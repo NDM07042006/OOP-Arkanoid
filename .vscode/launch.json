@@ -1,0 +1,21 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Run Arkanoid with Maven",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "OOP-Arkanoid-Main",
+            "vmArgs": "--module-path ${command:java.getModulePath} --add-modules javafx.controls,javafx.fxml,javafx.media"
+        },
+        {
+            "type": "java",
+            "name": "Run with JavaFX Maven Plugin",
+            "request": "launch",
+            "mainClass": "${command:SpecifyProgramArgs}",
+            "projectName": "arkanoid-game",
+            "preLaunchTask": "maven-javafx-run"
+        }
+    ]
+}
