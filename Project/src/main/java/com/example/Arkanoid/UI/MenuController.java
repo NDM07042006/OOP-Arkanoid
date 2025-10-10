@@ -22,7 +22,6 @@ public class MenuController {
     @FXML
     private void startGame() {
         System.out.println("Start Game clicked");
-        // TODO: load game scene
     }
 
     @FXML
