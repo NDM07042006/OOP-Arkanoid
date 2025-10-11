@@ -1,23 +1,32 @@
 package main.java.com.example.Arkanoid.UI;
 
+import java.io.IOException;
+
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+public class EndController {
+    @FXML
+    private AnchorPane anchorPane;
 
-public class MenuScene {
-
+    @FXML
     private Stage stage;
 
-
-    public MenuScene(Stage stage) {
+    public void setStage(Stage stage) {
         this.stage = stage;
     }
 
+    @FXML
+    public void Restart() {
 
-    public void show() {
+    } 
+
+    @FXML
+    public void Menu() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/Arkanoid/MenuGame.fxml"));
             Parent root = loader.load();
@@ -34,5 +43,10 @@ public class MenuScene {
             e.printStackTrace();
             System.out.println("khong the tai MenuGame.fxml");
         }
+    }
+
+    @FXML
+    public void NextLevel() {
+        
     }
 }

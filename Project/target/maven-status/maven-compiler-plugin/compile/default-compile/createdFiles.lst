@@ -1,3 +1,7 @@
 main/java/com/example/Arkanoid/UI/MenuScene.class
 main/java/com/example/Arkanoid/Main.class
+main/java/com/example/Arkanoid/UI/SettingController.class
+main/java/com/example/Arkanoid/UI/EndScene.class
 main/java/com/example/Arkanoid/UI/MenuController.class
+main/java/com/example/Arkanoid/UI/EndController.class
+main/java/com/example/Arkanoid/UI/SettingScene.class

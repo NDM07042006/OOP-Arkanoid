@@ -5,34 +5,28 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
-public class MenuScene {
-
+public class SettingScene {
     private Stage stage;
 
-
-    public MenuScene(Stage stage) {
+    public SettingScene(Stage stage) {
         this.stage = stage;
     }
 
-
     public void show() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/Arkanoid/MenuGame.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/Arkanoid/Setting.fxml"));
             Parent root = loader.load();
 
-            MenuController controller = loader.getController();
-            controller.setStage(stage);
+            SettingController settingController = loader.getController();
+            settingController.setStage(stage);
 
             Scene scene = new Scene(root);
-            stage.setTitle("Arkanoid Menu");
+            stage.setTitle("Setting");
             stage.setScene(scene);
             stage.show();
-
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("khong the tai MenuGame.fxml");
+            System.out.println("khong the tai file Setting.fxml");
         }
     }
 }
