@@ -41,7 +41,6 @@ public class MenuController {
 
     @FXML
     private void exitGame() {
-        System.out.println("Exit clicked");
         if (stage != null) stage.close();
     }
 }
