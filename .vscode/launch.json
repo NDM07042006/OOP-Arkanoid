@@ -3,6 +3,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "main.java.com.example.Arkanoid.Main",
+            "projectName": "arkanoid-game"
+        },
+        {
+            "type": "java",
             "name": "Run Arkanoid with Maven",
             "request": "launch",
             "mainClass": "Main",
