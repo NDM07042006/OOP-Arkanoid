@@ -91,7 +91,7 @@ public class Main extends Application {
                                     ball.setMoving(true);
                                     ball.setSpeed(6);
                                     ball.setVel_Y(-1);
-                                    ball.setVel_X(0); // thêm nếu muốn đi thẳng lên
+                                    ball.setVel_X(-1);
                                     System.out.println("moving");
                                 }
                                 break;
@@ -113,6 +113,12 @@ public class Main extends Application {
                         }
                     }
                 });
+
+                if (ball.getNode().getBoundsInParent().intersects(player.getNode().getBoundsInParent())) {
+                    // Handle bounced
+                    ball.vel_Y *= -1;
+                }
+
 
 
 

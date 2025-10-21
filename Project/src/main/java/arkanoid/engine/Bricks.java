@@ -122,7 +122,8 @@ public class Bricks extends GameObject {
     public void update() {
         if (currrentPoints == 0) {
             destroyed = true;
-
         }
+
+
     }
 }

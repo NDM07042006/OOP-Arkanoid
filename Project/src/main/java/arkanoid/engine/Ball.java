@@ -92,6 +92,9 @@ public class Ball extends GameObject {
         pos_Y += vel_Y * speed;
         sprite.setX(pos_X);
         sprite.setY(pos_Y);
+
+        if (pos_X <= 0 || pos_X >= 800 - 16) {vel_X = - vel_X;}
+        if (pos_Y <= 0) {vel_Y = - vel_Y;}
     }
 
 }
