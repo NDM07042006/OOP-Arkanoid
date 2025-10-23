@@ -13,8 +13,8 @@ public class Map {
             {0, 0, 0, 2, 1, 1, 0, 0, 0, 0},
             {0, 0, 0, 2, 1, 1, 0, 0, 0, 0},
             {0, 0, 0, 2, 1, 1, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+            {0, 0, 0, 0, 0, 2, 2, 0, 2, 2},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 
@@ -58,7 +58,7 @@ public class Map {
                                 "/main/java/arkanoid/engine/resources/bricks.png",
                                 112, 0,
                                 screenWidth, screenHeight,
-                                row, column
+                                row, column, 2
                         );
                         brickGroup.add(normalBrick);
                         break;
@@ -69,7 +69,7 @@ public class Map {
                                 "/main/java/arkanoid/engine/resources/bricks.png",
                                 112, 16,
                                 screenWidth, screenHeight,
-                                row, column
+                                row, column, -1
                         );
                         brickGroup.add(hardBrick);
                         break;

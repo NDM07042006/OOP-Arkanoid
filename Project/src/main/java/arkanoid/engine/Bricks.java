@@ -7,18 +7,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 
 public class Bricks extends GameObject {
-    static int HitPoints = 1;
     int Point_given;
-    int currrentPoints = HitPoints;
+    int currrentPoints;
     int width = 50;
     int height = 25;
 
     ImageView sprite;
     Scene scene;
 
-    public static int getHitPoints() {
-        return HitPoints;
-    }
 
     public int getPoint_given() {
         return Point_given;
@@ -69,10 +65,13 @@ public class Bricks extends GameObject {
     }
 
     public Bricks(int posX, int posY, String imagePath,
-                  int X, int Y, int screenWidth, int screenHeight, int row, int column) {
+                  int X, int Y, int screenHeight, int  screenWidth, int row, int column, int HP) {
+
+        currrentPoints = HP;
 
         this.pos_X = posX;
         this.pos_Y = posY;
+
 
         Image image = new Image(imagePath);
         sprite = new ImageView(image);
@@ -88,9 +87,6 @@ public class Bricks extends GameObject {
         sprite.setFitHeight(height);
     }
 
-    public void setHitPoints(int hitPoints) {
-        this.HitPoints = hitPoints;
-    }
 
 
 
@@ -123,7 +119,5 @@ public class Bricks extends GameObject {
         if (currrentPoints == 0) {
             destroyed = true;
         }
-
-
     }
 }

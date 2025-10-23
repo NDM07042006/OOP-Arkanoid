@@ -123,9 +123,14 @@ public class Main extends Application {
 
 
                 for (Bricks b : Map.brickGroup) {
+                    b.update();
+                    if (ball.getNode().getBoundsInParent().intersects(b.getNode().getBoundsInParent())) {
+                        ball.vel_Y *= -1;
+                        b.currrentPoints -= 1;
+                    }
                     if (b.isDestroyed()) {
+
                         root.getChildren().remove(b.getNode());
-                        b.update();
                     }
                 }
 
