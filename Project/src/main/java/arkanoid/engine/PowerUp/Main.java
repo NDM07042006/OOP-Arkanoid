@@ -13,8 +13,6 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        // Tạo scene từ FXML
-
         int baseWidth = 800;
         int baseHeight = 600;
 
@@ -31,11 +29,9 @@ public class Main extends Application {
         new AnimationTimer() {
             @Override
             public void handle(long now) {
-                powerUp.update(); // gọi hàm update() để di chuyển
+                powerUp.update();
             }
         }.start();
-
-        // Cấu hình và hiển thị cửa sổ
         primaryStage.setTitle("JavaFX với FXML");
         primaryStage.setScene(scene);
         primaryStage.show();
