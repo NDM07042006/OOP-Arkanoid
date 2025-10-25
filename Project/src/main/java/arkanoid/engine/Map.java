@@ -55,7 +55,7 @@ public class Map {
                         Bricks normalBrick = new Bricks(
                                 i * screenWidth / column, // X position
                                 t * screenWidth / column/ 2,   // Y position
-                                "/main/java/arkanoid/engine/resources/bricks.png",
+                                "/com/Arkanoid/img/bricks.png",
                                 112, 0,
                                 screenWidth, screenHeight,
                                 row, column
@@ -66,7 +66,7 @@ public class Map {
                         Bricks hardBrick = new Bricks(
                                 i * screenWidth / column, // X position
                                 t * screenWidth / column/ 2,   // Y position
-                                "/main/java/arkanoid/engine/resources/bricks.png",
+                                "/com/Arkanoid/img/bricks.png",
                                 112, 16,
                                 screenWidth, screenHeight,
                                 row, column

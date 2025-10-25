@@ -17,7 +17,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Sample.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/Arkanoid/Sample.fxml"));
         Parent parent = loader.load();
         ArrayList<Bricks> ListofBricks = new ArrayList<>();
 
@@ -62,12 +62,12 @@ public class Main extends Application {
 
 
 
-        Paddle player = new Paddle(200, 500, "/main/java/arkanoid/engine/resources/paddles_and_balls.png");
+        Paddle player = new Paddle(200, 500, "/com/Arkanoid/img/paddles_and_balls.png");
         player.setScene(scene);
         root.getChildren().add(player.getNode());
 
 
-        Ball ball = new Ball(200, 500, "/main/java/arkanoid/engine/resources/paddles_and_balls.png");
+        Ball ball = new Ball(200, 500, "/com/Arkanoid/img/paddles_and_balls.png");
         ball.setSence(scene);
         root.getChildren().add(ball.getNode());
 
@@ -95,6 +95,8 @@ public class Main extends Application {
                                     System.out.println("moving");
                                 }
                                 break;
+                            default:
+                                break;
 
                         }
 
@@ -109,6 +111,8 @@ public class Main extends Application {
                             case A, D:
                                 player.setVel_X(0);
 
+                                break;
+                            default:
                                 break;
                         }
                     }
