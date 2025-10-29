@@ -19,7 +19,7 @@ public class Main extends Application {
         Group root = new Group();
         Scene scene = new Scene(root, baseWidth, baseHeight);
 
-        Paddle player = new Paddle(200, 500, "/com/Arkanoid/img/paddles_and_balls.png");
+        Paddle player = new Paddle(200, 500, Define.PADDLES_AND_BALLS_IMAGE_PATH);
         player.setScene(scene);
         root.getChildren().add(player.getNode());
 
