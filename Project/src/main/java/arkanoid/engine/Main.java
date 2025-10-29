@@ -118,10 +118,7 @@ public class Main extends Application {
                     // Handle bounced
                     ball.vel_Y *= -1;
                 }
-
-
-
-
+                
                 for (Bricks b : Map.brickGroup) {
                     b.update();
                     if (ball.getNode().getBoundsInParent().intersects(b.getNode().getBoundsInParent())) {
