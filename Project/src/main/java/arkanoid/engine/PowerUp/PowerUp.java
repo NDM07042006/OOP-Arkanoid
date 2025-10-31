@@ -9,7 +9,7 @@ import main.java.arkanoid.engine.GameObject;
 public abstract class PowerUp extends GameObject {
 
     protected static final double FALL_SPEED = 1;
-    protected static final int WIDTH = 30;//độ to của power up khi hiển thị
+    protected static final int WIDTH = 30;// độ to của power up khi hiển thị
     protected static final int HEIGHT = 30;
     protected double x;
     protected double y;
@@ -27,6 +27,14 @@ public abstract class PowerUp extends GameObject {
         this.sprite.setPreserveRatio(true);
     }
 
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
     public ImageView getSprite() {
         return sprite;
     }
@@ -36,5 +44,7 @@ public abstract class PowerUp extends GameObject {
         y += FALL_SPEED;
         this.sprite.setY(y);
     }
+
+    public abstract PowerUpType getType();
 
 }

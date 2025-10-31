@@ -18,21 +18,30 @@ public class Main extends Application {
 
         Group root = new Group();
         Scene scene = new Scene(root, baseWidth, baseHeight);
+        GameEngine gameEngine = new GameEngine();
 
-        Paddle player = new Paddle(200, 500, Define.PADDLES_AND_BALLS_IMAGE_PATH);
+        Paddle player = gameEngine.paddle;
         player.setScene(scene);
         root.getChildren().add(player.getNode());
 
-        MultiBall powerUp = new MultiBall(300, 100);
-        root.getChildren().add(powerUp.getSprite());
+        // Thêm một số PowerUp để kiểm tra
+        MultiBall powerUp1 = new MultiBall(300, 100);
+        MultiBall powerUp2 = new MultiBall(400, 150);
+        gameEngine.addPowerUp(powerUp1);
+        gameEngine.addPowerUp(powerUp2);
+        for (PowerUp powerUp : gameEngine.powerUps){
+            root.getChildren().add(powerUp.getSprite());
+        }
 
         new AnimationTimer() {
             @Override
             public void handle(long now) {
-                powerUp.update();
+                for (PowerUp powerUp : gameEngine.powerUps) {
+                    powerUp.update();
+                }
             }
         }.start();
-        primaryStage.setTitle("JavaFX với FXML");
+        primaryStage.setTitle("Arkanoid");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

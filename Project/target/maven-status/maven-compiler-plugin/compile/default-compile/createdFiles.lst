@@ -1,8 +1,10 @@
 main\java\arkanoid\engine\PowerUp\Main.class
+main\java\arkanoid\engine\PowerUp\PowerUpType.class
 main\java\com\example\Arkanoid\UI\SettingController.class
 main\java\com\example\Arkanoid\UI\SettingScene.class
 main\java\arkanoid\engine\Define.class
 main\java\arkanoid\engine\Ball.class
+main\java\arkanoid\engine\GameEngine.class
 main\java\com\example\Arkanoid\UI\PauseController.class
 main\java\arkanoid\engine\Map.class
 main\java\com\example\Arkanoid\UI\EndController.class

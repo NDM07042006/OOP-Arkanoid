@@ -62,12 +62,12 @@ public class Main extends Application {
 
 
 
-        Paddle player = new Paddle(200, 500, "/com/Arkanoid/img/paddles_and_balls.png");
+        Paddle player = new Paddle(200, 500, Define.PADDLES_AND_BALLS_IMAGE_PATH);
         player.setScene(scene);
         root.getChildren().add(player.getNode());
 
 
-        Ball ball = new Ball(200, 500, "/com/Arkanoid/img/paddles_and_balls.png");
+        Ball ball = new Ball(200, 500, Define.PADDLES_AND_BALLS_IMAGE_PATH);
         ball.setSence(scene);
         root.getChildren().add(ball.getNode());
 

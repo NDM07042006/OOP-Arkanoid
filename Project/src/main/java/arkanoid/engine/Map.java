@@ -13,8 +13,8 @@ public class Map {
             {0, 0, 0, 2, 1, 1, 0, 0, 0, 0},
             {0, 0, 0, 2, 1, 1, 0, 0, 0, 0},
             {0, 0, 0, 2, 1, 1, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+            {0, 0, 0, 0, 0, 2, 2, 0, 2, 2},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 
@@ -55,10 +55,10 @@ public class Map {
                         Bricks normalBrick = new Bricks(
                                 i * screenWidth / column, // X position
                                 t * screenWidth / column/ 2,   // Y position
-                                "/com/Arkanoid/img/bricks.png",
+                                Define.BRICKS_IMAGE_PATH,
                                 112, 0,
                                 screenWidth, screenHeight,
-                                row, column
+                                row, column, 2
                         );
                         brickGroup.add(normalBrick);
                         break;
@@ -66,10 +66,10 @@ public class Map {
                         Bricks hardBrick = new Bricks(
                                 i * screenWidth / column, // X position
                                 t * screenWidth / column/ 2,   // Y position
-                                "/com/Arkanoid/img/bricks.png",
+                                Define.BRICKS_IMAGE_PATH,
                                 112, 16,
                                 screenWidth, screenHeight,
-                                row, column
+                                row, column, -1
                         );
                         brickGroup.add(hardBrick);
                         break;

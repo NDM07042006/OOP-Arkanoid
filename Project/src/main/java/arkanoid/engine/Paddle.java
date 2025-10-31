@@ -66,8 +66,8 @@ public class Paddle extends GameObject{
 
         sprite.setX(pos_X);
         sprite.setY(pos_Y);
-        sprite.setFitWidth(100);  // chỉnh kích thước nếu cần
-        sprite.setFitHeight(30);
+        sprite.setFitWidth(120);  // chỉnh kích thước nếu cần
+        sprite.setFitHeight(30*1.2);
     }
 
     //give object to the Group
