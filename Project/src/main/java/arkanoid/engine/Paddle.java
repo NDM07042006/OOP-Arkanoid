@@ -11,21 +11,84 @@ import javafx.geometry.Rectangle2D;
 public class Paddle extends GameObject{
     double vel_X;
     double vel_Y;
-    int speed = 1;
+    int speed = 5;
     ImageView sprite;
     Scene scene;
+
+    public double getVel_X() {
+        return vel_X;
+    }
+
+    public void setVel_X(double vel_X) {
+        this.vel_X = vel_X;
+    }
+
+    public double getVel_Y() {
+        return vel_Y;
+    }
+
+    public void setVel_Y(double vel_Y) {
+        this.vel_Y = vel_Y;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    public ImageView getSprite() {
+        return sprite;
+    }
+
+    public void setSprite(ImageView sprite) {
+        this.sprite = sprite;
+    }
+
+    public Scene getScene() {
+        return scene;
+    }
+
+    public void setScene(Scene scene) {
+        this.scene = scene;
+    }
+
     public void setSence(Scene scene) {
         this.scene = scene;
     }
 
-    public void getX() {
-        System.out.println(pos_X);
-    }
+    public void movingSideway() {
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                switch (keyEvent.getCode()) {
+                    case A:
+                        vel_X = -1;
+                        break;
+                    case D:
+                        vel_X = 1;
+                        break;
+                }
+            }
+        });
 
-    public  void getY() {
-        System.out.println(pos_Y);
+        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                switch (keyEvent.getCode()) {
+                    case A:
+                    case D:
+                    case W:
+                    case S:
+                        vel_X = 0;
+                        vel_Y = 0;
+                        break;
+                }
+            }
+        });
     }
-
 
     public Paddle(double startX, double startY, String imagePath) {
         pos_X = startX;
@@ -38,67 +101,26 @@ public class Paddle extends GameObject{
 
         sprite.setX(pos_X);
         sprite.setY(pos_Y);
-        sprite.setFitWidth(100);  // chỉnh kích thước nếu cần
-        sprite.setFitHeight(30);
+        sprite.setFitWidth(120);  // chỉnh kích thước nếu cần
+        sprite.setFitHeight(30*1.2);
     }
 
+    //give object to the Group
     public ImageView getNode() {
         return sprite;
     }
 
-
-
-    public void movingSideway() {
-
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                switch (keyEvent.getCode()) {
-                    case A : vel_X = -1;
-
-                        // getX();
-                        // getY();
-                        break;
-                    case D : vel_X = 1;
-                        // getX();
-                        // getY();
-                        break;
-
-                }
-
-            }
-        });
-
-        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                switch (keyEvent.getCode()) {
-                    case A, D, W, S:
-                        vel_X = 0;
-                        vel_Y = 0;
-                        break;
-                }
-            }
-        });
-
-    }
-
+    @Override
     public void update() {
-        double newX = pos_X + vel_X * speed;
-        double newY = pos_Y + vel_Y * speed;
-        if (newX < 0) {
-            newX = 0;
-        } else if(newX > 500) {
-            newX = 500;
-        }
-        pos_X = newX;
-        pos_Y = newY;
+        pos_X += vel_X * speed;
+        pos_Y += vel_Y * speed;
+        sprite.setX(pos_X);
+        sprite.setY(pos_Y);
     }
 
     public void draw() {
         sprite.setX(pos_X);
         sprite.setY(pos_Y);
     }
-
 
 }

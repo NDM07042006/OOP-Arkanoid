@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-// import main.java.com.example.Arkanoid.UI.MenuScene;
 public class PauseController {
     private Stage stage;
 
@@ -22,7 +21,10 @@ public class PauseController {
 
     @FXML
     public void restartLevel() {
-
+        stage.close();
+        Stage newStage = (Stage) stage.getOwner();
+        GameScene gameScene = new GameScene(newStage);
+        gameScene.show();
     }
 
     @FXML

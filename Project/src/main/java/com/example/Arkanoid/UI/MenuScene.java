@@ -28,6 +28,7 @@ public class MenuScene {
             Scene scene = new Scene(root);
             stage.setTitle("Arkanoid Menu");
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.show();
 
         } catch (IOException e) {

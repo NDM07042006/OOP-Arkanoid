@@ -20,18 +20,30 @@ public class GameObject {
     Node node;
     boolean destroyed = false;
 
+    public boolean isDestroyed() {
+        return destroyed;
+    }
+
+    public void setDestroyed(boolean destroyed) {
+        this.destroyed = destroyed;
+    }
+
     public double getPos_X() {
         return pos_X;
+    }
+
+    public void setPos_X(double pos_X) {
+        this.pos_X = pos_X;
     }
 
     public double getPos_Y() {
         return pos_Y;
     }
+
+    public void setPos_Y(double pos_Y) {
+        this.pos_Y = pos_Y;
+    }
+    
     public void update() {}
-
-
-
 }
-
-
 

@@ -7,7 +7,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-// import main.java.com.example.Arkanoid.UI.GameScene;
+
 public class MenuController {
     private Stage stage;
 

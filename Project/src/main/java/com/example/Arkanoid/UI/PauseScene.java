@@ -5,7 +5,7 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;;
 public class PauseScene {
-    public Stage stage;
+    private Stage stage;
 
     public PauseScene(Stage stage) {
         this.stage = stage;
@@ -23,6 +23,7 @@ public class PauseScene {
             
             stage.setTitle("Pause");
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();

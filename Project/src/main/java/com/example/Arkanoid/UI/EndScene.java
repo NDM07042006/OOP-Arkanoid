@@ -23,6 +23,7 @@ public class EndScene {
             Scene scene = new Scene(root);
             stage.setTitle("End Game!");
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
