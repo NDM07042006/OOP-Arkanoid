@@ -4,11 +4,16 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 import main.java.com.example.Arkanoid.UI.*;
+import main.java.com.example.Arkanoid.Utlis.SoundManager;
 
 public class Main extends Application {
     @Override
     public void start(Stage stage) {
         System.out.println("Main start() with stage: " + stage);
+        
+        // Load tất cả âm thanh khi khởi động
+        SoundManager.getInstance().loadAllSounds();
+        
         MenuScene menu = new MenuScene(stage);
         menu.show();
         // EndScene endScene = new EndScene(stage);

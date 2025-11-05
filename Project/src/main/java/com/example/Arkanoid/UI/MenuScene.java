@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import main.java.com.example.Arkanoid.Utlis.SoundManager;
 
 import java.io.IOException;
 
@@ -30,6 +31,9 @@ public class MenuScene {
             stage.setScene(scene);
             stage.setResizable(false);
             stage.show();
+
+            // Phát nhạc nền menu
+            SoundManager.getInstance().playMenuMusic();
 
         } catch (IOException e) {
             e.printStackTrace();
