@@ -76,6 +76,30 @@
                     <mainClass>main.java.com.example.Arkanoid.Main</mainClass>
                 </configuration>
             </plugin>
+
+            <!-- Maven Exec Plugin để chạy ứng dụng -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <mainClass>main.java.com.example.Arkanoid.Main</mainClass>
+                </configuration>
+            </plugin>
+
+            <!-- Maven JAR Plugin để tạo executable JAR -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>main.java.com.example.Arkanoid.Main</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>
