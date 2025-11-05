@@ -6,6 +6,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 
+import java.util.ArrayList;
+
 public class Ball extends GameObject {
     double vel_Y;
     double vel_X;
@@ -13,6 +15,16 @@ public class Ball extends GameObject {
     ImageView sprite;
     Scene scene;
     boolean isMoving = false;
+    boolean mainBall = false;
+
+
+    public boolean isMainBall() {
+        return mainBall;
+    }
+
+    public void setMainBall(boolean mainBall) {
+        this.mainBall = mainBall;
+    }
 
     public Scene getScene() {
         return scene;
@@ -93,8 +105,13 @@ public class Ball extends GameObject {
         sprite.setX(pos_X);
         sprite.setY(pos_Y);
 
+
         if (pos_X <= 0 || pos_X >= 800 - 16) {vel_X = - vel_X;}
         if (pos_Y <= 0) {vel_Y = - vel_Y;}
+
+        if (pos_Y >= 600) {
+            vel_Y = - vel_Y;
+        }
     }
 
 }
