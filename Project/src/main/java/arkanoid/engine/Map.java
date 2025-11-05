@@ -6,9 +6,8 @@ import java.util.ArrayList;
 public class Map {
     public static int row;
     public static int column;
-    public int[][] lv;
     private int[][] lvEasy = {
-            {1, 0, 1, 1, 1, 1, 0, 0, 0, 1},
+            {1, 0, 1, 1, 1, 1, 0, 0, 0, 0},
             {0, 0, 0, 2, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 2, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 2, 1, 1, 0, 0, 0, 0},
@@ -20,26 +19,8 @@ public class Map {
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 
     } ;
-    private int[][] lvMedium = {
-            {1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-            {0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 2, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0},
-            {0, 0, 0, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-            {0, 0, 0, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 2, 2},
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 2},
-            {0, 0, 0, 0, 0, 2, 2, 0, 2, 2, 0, 0, 0, 0, 2},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 
-    } ;
-
-
+    private  int[][] lv;
     public static ArrayList<Bricks> brickGroup = new ArrayList<>();
     private Scene secne;
 
@@ -50,14 +31,7 @@ public class Map {
         if (type_of_map == 0) {
             this.row = 10;
             this.column = 10;
-            this.lv = lvEasy;
         }
-        if (type_of_map == 1) {
-            this.row = 15;
-            this.column = 15;
-            this.lv = lvMedium;
-        }
-
     }
 
     public void setSecne(Scene scene) {
@@ -74,14 +48,14 @@ public class Map {
     public void loadMap(int screenWidth, int screenHeight) {
         for (int t = 0; t < row; t++) {
             for (int i = 0; i < column; i++) {
-                switch (lv[t][i]) {
+                switch (lvEasy[t][i]) {
                     case 0:
                         break;
                     case 1:
                         Bricks normalBrick = new Bricks(
                                 i * screenWidth / column, // X position
                                 t * screenWidth / column/ 2,   // Y position
-                                "main/resources/com/Arkanoid/bricks.png",
+                                Define.BRICKS_IMAGE_PATH,
                                 112, 0,
                                 screenWidth, screenHeight,
                                 row, column, 2
@@ -92,7 +66,7 @@ public class Map {
                         Bricks hardBrick = new Bricks(
                                 i * screenWidth / column, // X position
                                 t * screenWidth / column/ 2,   // Y position
-                                "main/resources/com/Arkanoid/bricks.png",
+                                Define.BRICKS_IMAGE_PATH,
                                 112, 16,
                                 screenWidth, screenHeight,
                                 row, column, -1

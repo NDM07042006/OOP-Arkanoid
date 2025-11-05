@@ -65,11 +65,13 @@ public class Bricks extends GameObject {
     }
 
     public Bricks(int posX, int posY, String imagePath,
-                  int X, int Y, int  screenWidth, int screenHeight, int row, int column, int HP) {
+                  int X, int Y, int screenHeight, int  screenWidth, int row, int column, int HP) {
 
         currrentPoints = HP;
+
         this.pos_X = posX;
         this.pos_Y = posY;
+
 
         Image image = new Image(imagePath);
         sprite = new ImageView(image);
