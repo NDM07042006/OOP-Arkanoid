@@ -1,7 +1,10 @@
 main\java\arkanoid\engine\PowerUp\Main.class
 main\java\arkanoid\engine\PowerUp\PowerUpType.class
+main\java\arkanoid\engine\CheckCollision\CheckBallAndBrick.class
 main\java\com\example\Arkanoid\UI\SettingController.class
+main\java\arkanoid\engine\CheckCollision\CheckPowerUpAndPaddle.class
 main\java\com\example\Arkanoid\UI\SettingScene.class
+main\java\arkanoid\engine\CheckCollision\CheckCollision.class
 main\java\arkanoid\engine\Define.class
 main\java\arkanoid\engine\Ball.class
 main\java\arkanoid\engine\GameEngine.class
@@ -17,6 +20,7 @@ main\java\arkanoid\engine\Main$1$2.class
 main\java\arkanoid\engine\Main.class
 main\java\arkanoid\engine\Main$2.class
 main\java\com\example\Arkanoid\UI\EndScene.class
+main\java\arkanoid\engine\CheckCollision\CheckBallAndPaddle.class
 main\java\arkanoid\engine\PowerUp\MultiBall.class
 main\java\com\example\Arkanoid\Main.class
 main\java\com\example\Arkanoid\UI\MenuController.class

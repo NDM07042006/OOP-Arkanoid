@@ -9,7 +9,7 @@ import javafx.animation.AnimationTimer;
 import main.java.arkanoid.engine.*;
 
 public class Main extends Application {
-
+    private GameEngine gameEngine = new GameEngine();
     @Override
     public void start(Stage primaryStage) throws Exception {
 
@@ -18,9 +18,15 @@ public class Main extends Application {
 
         Group root = new Group();
         Scene scene = new Scene(root, baseWidth, baseHeight);
-        GameEngine gameEngine = new GameEngine();
+        Map map = new Map(0);
+        gameEngine.setGame(root,map);
+        map.loadMap(baseHeight, baseHeight);
+        for (Bricks b : map.getBrickGroup()) {
+            b.setSence(scene);
+            root.getChildren().add(b.getNode());
+        }
 
-        Paddle player = gameEngine.paddle;
+        Paddle player = gameEngine.getPaddle();
         player.setScene(scene);
         root.getChildren().add(player.getNode());
 
@@ -29,21 +35,27 @@ public class Main extends Application {
         MultiBall powerUp2 = new MultiBall(400, 150);
         gameEngine.addPowerUp(powerUp1);
         gameEngine.addPowerUp(powerUp2);
-        for (PowerUp powerUp : gameEngine.powerUps){
-            root.getChildren().add(powerUp.getSprite());
-        }
 
         new AnimationTimer() {
             @Override
             public void handle(long now) {
-                for (PowerUp powerUp : gameEngine.powerUps) {
-                    powerUp.update();
-                }
+                
+                gameEngine.update();
+                gameEngine.CheckAllCollision();
             }
         }.start();
         primaryStage.setTitle("Arkanoid");
         primaryStage.setScene(scene);
         primaryStage.show();
+
+    }
+
+    @Override
+    public void stop() throws Exception {
+        if (gameEngine != null) {
+            gameEngine.shutdown(); // shutdown ExecutorService
+        }
+        super.stop();
     }
 
     public static void main(String[] args) {
