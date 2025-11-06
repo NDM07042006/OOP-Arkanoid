@@ -1,6 +1,5 @@
 package main.java.arkanoid.engine;
 
-import java.util.Iterator;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -15,13 +14,10 @@ import javafx.stage.Stage;
 import javafx.scene.paint.Color;
 import java.util.ArrayList;
 public class Main extends Application {
-    public static ArrayList<Ball> ballsGroup = new ArrayList<>();
-
-
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Sample.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/Arkanoid/Sample.fxml"));
         Parent parent = loader.load();
         ArrayList<Bricks> ListofBricks = new ArrayList<>();
 
@@ -31,8 +27,6 @@ public class Main extends Application {
 
         Group root = new Group();
         Scene scene = new Scene(root, baseWidth, baseHeight);
-
-        /*
 
 // Giữ tỉ lệ chuẩn, scale toàn bộ root khi đổi kích thước
         scene.widthProperty().addListener((obs, oldVal, newVal) -> {
@@ -55,13 +49,12 @@ public class Main extends Application {
             root.setLayoutY((scene.getHeight() - baseHeight * scale) / 2);
         });
 
-        */
 
 
 
-        Map map = new Map(1);
 
-        map.loadMap(baseWidth, baseHeight);
+        Map map = new Map(0);
+        map.loadMap(baseHeight, baseHeight);
         for (Bricks b : Map.brickGroup) {
             b.setSence(scene);
             root.getChildren().add(b.getNode());
@@ -69,16 +62,14 @@ public class Main extends Application {
 
 
 
-        Paddle player = new Paddle(200, 500, "main/resources/com/Arkanoid/paddles_and_balls.png");
+        Paddle player = new Paddle(200, 500, Define.PADDLES_AND_BALLS_IMAGE_PATH);
         player.setScene(scene);
         root.getChildren().add(player.getNode());
 
 
-        Ball ball = new Ball(200, 500, "main/resources/com/Arkanoid/paddles_and_balls.png");
+        Ball ball = new Ball(200, 500, Define.PADDLES_AND_BALLS_IMAGE_PATH);
         ball.setSence(scene);
         root.getChildren().add(ball.getNode());
-        ball.setMainBall(true);
-        ballsGroup.add(ball);
 
 
         new AnimationTimer() {
@@ -90,20 +81,22 @@ public class Main extends Application {
                     public void handle(KeyEvent keyEvent) {
                         switch (keyEvent.getCode()) {
                             case A : player.setVel_X(-1);;
+                                System.out.println("moving");
                                 break;
                             case D : player.setVel_X(1);;
+                                System.out.println("moving");
                                 break;
                             case SPACE:
-                                for (Ball ball: ballsGroup) {
-                                    if (!ball.isMoving() && ball.isMainBall()) { // 🔹 chỉ kích hoạt lần đầu
-                                        ball.setMoving(true);
-                                        ball.setSpeed(6);
-                                        ball.setVel_Y(-1);
-                                        ball.setVel_X(-1);
-                                        System.out.println("moving");
-                                    }
-                                    break;
+                                if (!ball.isMoving()) { // 🔹 chỉ kích hoạt lần đầu
+                                    ball.setMoving(true);
+                                    ball.setSpeed(6);
+                                    ball.setVel_Y(-1);
+                                    ball.setVel_X(0); // thêm nếu muốn đi thẳng lên
+                                    System.out.println("moving");
                                 }
+                                break;
+                            default:
+                                break;
 
                         }
 
@@ -119,45 +112,27 @@ public class Main extends Application {
                                 player.setVel_X(0);
 
                                 break;
+                            default:
+                                break;
                         }
                     }
                 });
-                for (Ball b: ballsGroup) {
-                    if (ball.getNode().getBoundsInParent().intersects(player.getNode().getBoundsInParent())) {
-                        // Handle bounced
-                        ball.vel_Y *= -1;
-                    }
-                    ball.update();
 
-                }
-                
-                for (Bricks brick : Map.brickGroup) {
-                    for (Ball ball : ballsGroup) {
-                        brick.update();
-                        if (ball.getNode().getBoundsInParent().intersects(brick.getNode().getBoundsInParent())) {
-                            ball.vel_Y *= -1;
-                            brick.currrentPoints -= 1;
-                        }
-                        if (brick.isDestroyed()) {
-                            root.getChildren().remove(brick.getNode());
-                        }
+
+
+                for (Bricks b : Map.brickGroup) {
+                    if (b.isDestroyed()) {
+                        root.getChildren().remove(b.getNode());
+                        b.update();
                     }
                 }
 
-                Iterator<Bricks> iterator = Map.brickGroup.iterator();
-
-                while (iterator.hasNext()) {
-                    Bricks brick = iterator.next();
-                    if (brick.isDestroyed()) {
-                        iterator.remove(); // safely removes current element
-                        brick = null;
-                    }
-                }
-
-
+                ball.update();
 
                 player.update();
-                System.out.println(Map.brickGroup.size());
+
+
+
 
             }
         }.start();
