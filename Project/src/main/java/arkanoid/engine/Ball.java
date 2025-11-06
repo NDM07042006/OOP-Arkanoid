@@ -16,7 +16,15 @@ public class Ball extends GameObject {
     Scene scene;
     boolean isMoving = false;
     boolean mainBall = false;
+    boolean attached = false;
 
+    public boolean isAttached() {
+        return attached;
+    }
+
+    public void setAttached(boolean attached) {
+        this.attached = attached;
+    }
 
     public boolean isMainBall() {
         return mainBall;
