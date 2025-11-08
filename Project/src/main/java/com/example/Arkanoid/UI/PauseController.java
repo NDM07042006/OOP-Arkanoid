@@ -8,6 +8,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import main.java.com.example.Arkanoid.Utlis.SoundManager;
+
 public class PauseController {
     private Stage stage;
 
@@ -18,18 +20,28 @@ public class PauseController {
     @FXML
     private AnchorPane anchorPane;
 
+    public void onPauseMenuOpened() {
+        SoundManager.getInstance().pauseBackgroundMusic();
+    }
+
     @FXML
     public void resume() {
-
+        SoundManager.getInstance().playButtonClick();
     }
 
     @FXML
     public void restartLevel() {
+        SoundManager.getInstance().playButtonClick();
 
+        // THÊM: Chạy lại nhạc game từ đầu
+        SoundManager.getInstance().playGameMusic();
     }
 
     @FXML
     public void menu() {
+        SoundManager.getInstance().playButtonClick();
+        SoundManager.getInstance().playMenuMusic();
+
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/Arkanoid/MenuGame.fxml"));
             Parent root = loader.load();

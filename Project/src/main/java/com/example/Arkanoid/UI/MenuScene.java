@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class MenuScene {
+public class MenuScene<MenuController> {
 
     private Stage stage;
 
@@ -23,7 +23,7 @@ public class MenuScene {
             Parent root = loader.load();
 
             MenuController controller = loader.getController();
-            controller.setStage(stage);
+            controller.getClass(stage);
 
             Scene scene = new Scene(root);
             stage.setTitle("Arkanoid Menu");

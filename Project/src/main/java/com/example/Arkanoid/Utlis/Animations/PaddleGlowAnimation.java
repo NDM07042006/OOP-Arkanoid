@@ -1,8 +1,9 @@
 package main.java.com.example.Arkanoid.Utlis.Animations;
 
-import javafx.animation.ScaleTransition;
-import javafx.animation.ParallelTransition;
-import javafx.animation.SequentialTransition;
+import javafx.animation.FadeTransition;
+import javafx.animation.Timeline;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
 import javafx.scene.Node;
 import javafx.scene.effect.Glow;
 import javafx.scene.effect.DropShadow;
@@ -11,17 +12,17 @@ import javafx.util.Duration;
 
 /**
  * Animation chớp sáng cho Paddle khi bóng chạm vào
- * Hiệu ứng: Glow + Scale + Shadow
+ * Chỉ dùng Glow + Shadow, KHÔNG scale để tránh ảnh hưởng collision
  */
 public class PaddleGlowAnimation implements Animation {
 
-    private ParallelTransition animation;
+    private Timeline animation;
     private boolean playing;
 
     // Cấu hình hiệu ứng
     private static final Duration GLOW_DURATION = Duration.millis(150);
-    private static final double SCALE_AMOUNT = 1.1;
     private static final double GLOW_LEVEL = 0.8;
+    private static final double SHADOW_RADIUS = 25;
 
     public PaddleGlowAnimation() {
         this.playing = false;
@@ -44,39 +45,39 @@ public class PaddleGlowAnimation implements Animation {
         var originalEffect = node.getEffect();
 
         // Tạo Glow effect
-        Glow glow = new Glow(GLOW_LEVEL);
+        Glow glow = new Glow(0); // Bắt đầu từ 0
 
         // Tạo DropShadow cho hiệu ứng chớp sáng
         DropShadow shadow = new DropShadow();
         shadow.setColor(Color.CYAN);
-        shadow.setRadius(20);
+        shadow.setRadius(0); // Bắt đầu từ 0
         shadow.setSpread(0.5);
 
         // Kết hợp Glow + Shadow
         glow.setInput(shadow);
         node.setEffect(glow);
 
-        // Scale animation - phóng to nhẹ
-        ScaleTransition scaleUp = new ScaleTransition(GLOW_DURATION, node);
-        scaleUp.setToX(SCALE_AMOUNT);
-        scaleUp.setToY(SCALE_AMOUNT);
-
-        // Scale về lại bình thường
-        ScaleTransition scaleDown = new ScaleTransition(GLOW_DURATION, node);
-        scaleDown.setToX(1.0);
-        scaleDown.setToY(1.0);
-
-        // Chạy scale up -> scale down
-        SequentialTransition scaleSequence = new SequentialTransition(scaleUp, scaleDown);
-
-        // Kết hợp tất cả
-        animation = new ParallelTransition(scaleSequence);
+        // Tạo timeline để animate glow level và shadow radius
+        animation = new Timeline(
+                // Frame 1: Glow lên MAX
+                new KeyFrame(Duration.ZERO,
+                        new KeyValue(glow.levelProperty(), 0),
+                        new KeyValue(shadow.radiusProperty(), 0)
+                ),
+                new KeyFrame(GLOW_DURATION,
+                        new KeyValue(glow.levelProperty(), GLOW_LEVEL),
+                        new KeyValue(shadow.radiusProperty(), SHADOW_RADIUS)
+                ),
+                // Frame 2: Glow xuống về 0
+                new KeyFrame(GLOW_DURATION.multiply(2),
+                        new KeyValue(glow.levelProperty(), 0),
+                        new KeyValue(shadow.radiusProperty(), 0)
+                )
+        );
 
         animation.setOnFinished(e -> {
             // Khôi phục effect gốc
             node.setEffect(originalEffect);
-            node.setScaleX(1.0);
-            node.setScaleY(1.0);
             playing = false;
 
             if (onFinished != null) {
@@ -110,30 +111,32 @@ public class PaddleGlowAnimation implements Animation {
         var originalEffect = node.getEffect();
 
         // Tạo effect với màu tùy chỉnh
-        Glow glow = new Glow(GLOW_LEVEL);
+        Glow glow = new Glow(0);
         DropShadow shadow = new DropShadow();
         shadow.setColor(glowColor);
-        shadow.setRadius(20);
+        shadow.setRadius(0);
         shadow.setSpread(0.5);
         glow.setInput(shadow);
         node.setEffect(glow);
 
-        // Scale animation
-        ScaleTransition scaleUp = new ScaleTransition(GLOW_DURATION, node);
-        scaleUp.setToX(SCALE_AMOUNT);
-        scaleUp.setToY(SCALE_AMOUNT);
-
-        ScaleTransition scaleDown = new ScaleTransition(GLOW_DURATION, node);
-        scaleDown.setToX(1.0);
-        scaleDown.setToY(1.0);
-
-        SequentialTransition scaleSequence = new SequentialTransition(scaleUp, scaleDown);
-        animation = new ParallelTransition(scaleSequence);
+        // Timeline animation
+        animation = new Timeline(
+                new KeyFrame(Duration.ZERO,
+                        new KeyValue(glow.levelProperty(), 0),
+                        new KeyValue(shadow.radiusProperty(), 0)
+                ),
+                new KeyFrame(GLOW_DURATION,
+                        new KeyValue(glow.levelProperty(), GLOW_LEVEL),
+                        new KeyValue(shadow.radiusProperty(), SHADOW_RADIUS)
+                ),
+                new KeyFrame(GLOW_DURATION.multiply(2),
+                        new KeyValue(glow.levelProperty(), 0),
+                        new KeyValue(shadow.radiusProperty(), 0)
+                )
+        );
 
         animation.setOnFinished(e -> {
             node.setEffect(originalEffect);
-            node.setScaleX(1.0);
-            node.setScaleY(1.0);
             playing = false;
         });
 

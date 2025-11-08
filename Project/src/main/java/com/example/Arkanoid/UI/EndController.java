@@ -1,15 +1,20 @@
 package main.java.com.example.Arkanoid.UI;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import main.java.com.example.Arkanoid.Utlis.SoundManager;  // ← THÊM
 
-public class EndController {
+public class EndController implements Initializable {  // ← THÊM implements
+
     @FXML
     private AnchorPane anchorPane;
 
@@ -20,13 +25,22 @@ public class EndController {
         this.stage = stage;
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        SoundManager.getInstance().playMenuMusic();
+    }
+
     @FXML
     public void Restart() {
+        SoundManager.getInstance().playButtonClick();
+        SoundManager.getInstance().playGameMusic();
 
-    } 
+    }
 
     @FXML
     public void Menu() {
+        SoundManager.getInstance().playButtonClick();
+
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/Arkanoid/MenuGame.fxml"));
             Parent root = loader.load();
@@ -47,6 +61,9 @@ public class EndController {
 
     @FXML
     public void NextLevel() {
-        
+        SoundManager.getInstance().playButtonClick();
+        SoundManager.getInstance().playGameMusic();
+
+
     }
 }

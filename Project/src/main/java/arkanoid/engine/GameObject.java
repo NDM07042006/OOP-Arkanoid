@@ -11,8 +11,8 @@ import javafx.scene.Node;
 
 
 public class GameObject {
-    double pos_X;
-    double pos_Y;
+    public double pos_X;
+    public double pos_Y;
     double Width = 48;
     double Height = 50;
     Image image;
