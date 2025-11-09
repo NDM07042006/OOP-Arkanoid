@@ -15,14 +15,11 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        int baseWidth = 800;
-        int baseHeight = 600;
-
         Group root = new Group();
-        Scene scene = new Scene(root, baseWidth, baseHeight);
+        Scene scene = new Scene(root, Define.SCREEN_WIDTH, Define.SCREEN_HEIGHT);
         Map map = new Map(1);
-        gameEngine.setGame(root,map, baseWidth, baseHeight);
-        //map.loadMap(baseHeight, baseHeight);
+        gameEngine.setGame(root,map);
+        map.loadMap(Define.SCREEN_WIDTH, Define.SCREEN_HEIGHT);
         for (Bricks b : map.getBrickGroup()) {
             b.setSence(scene);
             root.getChildren().add(b.getNode());
@@ -45,26 +42,12 @@ public class Main extends Application {
                     @Override
                     public void handle(KeyEvent keyEvent) {
                         switch (keyEvent.getCode()) {
-                            case A : player.setVel_X(-1);;
-                                System.out.println("moving");
+                            case A : gameEngine.moveLeft();
                                 break;
-                            case D : player.setVel_X(1);;
-                                System.out.println("moving");
+                            case D : gameEngine.moveRight();
                                 break;
-                                /*
-                            case SPACE:
-                                for (Ball ball: ballsGroup) {
-                                    if (!ball.isMoving() && ball.isMainBall()) { // 🔹 chỉ kích hoạt lần đầu
-                                        ball.setMoving(true);
-                                        ball.setSpeed(6);
-                                        ball.setVel_Y(-1);
-                                        ball.setVel_X(-1);
-                                        System.out.println("moving");
-                                    }
-                                    break;
-                                }
-
-                                 */
+                            default:
+                                break;
 
                         }
 
@@ -77,26 +60,21 @@ public class Main extends Application {
                     public void handle(KeyEvent keyEvent) {
                         switch (keyEvent.getCode()) {
                             case A, D:
-                                player.setVel_X(0);
-
+                                gameEngine.notMove();
+                                break;
+                            default:
                                 break;
                         }
                     }
                 });
 
-
                 gameEngine.update();
                 gameEngine.CheckAllCollision();
-
-                System.out.println(gameEngine.getMap().getBrickGroup().size());
-
-
             }
         }.start();
         primaryStage.setTitle("Arkanoid");
         primaryStage.setScene(scene);
         primaryStage.show();
-
 
     }
 

@@ -75,7 +75,7 @@ public class Main extends Application {
         Ball ball = new Ball(200, 500, "main/resources/com/Arkanoid/paddles_and_balls.png");
         ball.setSence(scene);
         root.getChildren().add(ball.getNode());
-        ball.setMainBall(true);
+        //ball.setMainBall(true);
         ballsGroup.add(ball);
 
 
@@ -93,7 +93,7 @@ public class Main extends Application {
                                 break;
                             case SPACE:
                                 for (Ball ball: ballsGroup) {
-                                    if (!ball.isMoving() && ball.isMainBall()) { // 🔹 chỉ kích hoạt lần đầu
+                                    if (!ball.isMoving() /*&& ball.isMainBall() */) { // 🔹 chỉ kích hoạt lần đầu
                                         ball.setMoving(true);
                                         ball.setSpeed(6);
                                         ball.setVel_Y(-1);
