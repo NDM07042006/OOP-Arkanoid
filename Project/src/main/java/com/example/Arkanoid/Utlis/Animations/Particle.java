@@ -1,4 +1,4 @@
-package main.java.com.example.Arkanoid.Utlis;
+package main.java.com.example.Arkanoid.Utlis.Animations;
 
 
 import javafx.scene.Node;
