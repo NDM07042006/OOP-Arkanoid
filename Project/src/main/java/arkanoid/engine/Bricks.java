@@ -28,8 +28,8 @@ public class Bricks extends GameObject {
         return currrentPoints;
     }
 
-    public void setCurrrentPoints(int currrentPoints) {
-        this.currrentPoints = currrentPoints;
+    public void setCurrrentPoints(int minusPoint) {
+        this.currrentPoints -= minusPoint;
     }
 
     public int getWidth() {
@@ -114,7 +114,7 @@ public class Bricks extends GameObject {
 
 
     public void update() {
-        if (currrentPoints == 0) {
+        if (currrentPoints <= 0) {
             destroyed = true;
         }
     }

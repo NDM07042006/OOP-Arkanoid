@@ -114,7 +114,6 @@ public class Main extends Application {
                     }
 
                 });
-
                 scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
                     @Override
                     public void handle(KeyEvent keyEvent) {
@@ -126,6 +125,7 @@ public class Main extends Application {
                         }
                     }
                 });
+
                 for (Ball b: ballsGroup) {
                     if (ball.getNode().getBoundsInParent().intersects(player.getNode().getBoundsInParent())) {
                         // Handle bounced

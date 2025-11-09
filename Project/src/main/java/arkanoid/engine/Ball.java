@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Ball extends GameObject {
     double vel_Y;
     double vel_X;
-    int speed = 0;
+    int speed = 15;
     ImageView sprite;
     Scene scene;
     boolean isMoving = false;
