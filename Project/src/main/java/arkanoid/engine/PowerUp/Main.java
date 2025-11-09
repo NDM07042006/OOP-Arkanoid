@@ -1,8 +1,10 @@
 package main.java.arkanoid.engine.PowerUp;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.animation.AnimationTimer;
 
@@ -13,14 +15,11 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        int baseWidth = 800;
-        int baseHeight = 600;
-
         Group root = new Group();
-        Scene scene = new Scene(root, baseWidth, baseHeight);
+        Scene scene = new Scene(root, Define.SCREEN_WIDTH, Define.SCREEN_HEIGHT);
         Map map = new Map(0);
         gameEngine.setGame(root,map);
-        map.loadMap(baseHeight, baseHeight);
+        map.loadMap(Define.SCREEN_WIDTH, Define.SCREEN_HEIGHT);
         for (Bricks b : map.getBrickGroup()) {
             b.setSence(scene);
             root.getChildren().add(b.getNode());
@@ -39,6 +38,35 @@ public class Main extends Application {
         new AnimationTimer() {
             @Override
             public void handle(long now) {
+                scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+                    @Override
+                    public void handle(KeyEvent keyEvent) {
+                        switch (keyEvent.getCode()) {
+                            case A : gameEngine.moveLeft();
+                                break;
+                            case D : gameEngine.moveRight();
+                                break;
+                            default:
+                                break;
+
+                        }
+
+                    }
+
+                });
+
+                scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
+                    @Override
+                    public void handle(KeyEvent keyEvent) {
+                        switch (keyEvent.getCode()) {
+                            case A, D:
+                                gameEngine.notMove();
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                });
                 
                 gameEngine.update();
                 gameEngine.CheckAllCollision();

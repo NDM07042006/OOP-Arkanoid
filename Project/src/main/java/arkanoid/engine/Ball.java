@@ -13,6 +13,7 @@ public class Ball extends GameObject {
     ImageView sprite;
     Scene scene;
     boolean isMoving = false;
+    boolean isColliding = false;
 
     public Scene getScene() {
         return scene;
@@ -54,6 +55,14 @@ public class Ball extends GameObject {
         this.speed = speed;
     }
 
+    public boolean isColliding(){
+        return isColliding;
+    }
+
+    public void setCollision(boolean collision){
+        isColliding = collision;
+    }
+
     public boolean isMoving() {
         return isMoving;
     }
@@ -93,8 +102,8 @@ public class Ball extends GameObject {
         sprite.setX(pos_X);
         sprite.setY(pos_Y);
 
-        if (pos_X <= 0 || pos_X >= 800 - 16) {vel_X = - vel_X;}
-        if (pos_Y <= 0) {vel_Y = - vel_Y;}
+        if (pos_X <= 0 || pos_X >= Define.SCREEN_WIDTH - 16) {vel_X = - vel_X;}
+        if (pos_Y <= 0 || pos_Y >= Define.SCREEN_HEIGHT - 16) {vel_Y = - vel_Y;}
     }
 
 }
