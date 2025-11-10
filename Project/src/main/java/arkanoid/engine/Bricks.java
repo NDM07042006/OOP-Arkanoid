@@ -8,7 +8,8 @@ import javafx.scene.input.KeyEvent;
 
 public class Bricks extends GameObject {
     int Point_given;
-    int currrentPoints;
+    double currrentPoints;
+    double Max_HP;
     int width = 50;
     int height = 25;
     boolean givePowerUp = false;
@@ -34,7 +35,7 @@ public class Bricks extends GameObject {
     Scene scene;
 
 
-    public int getPoint_given() {
+    public double getPoint_given() {
         return Point_given;
     }
 
@@ -42,7 +43,7 @@ public class Bricks extends GameObject {
         Point_given = point_given;
     }
 
-    public int getCurrrentPoints() {
+    public double getCurrrentPoints() {
         return currrentPoints;
     }
 
@@ -83,9 +84,10 @@ public class Bricks extends GameObject {
     }
 
     public Bricks(int posX, int posY, String imagePath,
-                  int X, int Y, int  screenWidth, int screenHeight, int row, int column, int HP) {
+                  int X, int Y, int  screenWidth, int screenHeight, int row, int column, double HP) {
 
         currrentPoints = HP;
+        Max_HP = HP;
         this.pos_X = posX;
         this.pos_Y = posY;
 
@@ -136,13 +138,12 @@ public class Bricks extends GameObject {
             destroyed = true;
         }
 
-        if (currrentPoints == 1) {
+        if (currrentPoints <= Max_HP/3 ) {
             sprite.setViewport(new Rectangle2D(176, sprite.getViewport().getMinY(), sprite.getViewport().getWidth(), sprite.getViewport().getHeight()));
-
-
-
-
-
         }
+        else if (currrentPoints <= 2*Max_HP/3 && currrentPoints >= Max_HP/3) {
+            sprite.setViewport(new Rectangle2D(176-32, sprite.getViewport().getMinY(), sprite.getViewport().getWidth(), sprite.getViewport().getHeight()));
+        }
+
     }
 }

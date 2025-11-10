@@ -9,28 +9,29 @@ import javafx.scene.input.KeyEvent;
 public class Ball extends GameObject {
     double vel_Y;
     double vel_X;
-    int speed = 10;
+    int speed = 0;
     ImageView sprite;
     Scene scene;
     boolean isMoving = false;
-    boolean paddleCollision  = false;
-    boolean attached = false;
+    boolean paddleCollision = false;
     boolean brickCollision = false;
 
-    public boolean isPaddleCollision() {
-        return paddleCollision;
-    }
+    boolean attached = false;
 
-    public void setPaddleCollision(boolean paddleCollision) {
-        this.paddleCollision = paddleCollision;
-    }
 
-    public boolean isBrickCollision() {
+    public boolean brickCollision(){
         return brickCollision;
     }
 
-    public void setBrickCollision(boolean brickCollision) {
-        this.brickCollision = brickCollision;
+    public void setBrickCollision(boolean collision){
+        brickCollision = collision;
+    }
+    public boolean paddleCollision(){
+        return paddleCollision;
+    }
+
+    public void setPaddleCollision(boolean collision){
+        paddleCollision = collision;
     }
 
     public boolean isAttached() {

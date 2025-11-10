@@ -39,7 +39,6 @@ public class Particle {
 
         // Giảm độ trong suốt (Opacity) để tạo hiệu ứng mờ dần
         shape.setOpacity(1 - (currentLife / lifeSpan));
-
         return currentLife >= lifeSpan;
     }
 }

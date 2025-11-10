@@ -22,6 +22,7 @@ public class GameEngine {
     private Map map;
 
 
+
     /*
      * Cài đặt luồng
      */
@@ -91,7 +92,7 @@ public class GameEngine {
         double start_y = paddleBounds.getMinY()-30;
         Ball ball = new Ball(start_x, start_y,
                 Define.PADDLES_AND_BALLS_IMAGE_PATH);
-        ball.setSpeed(1);
+        ball.setSpeed(10);
         ball.setVel_X(setVelBall_X( 0));
         ball.setVel_Y(setVelBall_y( 0));
         balls.add(ball);
@@ -108,7 +109,7 @@ public class GameEngine {
         Ball ball = new Ball(start_x, start_y,
                 Define.PADDLES_AND_BALLS_IMAGE_PATH);
         ball.setMoving(true);
-        ball.setSpeed(1);
+        ball.setSpeed(10);
         ball.setVel_X(setVelBall_X( degrees));
         ball.setVel_Y(setVelBall_y( degrees));
         balls.add(ball);

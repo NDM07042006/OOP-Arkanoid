@@ -7,6 +7,7 @@ import javafx.geometry.Bounds;
 import main.java.arkanoid.engine.Ball;
 import main.java.arkanoid.engine.Paddle;
 import main.java.com.example.Arkanoid.Utlis.Animations.PaddleGlowAnimation;
+import main.java.com.example.Arkanoid.Utlis.SoundManager;
 
 public class CheckBallAndPaddle extends CheckCollision {
     private List<Ball> balls = gameEngine.getBalls();
@@ -19,11 +20,11 @@ public class CheckBallAndPaddle extends CheckCollision {
         while (iterator.hasNext()) {
             Ball ball = iterator.next();
             if (ball.getNode().getBoundsInParent().intersects(paddle.getNode().getBoundsInParent())) {
-                if(!ball.isColliding()){
+                if(!ball.paddleCollision()){
                     Bounds paddleBounds = paddle.getSprite().getBoundsInParent();
                     double paddleLength = paddleBounds.getMaxX() - paddleBounds.getMinX();
                     double paddleMidPoint = paddleLength/2 +paddleBounds.getMinX();
-                    ball.setCollision(true);
+                    ball.setPaddleCollision(true);
                     Bounds ballBounds = ball.getSprite().getBoundsInParent();
                     double ballMidPoint = (ballBounds.getMaxX() - ballBounds.getMinX())/2 +ballBounds.getMinX();
                     double degrees = (ballMidPoint - paddleMidPoint)/(paddleLength/2)*75;
@@ -32,8 +33,11 @@ public class CheckBallAndPaddle extends CheckCollision {
 
                     paddleGlow.play(paddle.getNode());
 
+                    SoundManager.getInstance().playPaddleHit();
+
                 }
-                else ball.setCollision(false);
+                else ball.setPaddleCollision(false);
+
             }
         }
     }
