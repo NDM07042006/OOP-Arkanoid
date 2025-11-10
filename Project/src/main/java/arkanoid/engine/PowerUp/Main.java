@@ -1,6 +1,7 @@
 package main.java.arkanoid.engine.PowerUp;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -31,9 +32,9 @@ public class Main extends Application {
         root.getChildren().add(player.getNode());
 
         // Thêm một số PowerUp để kiểm tra
-        MultiBall powerUp1 = new MultiBall(300, 100);
-        MultiBall powerUp2 = new MultiBall(400, 150);
-        gameEngine.addPowerUp(powerUp1);
+        // SlowPaddle powerUp1 = new SlowPaddle(300, 100);
+        FastPaddle powerUp2 = new FastPaddle(400, 150);
+        // gameEngine.addPowerUp(powerUp1);
         gameEngine.addPowerUp(powerUp2);
 
         game = new AnimationTimer() {
@@ -77,6 +78,13 @@ public class Main extends Application {
         primaryStage.setTitle("Arkanoid");
         primaryStage.setScene(scene);
         primaryStage.show();
+        primaryStage.setOnCloseRequest(event -> {
+            try {
+                stop(); // Gọi lại phương thức stop() để dừng AnimationTimer và shutdown GameEngine
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
 
     }
 
@@ -88,6 +96,8 @@ public class Main extends Application {
         if (game != null ) {
             game.stop();
         }
+        Platform.exit();
+        System.exit(0);
         super.stop();
     }
 

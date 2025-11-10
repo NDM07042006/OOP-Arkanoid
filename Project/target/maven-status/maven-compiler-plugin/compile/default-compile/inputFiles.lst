@@ -1,5 +1,6 @@
 D:\OOP-Arkanoid\Project\src\main\java\arkanoid\engine\CheckCollision\CheckBallAndPaddle.java
 D:\OOP-Arkanoid\Project\src\main\java\arkanoid\engine\Define.java
+D:\OOP-Arkanoid\Project\src\main\java\arkanoid\engine\PowerUp\FastBall.java
 D:\OOP-Arkanoid\Project\src\main\java\arkanoid\engine\GameEngine.java
 D:\OOP-Arkanoid\Project\src\main\java\com\example\Arkanoid\Data\Score.java
 D:\OOP-Arkanoid\Project\src\main\java\com\example\Arkanoid\UI\PauseController.java
@@ -20,8 +21,11 @@ D:\OOP-Arkanoid\Project\src\main\java\arkanoid\engine\GameObject.java
 D:\OOP-Arkanoid\Project\src\main\java\com\example\Arkanoid\Main.java
 D:\OOP-Arkanoid\Project\src\main\java\com\example\Arkanoid\UI\MenuScene.java
 D:\OOP-Arkanoid\Project\src\main\java\arkanoid\engine\PowerUp\PowerUpType.java
+D:\OOP-Arkanoid\Project\src\main\java\arkanoid\engine\PowerUp\SlowPaddle.java
 D:\OOP-Arkanoid\Project\src\main\java\arkanoid\engine\CheckCollision\CheckCollision.java
 D:\OOP-Arkanoid\Project\src\main\java\com\example\Arkanoid\UI\EndController.java
 D:\OOP-Arkanoid\Project\src\main\java\com\example\Arkanoid\UI\MenuController.java
 D:\OOP-Arkanoid\Project\src\main\java\arkanoid\engine\Bricks.java
+D:\OOP-Arkanoid\Project\src\main\java\arkanoid\engine\PowerUp\SlowBall.java
 D:\OOP-Arkanoid\Project\src\main\java\arkanoid\engine\CheckCollision\CheckPowerUpAndPaddle.java
+D:\OOP-Arkanoid\Project\src\main\java\arkanoid\engine\PowerUp\FastPaddle.java

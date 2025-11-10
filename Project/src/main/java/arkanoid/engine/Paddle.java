@@ -10,7 +10,7 @@ import javafx.geometry.Rectangle2D;
 public class Paddle extends GameObject{
     double vel_X;
     double vel_Y;
-    int speed = 2;
+    int speed = 5;
     ImageView sprite;
     Scene scene;
 

@@ -65,11 +65,11 @@ public class GameEngine {
         return map;
     }
 /*
-* Thêm ball
+* Xử lý bóng
 */
     /*
      * Tạo vector vận tốc
-     * Dữ liệu đầu vào là góc tính theo phương thẳng đứng
+     * Dữ liệu đầu vào là góc của vector vận tốc hợp với phương thẳng đứng
      */
     public double setVelBall_X(double degrees){
         double vel_X = Define.DEFAULF_BALL_SPEED*Math.sin(Math.toRadians(degrees));
@@ -79,9 +79,9 @@ public class GameEngine {
         double vel_Y = -1*Define.DEFAULF_BALL_SPEED*Math.cos(Math.toRadians(degrees));
         return vel_Y;
     }
-    /*
-     * Tạo ball mặc định không di chuyển
-     */
+    
+    // Tạo bóng mặc định không di chuyển
+    
     public void addBall() {
         Bounds paddleBounds = paddle.getSprite().getBoundsInParent();
         double start_x = (paddleBounds.getMaxX()-paddleBounds.getMinX())/2
@@ -89,15 +89,15 @@ public class GameEngine {
         double start_y = paddleBounds.getMinY()-30;
         Ball ball = new Ball(start_x, start_y,
                 Define.PADDLES_AND_BALLS_IMAGE_PATH);
-        ball.setSpeed(1);
+        ball.setSpeed(2);
         ball.setVel_X(setVelBall_X( 0));
         ball.setVel_Y(setVelBall_y( 0));
         balls.add(ball);
         root.getChildren().add(ball.getNode());
     }
-    /*
-     * Thêm ball tự động di chuyển có hướng
-     */
+    
+    // Thêm bóng tự động di chuyển có hướng
+    
     public void addBall(double degrees) {
         Bounds paddleBounds = paddle.getSprite().getBoundsInParent();
         double start_x = (paddleBounds.getMaxX()-paddleBounds.getMinX())/2
@@ -106,12 +106,18 @@ public class GameEngine {
         Ball ball = new Ball(start_x, start_y,
                 Define.PADDLES_AND_BALLS_IMAGE_PATH);
         ball.setMoving(true);
-        ball.setSpeed(1);
+        ball.setSpeed(2);
         ball.setVel_X(setVelBall_X( degrees));
         ball.setVel_Y(setVelBall_y( degrees));
         balls.add(ball);
         root.getChildren().add(ball.getNode());
     }
+    //Điều chỉnh speed bóng
+    public void setAllBallSpeed(int extraSpeed){
+        for(Ball ball:balls){
+            ball.setSpeed(ball.getSpeed() + extraSpeed);
+        }
+    } 
     /*
      * Thêm power up
      */
@@ -119,6 +125,7 @@ public class GameEngine {
         powerUps.add(powerUp);
         root.getChildren().add(powerUp.getSprite());
     }
+
 
     /*
      * Cập nhật trạng thái của tất cả đối tượng
@@ -144,6 +151,9 @@ public class GameEngine {
     public void notMove(){
         paddle.setVel_X(0);
     }
+    public void setPaddleSpeed(int extraSpeed){
+        paddle.setSpeed(paddle.getSpeed() + extraSpeed);
+    }
 
     /*
      * Luồng kiểm tra va chạm
@@ -158,7 +168,7 @@ public class GameEngine {
      * Tắt luồng kiểm tra khi thoát game
      */
     public void shutdown() {
-        collisionExecutor.shutdown();
+        collisionExecutor.shutdown();  
     }
 
 }

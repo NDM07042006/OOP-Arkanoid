@@ -20,50 +20,52 @@ public class CheckBallAndBrick extends CheckCollision {
                 Bricks brick = bricksIterator.next();
                 if (ball.getSprite().getBoundsInParent().intersects(brick.getNode().getBoundsInParent())) {
                     if(!ball.brickCollision()){
+                        //Set tình trạng va chạm là true, tránh kẹt bóng ở lần check sau
                         ball.setBrickCollision(true);
+
                         Bounds ballBounds = ball.getSprite().getBoundsInParent();
                         Bounds brickBounds = brick.getSprite().getBoundsInParent();
                         /*
                         * Đổi hướng bóng
                         */
-                        /*
-                        * Chạm bên dưới gạch
-                        */
+                        
+                        // Chạm bên dưới gạch
+                        
                         if(ballBounds.getMinY()<=brickBounds.getMaxY()
                         && ballBounds.getMaxY()> brickBounds.getMaxY()){
                             ball.setVel_Y(-ball.getVel_Y());
                         }
-                        /*
-                        * Chạm bên trên gạch
-                        */
+                        
+                        // Chạm bên trên gạch
+                        
                         if(ballBounds.getMaxY()>=brickBounds.getMinY()
                         && ballBounds.getMinY()< brickBounds.getMinY()){
                             ball.setVel_Y(-ball.getVel_Y());
                         }
-                        /*
-                        * Chạm bên phải gạch
-                        */
+                        
+                        // Chạm bên phải gạch
+                        
                         if(ballBounds.getMinX()<=brickBounds.getMaxX()
                             && ballBounds.getMaxX()> brickBounds.getMaxX()){
                             ball.setVel_X(-ball.getVel_X());
                         }
-                        /*
-                        * Chạm bên trái gạch
-                        */
+                        
+                        // Chạm bên trái gạch
+                        
                         if(ballBounds.getMaxX()>=brickBounds.getMinX()
                             && ballBounds.getMinX()< brickBounds.getMinX()){
                             ball.setVel_X(-ball.getVel_X());
                         }
                         
-                        /*
-                        * Xóa gạch
-                        */
+                        // Xóa gạch
+                        
                         safeRemove(brick);
                         bricksIterator.remove();
                         break;
                     }
                 }
-                else ball.setBrickCollision(false);;
+                //Set lại khi không còn va chạm nữa
+                else ball.setBrickCollision(false);
             }
         }
     }

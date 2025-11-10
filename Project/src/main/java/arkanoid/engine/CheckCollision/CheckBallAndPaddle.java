@@ -2,8 +2,8 @@ package main.java.arkanoid.engine.CheckCollision;
 
 import java.util.Iterator;
 import java.util.List;
-
 import javafx.geometry.Bounds;
+
 import main.java.arkanoid.engine.Ball;
 import main.java.arkanoid.engine.Paddle;
 
@@ -18,17 +18,23 @@ public class CheckBallAndPaddle extends CheckCollision {
             Ball ball = iterator.next();
             if (ball.getNode().getBoundsInParent().intersects(paddle.getNode().getBoundsInParent())) {
                 if(!ball.paddleCollision()){
-                    Bounds paddleBounds = paddle.getSprite().getBoundsInParent();
-                    double paddleLength = paddleBounds.getMaxX() - paddleBounds.getMinX();
-                    double paddleMidPoint = paddleLength/2 +paddleBounds.getMinX();
+                    //Set tình trạng va chạm là true, tránh kẹt bóng ở lần check sau
                     ball.setPaddleCollision(true);
+
+                    Bounds paddleBounds = paddle.getSprite().getBoundsInParent();
+                    double paddleLength = paddleBounds.getWidth();
+                    double paddleMidPoint = paddleBounds.getCenterX();
+                    
                     Bounds ballBounds = ball.getSprite().getBoundsInParent();
-                    double ballMidPoint = (ballBounds.getMaxX() - ballBounds.getMinX())/2 +ballBounds.getMinX();
+                    double ballMidPoint = ballBounds.getCenterX();
+
+                    //Tính góc vector vận tốc sau va chạm
                     double degrees = (ballMidPoint - paddleMidPoint)/(paddleLength/2)*75;
                     ball.setVel_X(gameEngine.setVelBall_X(degrees));
                     ball.setVel_Y(gameEngine.setVelBall_y(degrees));
                 }
             }
+            //Set lại khi không còn va chạm nữa
             else ball.setPaddleCollision(false);
         }
     }
