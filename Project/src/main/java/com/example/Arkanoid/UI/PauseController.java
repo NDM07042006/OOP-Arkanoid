@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import main.java.com.example.Arkanoid.Utlis.SceneNavigator;
 
 public class PauseController {
     private Stage stage;
@@ -60,10 +61,14 @@ public class PauseController {
 
     @FXML
     public void menu() {
+        // Đóng pause window
         stage.close();
+        
+        // Lấy main stage
         Stage mainStage = (Stage) stage.getOwner();
-        MenuScene menuScene = new MenuScene(mainStage);
-        menuScene.show();
+        
+        // Sử dụng SceneNavigator để chuyển về menu nhanh
+        SceneNavigator.goToMenu(mainStage);
     }
 
     @FXML

@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 import main.java.com.example.Arkanoid.UI.*;
+import main.java.com.example.Arkanoid.Utlis.SceneCache;
 import main.java.com.example.Arkanoid.Utlis.SoundManager;
 
 public class Main extends Application {
@@ -13,6 +14,10 @@ public class Main extends Application {
         
         // Load tất cả âm thanh khi khởi động
         SoundManager.getInstance().loadAllSounds();
+        
+        // Preload scenes trong background để lần sau mở nhanh hơn
+        System.out.println("🚀 Preloading scenes...");
+        SceneCache.getInstance().preloadAll();
         
         MenuScene menu = new MenuScene(stage);
         menu.show();

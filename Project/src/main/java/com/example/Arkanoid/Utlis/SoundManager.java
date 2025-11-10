@@ -200,19 +200,31 @@ public class SoundManager {
                 currentMusic.stop();
             }
 
-            // Phát nhạc mới
-            System.out.println("Playing music: " + name + " at volume: " + newMusic.getVolume());
-            newMusic.play();
+            // Phát nhạc mới trong background thread để không block UI
+            final AudioClip musicToPlay = newMusic;
+            final String musicName = name;
+            
+            new Thread(() -> {
+                try {
+                    System.out.println("Playing music: " + musicName + " at volume: " + musicToPlay.getVolume());
+                    musicToPlay.play();
+                    System.out.println("✓ Started playing: " + musicName);
+                    
+                    // Kiểm tra xem có đang phát không
+                    if (musicToPlay.isPlaying()) {
+                        System.out.println("✓ Music is currently playing!");
+                    } else {
+                        System.err.println("⚠ Music loaded but NOT playing!");
+                    }
+                } catch (Exception e) {
+                    System.err.println("✗ Error playing music " + musicName + ": " + e.getMessage());
+                    e.printStackTrace();
+                }
+            }).start();
+            
             currentMusic = newMusic;
             currentMusicName = name;
-            System.out.println("✓ Started playing: " + name);
             
-            // Kiểm tra xem có đang phát không
-            if (newMusic.isPlaying()) {
-                System.out.println("✓ Music is currently playing!");
-            } else {
-                System.err.println("⚠ Music loaded but NOT playing!");
-            }
         } catch (Exception e) {
             System.err.println("✗ Error playing music " + name + ": " + e.getMessage());
             e.printStackTrace();

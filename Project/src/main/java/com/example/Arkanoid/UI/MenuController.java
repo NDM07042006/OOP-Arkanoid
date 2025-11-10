@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import main.java.com.example.Arkanoid.Utlis.SoundManager;
+import main.java.com.example.Arkanoid.Utlis.SceneNavigator;
 
 public class MenuController {
 
@@ -39,22 +40,41 @@ public class MenuController {
 
     @FXML
     private void startGame() {
-        new Thread(() -> SoundManager.getInstance().playButtonClick()).start();
-        SoundManager.getInstance().playGameMusic();
-        GameScene2 gameScene2 = new GameScene2(stage);
-        gameScene2.show();
+        System.out.println("⚡ Starting Game from Menu...");
+        
+        // Play sound
+        SoundManager.getInstance().playButtonClick();
+        
+        // Chuyển scene ngay lập tức
+        javafx.application.Platform.runLater(() -> {
+            SceneNavigator.goToGame(stage, 1);
+        });
     }
 
     @FXML
     private void showHighScores() {
-        new Thread(() -> SoundManager.getInstance().playButtonClick()).start();
-        System.out.println("High Scores clicked");
+        System.out.println("⚡ Opening High Scores...");
+        
+        // Play sound
+        SoundManager.getInstance().playButtonClick();
+        
+        // Chuyển scene ngay lập tức
+        javafx.application.Platform.runLater(() -> {
+            SceneNavigator.goToHighScores(stage);
+        });
     }
-
+    
     @FXML
     private void showLevels() {
-        new Thread(() -> SoundManager.getInstance().playButtonClick()).start();
-        System.out.println("Levels clicked");
+        System.out.println("⚡ Opening Levels...");
+        
+        // Play sound
+        SoundManager.getInstance().playButtonClick();
+        
+        // Chuyển scene ngay lập tức
+        javafx.application.Platform.runLater(() -> {
+            SceneNavigator.goToLevels(stage);
+        });
     }
 
     @FXML
@@ -62,7 +82,7 @@ public class MenuController {
 
     @FXML
     private void toggleSetting() {
-        new Thread(() -> SoundManager.getInstance().playButtonClick()).start();
+        SoundManager.getInstance().playButtonClick();
         try {
             if (newStage != null && newStage.isShowing()) {
                 newStage.toFront();
@@ -90,18 +110,10 @@ public class MenuController {
 
     @FXML
     private void exitGame() {
-        new Thread(() -> SoundManager.getInstance().playButtonClick()).start();
+        SoundManager.getInstance().playButtonClick();
         System.out.println("Exit Game!");
         if (stage != null) {
-            // Delay nhỏ để nghe âm thanh click trước khi thoát
-            new Thread(() -> {
-                try {
-                    Thread.sleep(100);
-                    javafx.application.Platform.runLater(() -> stage.close());
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }).start();
+            stage.close();
         }
     }
     
