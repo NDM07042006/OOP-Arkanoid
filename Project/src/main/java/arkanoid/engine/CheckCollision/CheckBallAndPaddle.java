@@ -6,10 +6,12 @@ import java.util.List;
 import javafx.geometry.Bounds;
 import main.java.arkanoid.engine.Ball;
 import main.java.arkanoid.engine.Paddle;
+import main.java.com.example.Arkanoid.Utlis.Animations.PaddleGlowAnimation;
 
 public class CheckBallAndPaddle extends CheckCollision {
     private List<Ball> balls = gameEngine.getBalls();
     private Paddle paddle = gameEngine.getPaddle();
+    private PaddleGlowAnimation paddleGlow = new PaddleGlowAnimation();
 
     @Override
     protected void check() {
@@ -27,6 +29,9 @@ public class CheckBallAndPaddle extends CheckCollision {
                     double degrees = (ballMidPoint - paddleMidPoint)/(paddleLength/2)*75;
                     ball.setVel_X(gameEngine.setVelBall_X(degrees));
                     ball.setVel_Y(gameEngine.setVelBall_y(degrees));
+
+                    paddleGlow.play(paddle.getNode());
+
                 }
                 else ball.setCollision(false);
             }

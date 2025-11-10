@@ -9,6 +9,9 @@ import javafx.stage.Stage;
 import javafx.animation.AnimationTimer;
 
 import main.java.arkanoid.engine.*;
+import main.java.com.example.Arkanoid.Utlis.Animations.PaddleGlowAnimation;
+
+import java.util.ArrayList;
 
 public class Main extends Application {
     private GameEngine gameEngine = new GameEngine();
@@ -17,9 +20,10 @@ public class Main extends Application {
 
         Group root = new Group();
         Scene scene = new Scene(root, Define.SCREEN_WIDTH, Define.SCREEN_HEIGHT);
-        Map map = new Map(1);
+        Map map = new Map(2);
         gameEngine.setGame(root,map);
         map.loadMap(Define.SCREEN_WIDTH, Define.SCREEN_HEIGHT);
+
         for (Bricks b : map.getBrickGroup()) {
             b.setSence(scene);
             root.getChildren().add(b.getNode());
@@ -29,11 +33,15 @@ public class Main extends Application {
         player.setScene(scene);
         root.getChildren().add(player.getNode());
 
+
+
+
         // Thêm một số PowerUp để kiểm tra
         MultiBall powerUp1 = new MultiBall(300, 100);
         MultiBall powerUp2 = new MultiBall(400, 150);
         gameEngine.addPowerUp(powerUp1);
         gameEngine.addPowerUp(powerUp2);
+        gameEngine.addBall();
 
         new AnimationTimer() {
             @Override
@@ -49,6 +57,8 @@ public class Main extends Application {
                             default:
                                 break;
 
+                            case SPACE:
+                                gameEngine.MoveBall();
                         }
 
                     }

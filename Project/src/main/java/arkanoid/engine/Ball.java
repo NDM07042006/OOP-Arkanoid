@@ -13,7 +13,33 @@ public class Ball extends GameObject {
     ImageView sprite;
     Scene scene;
     boolean isMoving = false;
-    boolean isColliding = false;
+    boolean paddleCollision  = false;
+    boolean attached = false;
+    boolean brickCollision = false;
+
+    public boolean isPaddleCollision() {
+        return paddleCollision;
+    }
+
+    public void setPaddleCollision(boolean paddleCollision) {
+        this.paddleCollision = paddleCollision;
+    }
+
+    public boolean isBrickCollision() {
+        return brickCollision;
+    }
+
+    public void setBrickCollision(boolean brickCollision) {
+        this.brickCollision = brickCollision;
+    }
+
+    public boolean isAttached() {
+        return attached;
+    }
+
+    public void setAttached(boolean attached) {
+        this.attached = attached;
+    }
 
     public Scene getScene() {
         return scene;
@@ -55,14 +81,6 @@ public class Ball extends GameObject {
         this.speed = speed;
     }
 
-    public boolean isColliding(){
-        return isColliding;
-    }
-
-    public void setCollision(boolean collision){
-        isColliding = collision;
-    }
-
     public boolean isMoving() {
         return isMoving;
     }
@@ -85,8 +103,8 @@ public class Ball extends GameObject {
 
         sprite.setX(pos_X);
         sprite.setY(pos_Y);
-        sprite.setFitWidth(30);  // chỉnh kích thước nếu cần
-        sprite.setFitHeight(30);
+        sprite.setFitWidth(15);  // chỉnh kích thước nếu cần
+        sprite.setFitHeight(15);
     }
 
 
@@ -96,7 +114,7 @@ public class Ball extends GameObject {
 
     @Override
     public void update() {
-        if (!isMoving) return;
+        //if (!isMoving) return;
         pos_X += vel_X * speed;
         pos_Y += vel_Y * speed;
         sprite.setX(pos_X);
@@ -104,6 +122,8 @@ public class Ball extends GameObject {
 
         if (pos_X <= 0 || pos_X >= Define.SCREEN_WIDTH - 16) {vel_X = - vel_X;}
         if (pos_Y <= 0 || pos_Y >= Define.SCREEN_HEIGHT - 16) {vel_Y = - vel_Y;}
+
     }
+
 
 }

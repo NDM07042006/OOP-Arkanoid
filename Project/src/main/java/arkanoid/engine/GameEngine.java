@@ -1,5 +1,6 @@
 package main.java.arkanoid.engine;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -19,7 +20,7 @@ public class GameEngine {
     private List<Ball> balls = new ArrayList<>();
     private List<PowerUp> powerUps = new ArrayList<>();
     private Map map;
-    private Bounds paddleBounds = paddle.getSprite().getBoundsInParent();
+
 
     /*
      * Cài đặt luồng
@@ -84,6 +85,7 @@ public class GameEngine {
      * Tạo ball mặc định không di chuyển
      */
     public void addBall() {
+        Bounds paddleBounds = paddle.getSprite().getBoundsInParent();
         double start_x = (paddleBounds.getMaxX()-paddleBounds.getMinX())/2
                 + paddleBounds.getMinX();
         double start_y = paddleBounds.getMinY()-30;
@@ -99,18 +101,20 @@ public class GameEngine {
      * Thêm ball tự động di chuyển có hướng
      */
     public void addBall(double degrees) {
+        Bounds paddleBounds = paddle.getSprite().getBoundsInParent();
         double start_x = (paddleBounds.getMaxX()-paddleBounds.getMinX())/2
                 + paddleBounds.getMinX();
         double start_y = paddleBounds.getMinY()-30;
         Ball ball = new Ball(start_x, start_y,
                 Define.PADDLES_AND_BALLS_IMAGE_PATH);
         ball.setMoving(true);
-        ball.setSpeed(10);
+        ball.setSpeed(1);
         ball.setVel_X(setVelBall_X( degrees));
         ball.setVel_Y(setVelBall_y( degrees));
         balls.add(ball);
         root.getChildren().add(ball.getNode());
     }
+
     /*
      * Thêm power up
      */
@@ -133,13 +137,25 @@ public class GameEngine {
         for (Bricks brick: map.getBrickGroup()) {
             brick.update();
             if (brick.isDestroyed()) {
+                switch (brick.getPowerUp_Type()) {
+                    case 1:
+                        MultiBall powerUp = new MultiBall(brick.pos_X, brick.pos_Y);
+                        addPowerUp(powerUp);
+
+                }
                 root.getChildren().remove(brick.getNode());
+
             }
-
         }
-
+        Iterator<Bricks> iterator = Map.brickGroup.iterator();
+        while (iterator.hasNext()) {
+            Bricks b = iterator.next();
+            if (b.isDestroyed()) {
+                iterator.remove(); // safely removes current element
+                b = null;
+            }
+        }
         paddle.update();
-
     }
 
     /*
@@ -147,12 +163,42 @@ public class GameEngine {
      */
     public void moveLeft(){
         paddle.setVel_X(-2);
+        for (Ball b: balls) {
+            if (!b.isMoving() && b.isAttached()) {
+                b.setVel_X(-2);
+            }
+        }
     }
     public void moveRight(){
         paddle.setVel_X(2);
+        for (Ball b: balls) {
+            if (!b.isMoving() && b.isAttached()) {
+                b.setVel_X(2);
+
+            }
+        }
     }
     public void notMove(){
         paddle.setVel_X(0);
+        for (Ball b: balls) {
+            if (!b.isMoving() && b.isAttached()) {
+                b.setVel_X(0);
+            }
+        }
+
+    }
+
+    public void MoveBall() {
+        for (Ball ball: balls) {
+            if (!ball.isMoving() && ball.isAttached() ) { // 🔹 chỉ kích hoạt lần đầu
+                ball.setMoving(true);
+                ball.setSpeed(5);
+                ball.setVel_Y(-1);
+                ball.setVel_X(0);
+                System.out.println("moving");
+            }
+            break;
+        }
     }
 
     /*

@@ -11,6 +11,24 @@ public class Bricks extends GameObject {
     int currrentPoints;
     int width = 50;
     int height = 25;
+    boolean givePowerUp = false;
+    int PowerUp_Type;
+
+    public int getPowerUp_Type() {
+        return PowerUp_Type;
+    }
+
+    public void setPowerUp_Type(int powerUp_Type) {
+        PowerUp_Type = powerUp_Type;
+    }
+
+    public boolean isGivePowerUp() {
+        return givePowerUp;
+    }
+
+    public void setGivePowerUp(boolean givePowerUp) {
+        this.givePowerUp = givePowerUp;
+    }
 
     ImageView sprite;
     Scene scene;
@@ -116,6 +134,15 @@ public class Bricks extends GameObject {
     public void update() {
         if (currrentPoints <= 0) {
             destroyed = true;
+        }
+
+        if (currrentPoints == 1) {
+            sprite.setViewport(new Rectangle2D(176, sprite.getViewport().getMinY(), sprite.getViewport().getWidth(), sprite.getViewport().getHeight()));
+
+
+
+
+
         }
     }
 }

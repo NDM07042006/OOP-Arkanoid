@@ -27,23 +27,6 @@ public abstract class PowerUp extends GameObject {
         this.sprite.setFitWidth(WIDTH);
         this.sprite.setFitHeight(HEIGHT);
     }
-
-    /*
-    public Ball(double startX, double startY, String imagePath) {
-        pos_X = startX;
-        pos_Y = startY;
-
-        Image image = new Image(imagePath);
-        sprite = new ImageView(image);
-        sprite.setViewport(new Rectangle2D(176, 16, 16, 16));
-
-        sprite.setX(pos_X);
-        sprite.setY(pos_Y);
-        sprite.setFitWidth(30);  // chỉnh kích thước nếu cần
-        sprite.setFitHeight(30);
-    }
-*/
-
     public static void setGameEngine(GameEngine engine) {
         gameEngine = engine;
     }
