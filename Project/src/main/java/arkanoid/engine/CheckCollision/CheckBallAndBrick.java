@@ -19,46 +19,51 @@ public class CheckBallAndBrick extends CheckCollision {
             while (bricksIterator.hasNext()) {
                 Bricks brick = bricksIterator.next();
                 if (ball.getSprite().getBoundsInParent().intersects(brick.getNode().getBoundsInParent())) {
-                    Bounds ballBounds = ball.getSprite().getBoundsInParent();
-                    Bounds brickBounds = brick.getSprite().getBoundsInParent();
-                    /*
-                     * Đổi hướng bóng
-                     */
-                    /*
-                     * Chạm bên dưới gạch
-                     */
-                    if(ballBounds.getMinY()<=brickBounds.getMaxY()
-                    && ballBounds.getMaxY()> brickBounds.getMaxY()){
-                        ball.setVel_Y(-ball.getVel_Y());
+                    if(!ball.brickCollision()){
+                        ball.setBrickCollision(true);
+                        Bounds ballBounds = ball.getSprite().getBoundsInParent();
+                        Bounds brickBounds = brick.getSprite().getBoundsInParent();
+                        /*
+                        * Đổi hướng bóng
+                        */
+                        /*
+                        * Chạm bên dưới gạch
+                        */
+                        if(ballBounds.getMinY()<=brickBounds.getMaxY()
+                        && ballBounds.getMaxY()> brickBounds.getMaxY()){
+                            ball.setVel_Y(-ball.getVel_Y());
+                        }
+                        /*
+                        * Chạm bên trên gạch
+                        */
+                        if(ballBounds.getMaxY()>=brickBounds.getMinY()
+                        && ballBounds.getMinY()< brickBounds.getMinY()){
+                            ball.setVel_Y(-ball.getVel_Y());
+                        }
+                        /*
+                        * Chạm bên phải gạch
+                        */
+                        if(ballBounds.getMinX()<=brickBounds.getMaxX()
+                            && ballBounds.getMaxX()> brickBounds.getMaxX()){
+                            ball.setVel_X(-ball.getVel_X());
+                        }
+                        /*
+                        * Chạm bên trái gạch
+                        */
+                        if(ballBounds.getMaxX()>=brickBounds.getMinX()
+                            && ballBounds.getMinX()< brickBounds.getMinX()){
+                            ball.setVel_X(-ball.getVel_X());
+                        }
+                        
+                        /*
+                        * Xóa gạch
+                        */
+                        safeRemove(brick);
+                        bricksIterator.remove();
+                        break;
                     }
-                    /*
-                     * Chạm bên phải gạch
-                     */
-                    else if(ballBounds.getMinX()<=brickBounds.getMaxX()
-                         && ballBounds.getMaxX()> brickBounds.getMaxX()){
-                        ball.setVel_X(-ball.getVel_X());
-                    }
-                    /*
-                     * Chạm bên trái gạch
-                     */
-                    else if(ballBounds.getMaxX()>=brickBounds.getMinX()
-                         && ballBounds.getMinX()< brickBounds.getMinX()){
-                        ball.setVel_X(-ball.getVel_X());
-                    }
-                    /*
-                     * Chạm bên trên gạch
-                     */
-                    else if(ballBounds.getMaxY()>=brickBounds.getMinY()
-                    && ballBounds.getMinY()< brickBounds.getMinY()){
-                        ball.setVel_Y(-ball.getVel_Y());
-                    }
-                    /*
-                     * Xóa gạch
-                     */
-                    safeRemove(brick);
-                    bricksIterator.remove();
-                    break;
                 }
+                else ball.setBrickCollision(false);;
             }
         }
     }

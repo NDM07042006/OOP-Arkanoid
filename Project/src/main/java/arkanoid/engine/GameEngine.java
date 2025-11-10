@@ -19,7 +19,6 @@ public class GameEngine {
     private List<Ball> balls = new ArrayList<>();
     private List<PowerUp> powerUps = new ArrayList<>();
     private Map map;
-    private Bounds paddleBounds = paddle.getSprite().getBoundsInParent();
     
     /*
      * Cài đặt luồng
@@ -84,6 +83,7 @@ public class GameEngine {
      * Tạo ball mặc định không di chuyển
      */
     public void addBall() {
+        Bounds paddleBounds = paddle.getSprite().getBoundsInParent();
         double start_x = (paddleBounds.getMaxX()-paddleBounds.getMinX())/2
         + paddleBounds.getMinX();
         double start_y = paddleBounds.getMinY()-30;
@@ -99,6 +99,7 @@ public class GameEngine {
      * Thêm ball tự động di chuyển có hướng
      */
     public void addBall(double degrees) {
+        Bounds paddleBounds = paddle.getSprite().getBoundsInParent();
         double start_x = (paddleBounds.getMaxX()-paddleBounds.getMinX())/2
         + paddleBounds.getMinX();
         double start_y = paddleBounds.getMinY()-30;

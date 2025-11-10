@@ -12,6 +12,7 @@ import main.java.arkanoid.engine.*;
 
 public class Main extends Application {
     private GameEngine gameEngine = new GameEngine();
+    private AnimationTimer game;
     @Override
     public void start(Stage primaryStage) throws Exception {
 
@@ -35,7 +36,7 @@ public class Main extends Application {
         gameEngine.addPowerUp(powerUp1);
         gameEngine.addPowerUp(powerUp2);
 
-        new AnimationTimer() {
+        game = new AnimationTimer() {
             @Override
             public void handle(long now) {
                 scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -71,7 +72,8 @@ public class Main extends Application {
                 gameEngine.update();
                 gameEngine.CheckAllCollision();
             }
-        }.start();
+        };
+        game.start();
         primaryStage.setTitle("Arkanoid");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -82,6 +84,9 @@ public class Main extends Application {
     public void stop() throws Exception {
         if (gameEngine != null) {
             gameEngine.shutdown(); // shutdown ExecutorService
+        }
+        if (game != null ) {
+            game.stop();
         }
         super.stop();
     }

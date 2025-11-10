@@ -13,7 +13,8 @@ public class Ball extends GameObject {
     ImageView sprite;
     Scene scene;
     boolean isMoving = false;
-    boolean isColliding = false;
+    boolean paddleCollision = false;
+    boolean brickCollision = false;
 
     public Scene getScene() {
         return scene;
@@ -55,12 +56,19 @@ public class Ball extends GameObject {
         this.speed = speed;
     }
 
-    public boolean isColliding(){
-        return isColliding;
+    public boolean brickCollision(){
+        return brickCollision;
     }
 
-    public void setCollision(boolean collision){
-        isColliding = collision;
+    public void setBrickCollision(boolean collision){
+        brickCollision = collision;
+    }
+    public boolean paddleCollision(){
+        return paddleCollision;
+    }
+
+    public void setPaddleCollision(boolean collision){
+        paddleCollision = collision;
     }
 
     public boolean isMoving() {
