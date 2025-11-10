@@ -1,5 +1,4 @@
 package main.java.arkanoid.engine;
-
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -55,40 +54,6 @@ public class Paddle extends GameObject{
         this.scene = scene;
     }
 
-    public void setSence(Scene scene) {
-        this.scene = scene;
-    }
-
-    public void movingSideway() {
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                switch (keyEvent.getCode()) {
-                    case A:
-                        vel_X = -1;
-                        break;
-                    case D:
-                        vel_X = 1;
-                        break;
-                }
-            }
-        });
-
-        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                switch (keyEvent.getCode()) {
-                    case A:
-                    case D:
-                    case W:
-                    case S:
-                        vel_X = 0;
-                        vel_Y = 0;
-                        break;
-                }
-            }
-        });
-    }
 
     public Paddle(double startX, double startY, String imagePath) {
         pos_X = startX;
@@ -114,11 +79,6 @@ public class Paddle extends GameObject{
     public void update() {
         pos_X += vel_X * speed;
         pos_Y += vel_Y * speed;
-        sprite.setX(pos_X);
-        sprite.setY(pos_Y);
-    }
-
-    public void draw() {
         sprite.setX(pos_X);
         sprite.setY(pos_Y);
     }

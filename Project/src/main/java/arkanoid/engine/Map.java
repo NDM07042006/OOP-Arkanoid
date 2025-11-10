@@ -1,5 +1,4 @@
 package main.java.arkanoid.engine;
-
 import javafx.scene.Scene;
 
 import java.util.ArrayList;
@@ -19,11 +18,14 @@ public class Map {
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 
-    };
+    } ;
 
-    private int[][] lv;
+    private  int[][] lv;
     public static ArrayList<Bricks> brickGroup = new ArrayList<>();
     private Scene secne;
+
+
+
 
     public Map(int type_of_map) {
         if (type_of_map == 0) {
@@ -40,6 +42,9 @@ public class Map {
         return brickGroup;
     }
 
+
+
+
     public void loadMap(int screenWidth, int screenHeight) {
         for (int t = 0; t < row; t++) {
             for (int i = 0; i < column; i++) {
@@ -49,8 +54,8 @@ public class Map {
                     case 1:
                         Bricks normalBrick = new Bricks(
                                 i * screenWidth / column, // X position
-                                t * screenWidth / column / 2,   // Y position
-                                "/com/Arkanoid/img/bricks.png",
+                                t * screenWidth / column/ 2,   // Y position
+                                Define.BRICKS_IMAGE_PATH,
                                 112, 0,
                                 screenWidth, screenHeight,
                                 row, column, 2
@@ -60,16 +65,18 @@ public class Map {
                     case 2:
                         Bricks hardBrick = new Bricks(
                                 i * screenWidth / column, // X position
-                                t * screenWidth / column / 2,   // Y position
-                                "/com/Arkanoid/img/bricks.png",
+                                t * screenWidth / column/ 2,   // Y position
+                                Define.BRICKS_IMAGE_PATH,
                                 112, 16,
                                 screenWidth, screenHeight,
                                 row, column, -1
                         );
                         brickGroup.add(hardBrick);
                         break;
+
                 }
             }
         }
     }
+
 }

@@ -27,14 +27,22 @@ public class MenuController {
         this.stage = stage;
     }
 
+    // @FXML
+    // private void startGame() {
+    //     System.out.println("Start Game clicked");
+    //     // Phát âm thanh và chuyển scene đồng thời - không chờ
+    //     new Thread(() -> SoundManager.getInstance().playButtonClick()).start();
+    //     SoundManager.getInstance().playGameMusic(); // Chuyển sang nhạc game
+    //     GameScene gameScene = new GameScene(stage);
+    //     gameScene.show();
+    // }
+
     @FXML
     private void startGame() {
-        System.out.println("Start Game clicked");
-        // Phát âm thanh và chuyển scene đồng thời - không chờ
         new Thread(() -> SoundManager.getInstance().playButtonClick()).start();
-        SoundManager.getInstance().playGameMusic(); // Chuyển sang nhạc game
-        GameScene gameScene = new GameScene(stage);
-        gameScene.show();
+        SoundManager.getInstance().playGameMusic();
+        GameScene2 gameScene2 = new GameScene2(stage);
+        gameScene2.show();
     }
 
     @FXML

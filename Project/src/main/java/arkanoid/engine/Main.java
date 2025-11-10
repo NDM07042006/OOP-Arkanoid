@@ -62,12 +62,12 @@ public class Main extends Application {
 
 
 
-        Paddle player = new Paddle(200, 500, "/com/Arkanoid/img/paddles_and_balls.png");
+        Paddle player = new Paddle(200, 500, Define.PADDLES_AND_BALLS_IMAGE_PATH);
         player.setScene(scene);
         root.getChildren().add(player.getNode());
 
 
-        Ball ball = new Ball(200, 500, "/com/Arkanoid/img/paddles_and_balls.png");
+        Ball ball = new Ball(200, 500, Define.PADDLES_AND_BALLS_IMAGE_PATH);
         ball.setSence(scene);
         root.getChildren().add(ball.getNode());
 
@@ -91,7 +91,7 @@ public class Main extends Application {
                                     ball.setMoving(true);
                                     ball.setSpeed(6);
                                     ball.setVel_Y(-1);
-                                    ball.setVel_X(-1);
+                                    ball.setVel_X(0); // thêm nếu muốn đi thẳng lên
                                     System.out.println("moving");
                                 }
                                 break;
@@ -118,23 +118,12 @@ public class Main extends Application {
                     }
                 });
 
-                if (ball.getNode().getBoundsInParent().intersects(player.getNode().getBoundsInParent())) {
-                    // Handle bounced
-                    ball.vel_Y *= -1;
-                }
-
-
 
 
                 for (Bricks b : Map.brickGroup) {
-                    b.update();
-                    if (ball.getNode().getBoundsInParent().intersects(b.getNode().getBoundsInParent())) {
-                        ball.vel_Y *= -1;
-                        b.currrentPoints -= 1;
-                    }
                     if (b.isDestroyed()) {
-
                         root.getChildren().remove(b.getNode());
+                        b.update();
                     }
                 }
 

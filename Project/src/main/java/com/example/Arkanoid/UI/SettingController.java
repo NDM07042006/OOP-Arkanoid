@@ -35,24 +35,30 @@ public class SettingController {
     public void initialize() {
         soundManager = SoundManager.getInstance();
         
-        // Load giá trị hiện tại từ SoundManager
+        // Load giá trị hiện tại từ SoundManager (trước khi add listeners)
         musicVolumeSlider.setValue(soundManager.getMusicVolume());
         sfxVolumeSlider.setValue(soundManager.getSfxVolume());
         musicEnabledCheckBox.setSelected(soundManager.isMusicEnabled());
         sfxEnabledCheckBox.setSelected(soundManager.isSfxEnabled());
         
+        // Set initial state của sliders
+        musicVolumeSlider.setDisable(!musicEnabledCheckBox.isSelected());
+        sfxVolumeSlider.setDisable(!sfxEnabledCheckBox.isSelected());
+        
         // Cập nhật label hiển thị
         updateMusicVolumeLabel(soundManager.getMusicVolume());
         updateSfxVolumeLabel(soundManager.getSfxVolume());
         
-        // Listener cho Music Volume Slider
+        // Add listeners SAU KHI set giá trị ban đầu để tránh trigger không cần thiết
+        
+        // Listener cho Music Volume Slider - update ngay lập tức
         musicVolumeSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             double volume = newValue.doubleValue();
             soundManager.setMusicVolume(volume);
             updateMusicVolumeLabel(volume);
         });
         
-        // Listener cho SFX Volume Slider
+        // Listener cho SFX Volume Slider - update ngay lập tức
         sfxVolumeSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             double volume = newValue.doubleValue();
             soundManager.setSfxVolume(volume);
@@ -70,10 +76,6 @@ public class SettingController {
             soundManager.setSfxEnabled(newValue);
             sfxVolumeSlider.setDisable(!newValue);
         });
-        
-        // Set initial state của sliders
-        musicVolumeSlider.setDisable(!musicEnabledCheckBox.isSelected());
-        sfxVolumeSlider.setDisable(!sfxEnabledCheckBox.isSelected());
     }
     
     private void updateMusicVolumeLabel(double volume) {

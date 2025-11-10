@@ -49,7 +49,7 @@ public class SoundManager {
             URL resource = getClass().getResource(filePath);
             if (resource != null) {
                 AudioClip clip = new AudioClip(resource.toString());
-                clip.setVolume(1.0); // Đặt volume tối đa để test
+                clip.setVolume(sfxVolume); // Dùng sfxVolume thay vì hardcode
                 soundEffects.put(name, clip);
                 System.out.println("✓ Loaded sound: " + name + " (volume: " + clip.getVolume() + ")");
             } else {
@@ -69,7 +69,7 @@ public class SoundManager {
             if (resource != null) {
                 System.out.println("Loading music from: " + resource.toString());
                 AudioClip clip = new AudioClip(resource.toString());
-                clip.setVolume(1.0); // Đặt volume tối đa để test
+                clip.setVolume(musicVolume); // Dùng musicVolume thay vì hardcode
                 clip.setCycleCount(AudioClip.INDEFINITE); // Loop vô hạn
                 backgroundMusics.put(name, clip);
                 System.out.println("✓ Loaded music: " + name + " (volume: " + clip.getVolume() + ")");
@@ -286,10 +286,13 @@ public class SoundManager {
      */
     public void setMusicVolume(double volume) {
         this.musicVolume = Math.max(0.0, Math.min(1.0, volume));
+        
+        // Update tất cả music clips trong map
         for (AudioClip clip : backgroundMusics.values()) {
             clip.setVolume(this.musicVolume);
         }
-        // Update current playing music
+        
+        // QUAN TRỌNG: Update currentMusic đang phát (nếu có)
         if (currentMusic != null) {
             currentMusic.setVolume(this.musicVolume);
         }
@@ -300,6 +303,7 @@ public class SoundManager {
      */
     public void setSfxEnabled(boolean enabled) {
         this.sfxEnabled = enabled;
+        System.out.println("SFX " + (enabled ? "enabled" : "disabled"));
     }
 
     /**
@@ -307,10 +311,26 @@ public class SoundManager {
      */
     public void setMusicEnabled(boolean enabled) {
         this.musicEnabled = enabled;
-        if (!enabled && currentMusic != null) {
-            currentMusic.stop();
-        } else if (enabled && currentMusic != null && currentMusicName != null) {
-            currentMusic.play();
+        System.out.println("Music " + (enabled ? "enabled" : "disabled"));
+        
+        if (!enabled) {
+            // Tắt nhạc - dừng nhạc hiện tại
+            if (currentMusic != null && currentMusic.isPlaying()) {
+                currentMusic.stop();
+                System.out.println("✓ Stopped music: " + currentMusicName);
+            }
+        } else {
+            // Bật nhạc - chỉ phát nếu volume > 0
+            if (currentMusicName != null && musicVolume > 0.0) {
+                if (currentMusic != null && !currentMusic.isPlaying()) {
+                    currentMusic.play();
+                    System.out.println("✓ Resumed music: " + currentMusicName + " (volume: " + musicVolume + ")");
+                } else if (currentMusic == null) {
+                    playBackgroundMusic(currentMusicName);
+                }
+            } else if (musicVolume == 0.0) {
+                System.out.println("⚠ Music enabled but volume is 0, not playing");
+            }
         }
     }
 

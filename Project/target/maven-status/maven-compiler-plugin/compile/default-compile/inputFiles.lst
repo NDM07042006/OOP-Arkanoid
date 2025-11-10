@@ -2,6 +2,7 @@
 /home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/com/example/Arkanoid/UI/MenuController.java
 /home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/com/example/Arkanoid/UI/GameScene.java
 /home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/arkanoid/engine/PowerUp/MultiBall.java
+/home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/arkanoid/engine/Define.java
 /home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/arkanoid/engine/PowerUp/Main.java
 /home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/arkanoid/engine/PowerUp/PowerUp.java
 /home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/arkanoid/App.java
@@ -11,7 +12,9 @@
 /home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/com/example/Arkanoid/Main.java
 /home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/arkanoid/engine/GameEngine.java
 /home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/com/example/Arkanoid/Utlis/Animations/Animation.java
+/home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/com/example/Arkanoid/UI/GameScene2.java
 /home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/com/example/Arkanoid/Data/Lives.java
+/home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/com/example/Arkanoid/UI/GameController.java
 /home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/com/example/Arkanoid/UI/MenuScene.java
 /home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/arkanoid/engine/Bricks.java
 /home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/arkanoid/engine/Ball.java
@@ -20,6 +23,7 @@
 /home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/arkanoid/engine/Map.java
 /home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/com/example/Arkanoid/UI/SettingController.java
 /home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/arkanoid/engine/Paddle.java
+/home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/arkanoid/engine/PowerUp/PowerUpType.java
 /home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/com/example/Arkanoid/Utlis/Animations/PaddleGlowAnimation.java
 /home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/arkanoid/engine/GameObject.java
 /home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/com/example/Arkanoid/UI/PauseController.java

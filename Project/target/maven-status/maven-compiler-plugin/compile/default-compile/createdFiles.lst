@@ -1,10 +1,13 @@
 main/java/com/example/Arkanoid/UI/GameScene$1$2.class
 main/java/com/example/Arkanoid/UI/SettingController.class
-main/java/arkanoid/engine/Paddle$3.class
+main/java/com/example/Arkanoid/UI/GameScene2.class
 main/java/arkanoid/engine/GameObject.class
 main/java/arkanoid/engine/Main$2.class
 main/java/arkanoid/engine/Main$1$2.class
+main/java/com/example/Arkanoid/UI/GameController.class
 main/java/arkanoid/engine/PowerUp/MultiBall.class
+main/java/arkanoid/engine/GameEngine.class
+main/java/arkanoid/engine/PowerUp/PowerUpType.class
 main/java/arkanoid/engine/PowerUp/PowerUp.class
 main/java/com/example/Arkanoid/UI/EndController.class
 main/java/com/example/Arkanoid/Utlis/Animations/Animation.class
@@ -19,7 +22,6 @@ main/java/com/example/Arkanoid/Main.class
 main/java/arkanoid/engine/PowerUp/Main.class
 main/java/arkanoid/engine/Map.class
 main/java/com/example/Arkanoid/UI/SettingScene.class
-main/java/arkanoid/engine/Paddle$1.class
 main/java/com/example/Arkanoid/UI/PauseScene.class
 main/java/com/example/Arkanoid/UI/PauseController.class
 main/java/com/example/Arkanoid/UI/GameScene$1.class
@@ -27,7 +29,7 @@ main/java/arkanoid/engine/Main$1.class
 main/java/com/example/Arkanoid/UI/MenuController.class
 main/java/com/example/Arkanoid/UI/GameScene$1$1.class
 main/java/com/example/Arkanoid/UI/MenuScene.class
-main/java/arkanoid/engine/Paddle$2.class
+main/java/arkanoid/engine/Define.class
 main/java/com/example/Arkanoid/UI/EndScene.class
 main/java/com/example/Arkanoid/UI/GameScene.class
 main/java/arkanoid/engine/PowerUp/Main$1.class

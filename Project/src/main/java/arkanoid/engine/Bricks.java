@@ -1,19 +1,20 @@
 package main.java.arkanoid.engine;
-
+import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 
 public class Bricks extends GameObject {
-    static int HitPoints = 1;
     int Point_given;
-    int currrentPoints = HitPoints;
-    int width = 50;
-    int height = 25;
+    int currrentPoints;
+    double width = 50;
+    double height = 25;
 
     ImageView sprite;
     Scene scene;
+
 
     public int getPoint_given() {
         return Point_given;
@@ -31,7 +32,7 @@ public class Bricks extends GameObject {
         this.currrentPoints = currrentPoints;
     }
 
-    public int getWidth() {
+    public double getWidth() {
         return width;
     }
 
@@ -39,7 +40,7 @@ public class Bricks extends GameObject {
         this.width = width;
     }
 
-    public int getHeight() {
+    public double getHeight() {
         return height;
     }
 
@@ -64,13 +65,13 @@ public class Bricks extends GameObject {
     }
 
     public Bricks(int posX, int posY, String imagePath,
-                  int X, int Y, int screenHeight, int screenWidth, int row, int column, int HP) {
+                  int X, int Y, int screenHeight, int  screenWidth, int row, int column, int HP) {
 
         currrentPoints = HP;
-        Point_given = HP * 10; // Mỗi HP cho 10 điểm
 
         this.pos_X = posX;
         this.pos_Y = posY;
+
 
         Image image = new Image(imagePath);
         sprite = new ImageView(image);
@@ -78,7 +79,7 @@ public class Bricks extends GameObject {
 
         // Tính kích thước viên gạch theo số hàng/cột và kích thước màn hình
         this.width = screenWidth / column;
-        this.height = screenWidth / 2 / column;
+        this.height = screenWidth/ 2 / column ;
 
         sprite.setX(pos_X);
         sprite.setY(pos_Y);
@@ -86,9 +87,8 @@ public class Bricks extends GameObject {
         sprite.setFitHeight(height);
     }
 
-    public void setHitPoints(int hitPoints) {
-        this.HitPoints = hitPoints;
-    }
+
+
 
     public void setSence(Scene scene) {
         this.scene = scene;
@@ -98,14 +98,12 @@ public class Bricks extends GameObject {
         return sprite;
     }
 
-    public void setPos_X(double x) {
+    public void setPos_X(int x) {
         pos_X = x;
-        sprite.setX(x); // Cập nhật vị trí visual
     }
 
-    public void setPos_Y(double y) {
+    public void setPos_Y(int y) {
         pos_Y = y;
-        sprite.setY(y); // Cập nhật vị trí visual
     }
 
     public double getPos_X() {
@@ -116,11 +114,6 @@ public class Bricks extends GameObject {
         return pos_Y;
     }
 
-    public void Bricks_destroyed() {
-        if (HitPoints == 0) {
-            destroyed = true;
-        }
-    }
 
     public void update() {
         if (currrentPoints == 0) {

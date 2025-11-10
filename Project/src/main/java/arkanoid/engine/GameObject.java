@@ -1,5 +1,4 @@
 package main.java.arkanoid.engine;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,8 +16,6 @@ public class GameObject {
     double Width = 48;
     double Height = 50;
     Image image;
-    Node node;
-    boolean destroyed = false;
 
     public boolean isDestroyed() {
         return destroyed;
@@ -27,6 +24,11 @@ public class GameObject {
     public void setDestroyed(boolean destroyed) {
         this.destroyed = destroyed;
     }
+
+    Node node;
+    boolean destroyed = false;
+
+
 
     public double getPos_X() {
         return pos_X;
@@ -43,7 +45,44 @@ public class GameObject {
     public void setPos_Y(double pos_Y) {
         this.pos_Y = pos_Y;
     }
-    
+
+    public double getWidth() {
+        return Width;
+    }
+
+    public void setWidth(double width) {
+        Width = width;
+    }
+
+    public double getHeight() {
+        return Height;
+    }
+
+    public void setHeight(double height) {
+        Height = height;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    public Node getNode() {
+        return node;
+    }
+
+    public void setNode(Node node) {
+        this.node = node;
+    }
+
     public void update() {}
+
+
+
 }
+
+
 
