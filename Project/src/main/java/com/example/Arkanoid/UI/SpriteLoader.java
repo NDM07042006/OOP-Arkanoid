@@ -3,12 +3,13 @@ package main.java.com.example.Arkanoid.UI;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import main.java.arkanoid.engine.Define;
 
 public class SpriteLoader {
     private static Image spriteImage;
 
     static {
-        spriteImage = new Image("/com/Arkanoid/images/background_game.png");
+        spriteImage = new Image(Define.BACKGROUND);
     }
 
     public static ImageView getSprite(double x, double y, double width, double height) {

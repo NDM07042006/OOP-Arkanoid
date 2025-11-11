@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import main.java.arkanoid.engine.Define;
 
 public class SettingScene {
     private Stage stage;
@@ -14,7 +15,7 @@ public class SettingScene {
 
     public void show() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/Arkanoid/Setting.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(Define.SETTING_PATH));
             Parent root = loader.load();
 
             SettingController settingController = loader.getController();

@@ -101,8 +101,8 @@ public class SoundManager {
         loadSoundEffect("game_over", "/com/Arkanoid/sounds/game_over.wav");
 
         // === BACKGROUND MUSIC ===
-        loadBackgroundMusic("menu", "/com/Arkanoid/sounds/menu_theme.wav");
-        loadBackgroundMusic("game", "/com/Arkanoid/sounds/game_theme.wav");
+        loadBackgroundMusic("menu", "/com/Arkanoid/sounds/menu_theme.mp3");
+        loadBackgroundMusic("game", "/com/Arkanoid/sounds/game_theme.mp3");
 
         System.out.println("====================================\n");
     }

@@ -7,6 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import main.java.arkanoid.engine.Define;
 
 public class GameController {
     @FXML
@@ -55,7 +56,7 @@ public class GameController {
             }
 
             // Load sprite sheet
-            Image spriteSheet = new Image(getClass().getResourceAsStream("/com/Arkanoid/images/background_game.png"));
+            Image spriteSheet = new Image(getClass().getResourceAsStream(Define.BACKGROUND));
 
             if (spriteSheet.isError()) {
                 System.err.println("❌ Failed to load background sprite sheet");

@@ -4,10 +4,15 @@ public class Define {
     public static final String MULTI_BALL_IMAGE_PATH        = "main/resources/com/Arkanoid/img/MultiBall.png";
     public static final String PADDLES_AND_BALLS_IMAGE_PATH = "main/resources/com/Arkanoid/img/paddles_and_balls.png";
     public static final String BRICKS_IMAGE_PATH            = "main/resources/com/Arkanoid/img/bricks.png";
+    public static final String BACKGROUND                   = "main/resources/com/Arkanoid/img/background_game.png";
+
     public static final String END_SCREEN_PATH              = "/com/Arkanoid/EndScreen.fxml";
     public static final String MENU_GAME_PATH               = "/com/Arkanoid/MenuGame.fxml";
     public static final String PAUSE_MENU_PATH              = "/com/Arkanoid/PauseMenu.fxml";
     public static final String SETTING_PATH                 = "/com/Arkanoid/Setting.fxml";
+    public static final String LEVELS                       = "/com/Arkanoid/Levels.fxml";
+    public static final String HIGH_SCORE_PATH              = "/com/Arkanoid/HighScores.fxml";
+    public static final String GAME_SCENE                   = "/com/Arkanoid/GameScene.fxml";
 
     public static final int MAX_BALL_SPEED                  = 10;
     public static final int DEFAULF_BALL_SPEED              = 5;

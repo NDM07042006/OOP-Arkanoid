@@ -246,7 +246,7 @@ public class Map {
                         Bricks GreenBrick = new Bricks(
                                 i * screenWidth / column, // X position
                                  t * screenWidth / column/ 2,   // Y position
-                                "main/resources/com/Arkanoid/bricks.png",
+                                Define.BRICKS_IMAGE_PATH,
                                 112, 16,
                                 screenWidth, screenHeight,
                                 row, column, 2
@@ -259,7 +259,7 @@ public class Map {
                         Bricks YellowBrick = new Bricks(
                                 i * screenWidth / column, // X position
                                 t * screenWidth / column/ 2,   // Y position
-                                "main/resources/com/Arkanoid/bricks.png",
+                                Define.BRICKS_IMAGE_PATH,
                                 112, 32,
                                 screenWidth, screenHeight,
                                 row, column, 3
@@ -271,7 +271,7 @@ public class Map {
                         Bricks OrangeBrick = new Bricks(
                                 i * screenWidth / column, // X position
                                 t * screenWidth / column/ 2,   // Y position
-                                "main/resources/com/Arkanoid/bricks.png",
+                                Define.BRICKS_IMAGE_PATH,
                                 112, 48,
                                 screenWidth, screenHeight,
                                 row, column, 4
@@ -283,7 +283,7 @@ public class Map {
                         Bricks RedBrick = new Bricks(
                                 i * screenWidth / column, // X position
                                 t * screenWidth / column/ 2,   // Y position
-                                "main/resources/com/Arkanoid/bricks.png",
+                                Define.BRICKS_IMAGE_PATH,
                                 112, 64,
                                 screenWidth, screenHeight,
                                 row, column, 6
@@ -295,7 +295,7 @@ public class Map {
                         Bricks PowerUpBrick = new Bricks(
                                 i * screenWidth / column, // X position
                                 t * screenWidth / column/ 2,   // Y position
-                                "main/resources/com/Arkanoid/bricks.png",
+                                Define.BRICKS_IMAGE_PATH,
                                 112, 0,
                                 screenWidth, screenHeight,
                                 row, column, 2
@@ -309,7 +309,7 @@ public class Map {
                         Bricks HardBrick = new Bricks(
                                 i * screenWidth / column, // X position
                                 t * screenWidth / column/ 2,   // Y position
-                                "main/resources/com/Arkanoid/bricks.png",
+                                Define.BRICKS_IMAGE_PATH,
                                 112, 64+16,
                                 screenWidth, screenHeight,
                                 row, column, Integer.MAX_VALUE

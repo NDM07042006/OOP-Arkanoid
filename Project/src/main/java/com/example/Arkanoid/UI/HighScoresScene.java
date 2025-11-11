@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import main.java.arkanoid.engine.Define;
 import main.java.com.example.Arkanoid.Utlis.SceneCache;
 
 public class HighScoresScene {
@@ -37,7 +38,7 @@ public class HighScoresScene {
         // Nếu chưa cache, load bình thường
         try {
             System.out.println("🔄 Loading HighScoresScene from FXML");
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/Arkanoid/HighScores.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(Define.HIGH_SCORE_PATH));
             Parent root = loader.load();
 
             HighScoresController controller = loader.getController();

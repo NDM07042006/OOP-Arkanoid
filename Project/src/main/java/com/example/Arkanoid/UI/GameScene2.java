@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import main.java.arkanoid.engine.Define;
 import main.java.com.example.Arkanoid.Utlis.SceneCache;
 
 public class GameScene2 {
@@ -34,7 +35,7 @@ public class GameScene2 {
                 gameController = (GameController) SceneCache.getInstance().getCachedController("game");
             } else {
                 System.out.println("🔄 Loading GameScene from FXML...");
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/Arkanoid/GameScene.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(Define.GAME_SCENE));
                 Parent root = loader.load();
 
                 scene = new Scene(root);

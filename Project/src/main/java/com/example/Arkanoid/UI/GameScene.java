@@ -16,10 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import main.java.arkanoid.engine.Ball;
-import main.java.arkanoid.engine.Bricks;
-import main.java.arkanoid.engine.Paddle;
-import main.java.arkanoid.engine.Map;
+import main.java.arkanoid.engine.*;
 import main.java.com.example.Arkanoid.Data.*;
 
 public class GameScene {
@@ -127,12 +124,12 @@ public class GameScene {
 
 
 
-        Paddle player = new Paddle(200, 500, "/com/Arkanoid/img/paddles_and_balls.png");
+        Paddle player = new Paddle(200, 500, Define.PADDLES_AND_BALLS_IMAGE_PATH);
         player.setScene(scene);
         root.getChildren().add(player.getNode());
 
 
-        Ball ball = new Ball(200, 500, "/com/Arkanoid/img/paddles_and_balls.png");
+        Ball ball = new Ball(200, 500, Define.PADDLES_AND_BALLS_IMAGE_PATH);
         ball.setSence(scene);
         root.getChildren().add(ball.getNode());
 

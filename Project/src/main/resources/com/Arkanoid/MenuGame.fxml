@@ -22,4 +22,4 @@
         <Button layoutX="175.0" layoutY="285.0" mnemonicParsing="false" onAction="#toggleSetting" prefHeight="26.0" prefWidth="250.0" styleClass="menu-button" text="Setting" />
         <Button layoutX="175.0" layoutY="317.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="26.0" prefWidth="250.0" styleClass="menu-button, exit-button" text="Exit" />
     </children>
-</AnchorPane>ane>
+</AnchorPane>

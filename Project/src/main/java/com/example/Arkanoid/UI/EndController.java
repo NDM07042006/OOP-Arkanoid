@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import main.java.arkanoid.engine.Define;
 
 public class EndController {
     @FXML
@@ -28,7 +29,7 @@ public class EndController {
     @FXML
     public void Menu() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/Arkanoid/MenuGame.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(Define.MENU_GAME_PATH));
             Parent root = loader.load();
 
             MenuController controller = loader.getController();
