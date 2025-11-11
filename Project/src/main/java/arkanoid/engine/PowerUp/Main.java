@@ -1,7 +1,6 @@
 package main.java.arkanoid.engine.PowerUp;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -10,18 +9,22 @@ import javafx.stage.Stage;
 import javafx.animation.AnimationTimer;
 
 import main.java.arkanoid.engine.*;
+import main.java.com.example.Arkanoid.Utlis.Animations.PaddleGlowAnimation;
+import main.java.com.example.Arkanoid.Utlis.SoundManager;
+import java.util.ArrayList;
 
 public class Main extends Application {
     private GameEngine gameEngine = new GameEngine();
-    private AnimationTimer game;
     @Override
     public void start(Stage primaryStage) throws Exception {
 
         Group root = new Group();
         Scene scene = new Scene(root, Define.SCREEN_WIDTH, Define.SCREEN_HEIGHT);
-        Map map = new Map(0);
+        Map map = new Map(5);
         gameEngine.setGame(root,map);
         map.loadMap(Define.SCREEN_WIDTH, Define.SCREEN_HEIGHT);
+
+
         for (Bricks b : map.getBrickGroup()) {
             b.setSence(scene);
             root.getChildren().add(b.getNode());
@@ -31,13 +34,17 @@ public class Main extends Application {
         player.setScene(scene);
         root.getChildren().add(player.getNode());
 
-        // Thêm một số PowerUp để kiểm tra
-        // SlowPaddle powerUp1 = new SlowPaddle(300, 100);
-        FastPaddle powerUp2 = new FastPaddle(400, 150);
-        // gameEngine.addPowerUp(powerUp1);
-        gameEngine.addPowerUp(powerUp2);
 
-        game = new AnimationTimer() {
+
+
+        // Thêm một số PowerUp để kiểm tra
+        //MultiBall powerUp1 = new MultiBall(300, 100);
+        //MultiBall powerUp2 = new MultiBall(400, 150);
+        //gameEngine.addPowerUp(powerUp1);
+        //gameEngine.addPowerUp(powerUp2);
+        gameEngine.addBall();
+
+        new AnimationTimer() {
             @Override
             public void handle(long now) {
                 scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -51,6 +58,8 @@ public class Main extends Application {
                             default:
                                 break;
 
+                            case SPACE:
+                                gameEngine.MoveBall();
                         }
 
                     }
@@ -69,22 +78,14 @@ public class Main extends Application {
                         }
                     }
                 });
-                
+
                 gameEngine.update();
                 gameEngine.CheckAllCollision();
             }
-        };
-        game.start();
+        }.start();
         primaryStage.setTitle("Arkanoid");
         primaryStage.setScene(scene);
         primaryStage.show();
-        primaryStage.setOnCloseRequest(event -> {
-            try {
-                stop(); // Gọi lại phương thức stop() để dừng AnimationTimer và shutdown GameEngine
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
 
     }
 
@@ -93,11 +94,6 @@ public class Main extends Application {
         if (gameEngine != null) {
             gameEngine.shutdown(); // shutdown ExecutorService
         }
-        if (game != null ) {
-            game.stop();
-        }
-        Platform.exit();
-        System.exit(0);
         super.stop();
     }
 

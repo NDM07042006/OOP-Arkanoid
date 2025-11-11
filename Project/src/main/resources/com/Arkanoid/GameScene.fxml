@@ -7,8 +7,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.example.Arkanoid.UI.GameController">
    <children>
       <Label layoutX="10.0" layoutY="10.0" text="SCORE: 0" />
-      <Label layoutX="10.0" layoutY="30.0" text="LEVEL: 0" />
-      <Label layoutX="10.0" layoutY="50.0" text="LIVES: 0" />
+      <Label layoutX="10.0" layoutY="30.0" text="LIVES: 0" />
       <Button layoutX="270.0" layoutY="360.0" mnemonicParsing="false" onAction="#pause" text="Pause" />
    </children>
 </AnchorPane>

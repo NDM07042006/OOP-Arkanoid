@@ -28,8 +28,6 @@ public class GameObject {
     Node node;
     boolean destroyed = false;
 
-
-
     public double getPos_X() {
         return pos_X;
     }
@@ -79,10 +77,6 @@ public class GameObject {
     }
 
     public void update() {}
-
-
-
 }
-
 
 

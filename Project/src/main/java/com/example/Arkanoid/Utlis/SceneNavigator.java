@@ -30,7 +30,7 @@ public class SceneNavigator {
             stage.setTitle("Arkanoid Menu");
             
             // KHÔNG play music ở đây - để tránh blocking
-            // SoundManager.getInstance().playMenuMusic();
+            SoundManager.getInstance().playMenuMusic();
             
             long endTime = System.nanoTime();
             double timeTaken = (endTime - startTime) / 1_000_000.0; // Convert to ms
