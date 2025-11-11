@@ -32,9 +32,9 @@ public class Main extends Application {
         root.getChildren().add(player.getNode());
 
         // Thêm một số PowerUp để kiểm tra
-        // SlowPaddle powerUp1 = new SlowPaddle(300, 100);
-        MultiBall powerUp2 = new MultiBall(400, 150);
-        // gameEngine.addPowerUp(powerUp1);
+        RandomPowerUp powerUp1 = new RandomPowerUp(300, 100);
+        RandomPowerUp powerUp2 = new RandomPowerUp(400, 150);
+        gameEngine.addPowerUp(powerUp1);
         gameEngine.addPowerUp(powerUp2);
 
         game = new AnimationTimer() {

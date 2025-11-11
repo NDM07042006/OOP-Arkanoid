@@ -13,6 +13,7 @@ main\java\arkanoid\engine\Main$1$1.class
 main\java\arkanoid\engine\Paddle.class
 main\java\arkanoid\engine\PowerUp\Main$1$1.class
 main\java\com\example\Arkanoid\Data\Score.class
+main\java\arkanoid\engine\PowerUp\RandomPowerUp.class
 main\java\com\example\Arkanoid\UI\EndScene.class
 main\java\arkanoid\engine\CheckCollision\CheckBallAndPaddle.class
 main\java\arkanoid\engine\PowerUp\MultiBall.class
@@ -35,4 +36,5 @@ main\java\com\example\Arkanoid\UI\MenuController.class
 main\java\com\example\Arkanoid\UI\PauseScene.class
 main\java\arkanoid\engine\Bricks.class
 main\java\com\example\Arkanoid\UI\MenuScene.class
+main\java\arkanoid\engine\PowerUp\RandomPowerUp$1.class
 main\java\arkanoid\engine\GameObject.class
