@@ -1,8 +1,6 @@
 package main.java.com.example.Arkanoid.UI;
 
 import javafx.fxml.FXML;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -11,6 +9,9 @@ import javafx.stage.Stage;
 public class GameController {
     @FXML
     private AnchorPane anchorPane;
+    
+    @FXML
+    private ImageView pauseButton;
 
     @FXML
     private Stage stage;
@@ -21,6 +22,11 @@ public class GameController {
 
     @FXML
     public void initialize() {
+        System.out.println("🔧 GameController.initialize() called");
+        System.out.println("   - anchorPane: " + (anchorPane != null ? "OK" : "NULL"));
+        System.out.println("   - needsBackgroundLoad: " + needsBackgroundLoad);
+        System.out.println("   - levelNumber: " + levelNumber);
+        
         // FXML components đã được inject, anchorPane sẵn sàng
         // Nếu level đã được set trước, load background ngay
         if (needsBackgroundLoad && anchorPane != null) {
@@ -36,12 +42,15 @@ public class GameController {
     public void setLevel(int levelNumber) {
         this.levelNumber = levelNumber;
         System.out.println("GameController: Level set to " + levelNumber);
+        System.out.println("   - anchorPane: " + (anchorPane != null ? "OK" : "NULL"));
         
         // Nếu anchorPane đã sẵn sàng, load ngay
         if (anchorPane != null) {
+            System.out.println("   - Loading background immediately...");
             loadBackgroundForLevel(levelNumber);
         } else {
             // Nếu chưa, đợi initialize() gọi
+            System.out.println("   - Waiting for initialize() to load background...");
             needsBackgroundLoad = true;
         }
     }
@@ -54,59 +63,35 @@ public class GameController {
                 return;
             }
             
-            // Load sprite sheet
-            Image spriteSheet = new Image(getClass().getResourceAsStream("/com/Arkanoid/images/background_game.png"));
+            // Sử dụng SpriteLoader để load background
+            // Ban đầu dùng kích thước mặc định hoặc prefSize
+            double initialWidth = anchorPane.getPrefWidth() > 0 ? anchorPane.getPrefWidth() : 600;
+            double initialHeight = anchorPane.getPrefHeight() > 0 ? anchorPane.getPrefHeight() : 400;
             
-            if (spriteSheet.isError()) {
-                System.err.println("❌ Failed to load background sprite sheet");
-                return;
+            ImageView newBackground = SpriteLoader.getBackgroundForLevel(level, initialWidth, initialHeight);
+            
+            // Xóa background cũ nếu có
+            if (backgroundView != null) {
+                anchorPane.getChildren().remove(backgroundView);
             }
             
-            // Tính toán kích thước của mỗi background trong sprite sheet
-            // Giả sử 10 backgrounds được sắp xếp theo grid 2 cột x 5 hàng
-            double totalWidth = spriteSheet.getWidth();
-            double totalHeight = spriteSheet.getHeight();
-            double bgWidth = totalWidth / 2;  // 2 cột
-            double bgHeight = totalHeight / 5; // 5 hàng
+            // Bind kích thước background với AnchorPane
+            newBackground.fitWidthProperty().bind(anchorPane.widthProperty());
+            newBackground.fitHeightProperty().bind(anchorPane.heightProperty());
             
-            // Tính vị trí của background dựa trên level (1-10)
-            int row = (level - 1) / 2;  // Hàng (0-4)
-            int col = (level - 1) % 2;  // Cột (0-1)
+            // Set vị trí background ở góc trên bên trái
+            AnchorPane.setTopAnchor(newBackground, 0.0);
+            AnchorPane.setLeftAnchor(newBackground, 0.0);
+            AnchorPane.setRightAnchor(newBackground, 0.0);
+            AnchorPane.setBottomAnchor(newBackground, 0.0);
             
-            double x = col * bgWidth;
-            double y = row * bgHeight;
+            // Thêm background mới ở vị trí đầu tiên (phía sau tất cả)
+            backgroundView = newBackground;
+            anchorPane.getChildren().add(0, backgroundView);
             
-            // Tạo viewport để crop phần background tương ứng
-            Rectangle2D viewport = new Rectangle2D(x, y, bgWidth, bgHeight);
-            
-            // Đợi anchorPane có kích thước trước khi tạo ImageView
-            double paneWidth = anchorPane.getWidth();
-            double paneHeight = anchorPane.getHeight();
-            
-            // Nếu pane chưa có kích thước, dùng giá trị mặc định
-            if (paneWidth <= 0) paneWidth = 800;  // Default width
-            if (paneHeight <= 0) paneHeight = 600; // Default height
-            
-            // Tạo hoặc update ImageView
-            if (backgroundView == null) {
-                backgroundView = new ImageView(spriteSheet);
-                backgroundView.setPreserveRatio(false);
-                backgroundView.setFitWidth(paneWidth);
-                backgroundView.setFitHeight(paneHeight);
-                
-                // Đặt background ở phía sau tất cả các node khác
-                anchorPane.getChildren().add(0, backgroundView);
-            } else {
-                backgroundView.setImage(spriteSheet);
-                backgroundView.setFitWidth(paneWidth);
-                backgroundView.setFitHeight(paneHeight);
-            }
-            
-            backgroundView.setViewport(viewport);
-            
-            System.out.println("✅ Loaded background for Level " + level + 
-                             " (viewport: x=" + x + ", y=" + y + 
-                             ", width=" + bgWidth + ", height=" + bgHeight + ")");
+            System.out.println("✅ GameController: Background loaded and bound to AnchorPane for Level " + level);
+            System.out.println("   - AnchorPane size: " + anchorPane.getWidth() + "x" + anchorPane.getHeight());
+            System.out.println("   - AnchorPane prefSize: " + anchorPane.getPrefWidth() + "x" + anchorPane.getPrefHeight());
             
         } catch (Exception e) {
             System.err.println("❌ Error loading background for level " + level);
@@ -120,8 +105,9 @@ public class GameController {
 
     @FXML
     public void pause() {
-        // Tạo một stage mới cho pause (giống như GameScene)
+        // Tạo một stage mới cho pause
         Stage pauseStage = new Stage();
+        pauseStage.initStyle(javafx.stage.StageStyle.TRANSPARENT); // Phải set TRƯỚC initOwner
         pauseStage.initOwner(stage);
         pauseStage.initModality(Modality.WINDOW_MODAL);
         

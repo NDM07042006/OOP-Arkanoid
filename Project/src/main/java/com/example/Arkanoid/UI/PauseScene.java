@@ -3,7 +3,8 @@ package main.java.com.example.Arkanoid.UI;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
-import javafx.scene.Scene;;
+import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 public class PauseScene {
     private Stage stage;
 
@@ -13,6 +14,8 @@ public class PauseScene {
 
     public void show() {
         try {
+            // Stage style đã được set ở GameController (TRANSPARENT)
+            
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/Arkanoid/PauseMenu.fxml"));
             Parent root = loader.load();
 
@@ -20,6 +23,7 @@ public class PauseScene {
             pauseController.setStage(stage);
             
             Scene scene = new Scene(root);
+            scene.setFill(Color.TRANSPARENT); // Scene trong suốt
             
             stage.setTitle("Pause");
             stage.setScene(scene);

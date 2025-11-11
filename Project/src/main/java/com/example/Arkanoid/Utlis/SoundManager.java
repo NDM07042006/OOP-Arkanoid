@@ -5,6 +5,7 @@ import javafx.scene.media.AudioClip;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import main.java.arkanoid.engine.Define;
 
 /**
  * Quản lý âm thanh trong game Arkanoid
@@ -89,20 +90,20 @@ public class SoundManager {
         System.out.println("\n========== LOADING SOUNDS ==========");
 
         // === MENU SOUNDS ===
-        loadSoundEffect("button_hover", "/com/Arkanoid/sounds/button_hover.mp3");
-        loadSoundEffect("button_click", "/com/Arkanoid/sounds/button_click.wav");
+        loadSoundEffect("button_hover", Define.BUTTON_HOVER_SOUND);
+        loadSoundEffect("button_click", Define.BUTTON_CLICK_SOUND);
 
         // === GAME SOUNDS ===
-        loadSoundEffect("paddle_hit", "/com/Arkanoid/sounds/paddle_hit.wav");
-        loadSoundEffect("wall_hit", "/com/Arkanoid/sounds/wall_hit.wav");
-        loadSoundEffect("brick_break", "/com/Arkanoid/sounds/brick_break.wav");
-        loadSoundEffect("life_lost", "/com/Arkanoid/sounds/lost_life.wav");
-        loadSoundEffect("level_complete", "/com/Arkanoid/sounds/level_complete.wav");
-        loadSoundEffect("game_over", "/com/Arkanoid/sounds/game_over.wav");
+        loadSoundEffect("paddle_hit", Define.PADDLE_HIT_SOUND);
+        loadSoundEffect("wall_hit", Define.WALL_HIT_SOUND);
+        loadSoundEffect("brick_break", Define.BRICK_BREAK_SOUND);
+        loadSoundEffect("life_lost", Define.LIFE_LOST_SOUND);
+        loadSoundEffect("level_complete", Define.LEVEL_COMPLETE_SOUND);
+        loadSoundEffect("game_over", Define.GAME_OVER_SOUND);
 
         // === BACKGROUND MUSIC ===
-        loadBackgroundMusic("menu", "/com/Arkanoid/sounds/menu_theme.wav");
-        loadBackgroundMusic("game", "/com/Arkanoid/sounds/game_theme.wav");
+        loadBackgroundMusic("menu", Define.MENU_THEME_MUSIC);
+        loadBackgroundMusic("game", Define.GAME_THEME_MUSIC);
 
         System.out.println("====================================\n");
     }

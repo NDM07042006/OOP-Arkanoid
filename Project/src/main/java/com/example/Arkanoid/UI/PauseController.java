@@ -1,9 +1,7 @@
 package main.java.com.example.Arkanoid.UI;
 
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.com.example.Arkanoid.Utlis.SceneNavigator;
 
@@ -24,10 +22,23 @@ public class PauseController {
 
     @FXML
     public void restartLevel() {
+        // Đóng pause window
         stage.close();
-        Stage newStage = (Stage) stage.getOwner();
-        GameScene gameScene = new GameScene(newStage);
-        gameScene.show();
+        
+        // Lấy main stage (game stage)
+        Stage mainStage = (Stage) stage.getOwner();
+        
+        // Lấy level hiện tại từ cached GameController
+        int currentLevel = 1; // Default
+        GameController gameController = (GameController) main.java.com.example.Arkanoid.Utlis.SceneCache.getInstance().getCachedController("game");
+        if (gameController != null) {
+            currentLevel = gameController.getLevel();
+        }
+        
+        System.out.println("🔄 Restarting Level " + currentLevel + "...");
+        
+        // Reload lại level hiện tại (KHÔNG clear cache, chỉ set lại level)
+        SceneNavigator.goToGame(mainStage, currentLevel);
     }
 
     @FXML
@@ -51,6 +62,7 @@ public class PauseController {
         settingStage.setOnHidden(event -> {
             // Tạo pause stage mới với cùng mainStage (game scene)
             Stage newPauseStage = new Stage();
+            newPauseStage.initStyle(javafx.stage.StageStyle.TRANSPARENT); // ✅ Thêm dòng này
             newPauseStage.initOwner(mainStage);
             newPauseStage.initModality(javafx.stage.Modality.WINDOW_MODAL);
             

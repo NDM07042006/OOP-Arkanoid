@@ -9,6 +9,7 @@ import java.util.Iterator;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import main.java.arkanoid.engine.Define;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -125,12 +126,12 @@ public class GameScene {
 
 
 
-        Paddle player = new Paddle(200, 500, "/com/Arkanoid/img/paddles_and_balls.png");
+        Paddle player = new Paddle(200, 500, Define.PADDLES_AND_BALLS_IMAGE_PATH);
         player.setScene(scene);
         root.getChildren().add(player.getNode());
 
 
-        Ball ball = new Ball(200, 500, "/com/Arkanoid/img/paddles_and_balls.png");
+        Ball ball = new Ball(200, 500, Define.PADDLES_AND_BALLS_IMAGE_PATH);
         ball.setSence(scene);
         root.getChildren().add(ball.getNode());
 
@@ -247,6 +248,7 @@ public class GameScene {
             
             // Tạo một stage mới mỗi lần pause
             Stage pauseStage = new Stage();
+            pauseStage.initStyle(javafx.stage.StageStyle.TRANSPARENT); // ✅ Thêm dòng này
             pauseStage.initOwner(stage);
             pauseStage.initModality(Modality.WINDOW_MODAL);
             
