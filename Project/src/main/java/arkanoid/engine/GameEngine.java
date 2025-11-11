@@ -11,6 +11,10 @@ import javafx.scene.image.ImageView;
 import java.util.ArrayList;
 import main.java.arkanoid.engine.PowerUp.*;
 import main.java.arkanoid.engine.CheckCollision.*;
+import javafx.scene.layout.Pane;
+import main.java.com.example.Arkanoid.Utlis.Animations.ParticleSystem;
+
+
 
 //test phần engine sẽ sửa sau
 public class GameEngine {
@@ -19,6 +23,24 @@ public class GameEngine {
     private List<Ball> balls = new ArrayList<>();
     private List<PowerUp> powerUps = new ArrayList<>();
     private Map map;
+    private Pane gamePane = new Pane();
+    private ParticleSystem particleSystem = new ParticleSystem(gamePane);
+
+    public Pane getGamePane() {
+        return gamePane;
+    }
+
+    public void setGamePane(Pane gamePane) {
+        this.gamePane = gamePane;
+    }
+
+    public ParticleSystem getParticleSystem() {
+        return particleSystem;
+    }
+
+    public void setParticleSystem(ParticleSystem particleSystem) {
+        this.particleSystem = particleSystem;
+    }
 
     /*
      * Cài đặt luồng
@@ -85,14 +107,15 @@ public class GameEngine {
     public void addBall() {
         Bounds paddleBounds = paddle.getSprite().getBoundsInParent();
         double start_x = paddleBounds.getCenterX();
-        double start_y = paddleBounds.getMinY()-30;
+        double start_y = paddleBounds.getMinY()-21;
         Ball ball = new Ball(start_x, start_y,
                 Define.PADDLES_AND_BALLS_IMAGE_PATH);
-        ball.setSpeed(Define.DEFAULF_BALL_SPEED);
         ball.setVel_X(setVelBall_X( 0));
         ball.setVel_Y(setVelBall_y( 0));
         balls.add(ball);
         root.getChildren().add(ball.getNode());
+        ball.setAttached(true);
+        ball.setSpeed(0);
     }
 
     // Thêm bóng tự động di chuyển có hướng
@@ -115,10 +138,11 @@ public class GameEngine {
         for (Ball ball: balls) {
             if (!ball.isMoving() && ball.isAttached() ) { // 🔹 chỉ kích hoạt lần đầu
                 ball.setMoving(true);
-                ball.setSpeed(5);
-                ball.setVel_Y(-1);
-                ball.setVel_X(0);
+                ball.setSpeed(Define.DEFAULF_BALL_SPEED);
+                ball.setVel_Y(setVelBall_y(0));
+                ball.setVel_X(setVelBall_X(0));
                 System.out.println("moving");
+                ball.setAttached(false);
             }
             break;
         }
@@ -186,12 +210,35 @@ public class GameEngine {
      */
     public void moveLeft(){
         paddle.setVel_X(-2);
+        for (Ball b: balls) {
+            if (b.isAttached()) {
+                b.setSpeed(paddle.getSpeed());
+                b.setVel_Y(0);
+                b.setVel_X(-2);
+            }
+        }
     }
     public void moveRight(){
         paddle.setVel_X(2);
+        for (Ball b: balls) {
+            if (b.isAttached()) {
+                b.setSpeed(paddle.getSpeed());
+                b.setVel_X(2);
+                b.setVel_Y(0);
+            }
+        }
+
     }
     public void notMove(){
         paddle.setVel_X(0);
+        for (Ball b: balls) {
+            if (b.isAttached()) {
+                b.setSpeed(paddle.getSpeed());
+                b.setVel_X(0);
+                b.setVel_Y(0);
+
+            }
+        }
     }
     public void setPaddleSpeed(int extraSpeed){
         if (paddle.getSpeed() + extraSpeed >= Define.MIN_PADDLE_SPEED

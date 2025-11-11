@@ -104,8 +104,8 @@ public class Ball extends GameObject {
 
         sprite.setX(pos_X);
         sprite.setY(pos_Y);
-        sprite.setFitWidth(15);  // chỉnh kích thước nếu cần
-        sprite.setFitHeight(15);
+        sprite.setFitWidth(20);  // chỉnh kích thước nếu cần
+        sprite.setFitHeight(20);
     }
 
 
@@ -116,6 +116,7 @@ public class Ball extends GameObject {
     @Override
     public void update() {
         //if (!isMoving) return;
+        System.out.println(pos_X + " "+ pos_Y);
         pos_X += vel_X * speed;
         pos_Y += vel_Y * speed;
         sprite.setX(pos_X);

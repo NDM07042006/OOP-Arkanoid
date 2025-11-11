@@ -8,12 +8,18 @@ import javafx.application.Platform;
 import main.java.arkanoid.engine.Ball;
 import main.java.arkanoid.engine.Map;
 import main.java.arkanoid.engine.Bricks;
+import main.java.com.example.Arkanoid.Utlis.Animations.ParticleSystem;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+
 
 public class CheckBallAndBrick extends CheckCollision {
     private List<Ball> balls = gameEngine.getBalls();
     private Map map = gameEngine.getMap();
     @Override
     protected void check() {
+        Pane gamePane = new Pane();
+        ParticleSystem particleSystem = new ParticleSystem(gamePane);
         for (Ball ball : balls) {
             Iterator<Bricks> bricksIterator = map.getBrickGroup().iterator();
             while (bricksIterator.hasNext()) {
@@ -60,6 +66,8 @@ public class CheckBallAndBrick extends CheckCollision {
 
                         brick.setCurrrentPoints(1);
                         System.out.println("Collision detected");
+                        particleSystem.createExplosion(brick.getPos_X(), brick.getPos_Y(), Color.ORANGE, 50);
+
 
                     }
                 }
