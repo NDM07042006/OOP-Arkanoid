@@ -43,6 +43,10 @@ public class LevelController {
     private Rectangle level10Bg;
 
     private Stage stage;
+    
+    // Cooldown để tránh spam hover sound
+    private long lastHoverTime = 0;
+    private static final long HOVER_COOLDOWN = 200; // 200ms
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -50,6 +54,10 @@ public class LevelController {
 
     @FXML
     public void initialize() {
+        System.out.println("LevelController initialized");
+        System.out.println("SFX Enabled: " + SoundManager.getInstance().isSfxEnabled());
+        System.out.println("SFX Volume: " + SoundManager.getInstance().getSfxVolume());
+        
         // Thêm hover effect cho các level rectangles
         setupHoverEffect(level1Bg);
         setupHoverEffect(level2Bg);
@@ -69,7 +77,13 @@ public class LevelController {
                 rectangle.setOpacity(0.8);
                 rectangle.setScaleX(1.05);
                 rectangle.setScaleY(1.05);
-                SoundManager.getInstance().playButtonHover();
+                
+                // Thêm cooldown để tránh spam sound
+                long currentTime = System.currentTimeMillis();
+                if (currentTime - lastHoverTime > HOVER_COOLDOWN) {
+                    SoundManager.getInstance().playButtonHover();
+                    lastHoverTime = currentTime;
+                }
             });
             rectangle.setOnMouseExited(e -> {
                 rectangle.setOpacity(1.0);
@@ -152,10 +166,7 @@ public class LevelController {
     private void startGameAsync(int levelNumber) {
         System.out.println("⚡ Starting Level " + levelNumber + "...");
         
-        // Play sound KHÔNG chờ
-        SoundManager.getInstance().playButtonClick();
-        
-        // Chuyển scene NGAY LẬP TỨC (không đợi sound)
+        // Chuyển scene NGAY LẬP TỨC (không gọi sound ở đây nữa vì đã gọi ở trên)
         javafx.application.Platform.runLater(() -> {
             SceneNavigator.goToGame(stage, levelNumber);
         });
@@ -165,7 +176,7 @@ public class LevelController {
     public void backToMenu() {
         System.out.println("⚡ Back to menu...");
         
-        // Play sound KHÔNG chờ  
+        // Play sound
         SoundManager.getInstance().playButtonClick();
         
         // Chuyển scene NGAY LẬP TỨC

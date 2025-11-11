@@ -32,7 +32,7 @@ public class Define {
     
     // ==================== SOUND PATHS ====================
     // Sound Effects
-    public static final String BUTTON_HOVER_SOUND           = "/com/Arkanoid/sounds/button_hover.mp3";
+    public static final String BUTTON_HOVER_SOUND           = "/com/Arkanoid/sounds/button_hover.wav";
     public static final String BUTTON_CLICK_SOUND           = "/com/Arkanoid/sounds/button_click.wav";
     public static final String PADDLE_HIT_SOUND             = "/com/Arkanoid/sounds/paddle_hit.wav";
     public static final String WALL_HIT_SOUND               = "/com/Arkanoid/sounds/wall_hit.wav";

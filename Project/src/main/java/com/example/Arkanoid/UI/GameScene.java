@@ -40,13 +40,6 @@ public class GameScene {
         return scLabel;
     }
 
-    public Label getLvLabel() {
-        lvLabel = new Label("LEVEL: 0");
-        lvLabel.setLayoutX(10);
-        lvLabel.setLayoutY(30);
-        return lvLabel;
-    }
-
     public Label getLiLabel() {
         liLabel = new Label("LIVES: 0" );
         liLabel.setLayoutX(10);
@@ -113,8 +106,8 @@ public class GameScene {
 
 
 
-        Map map = new Map(0);
-        map.loadMap(baseHeight, baseHeight);
+        Map map = new Map(1);  // Load map level 1
+        map.loadMap(baseWidth, baseHeight);
         
         // Dịch toàn bộ map xuống dưới thêm 50 pixels
         int offsetY = 70; // Thay đổi giá trị này để dịch map lên/xuống
@@ -265,7 +258,6 @@ public class GameScene {
 
         root.getChildren().add(pauseButton);
         root.getChildren().add(getLiLabel());
-        root.getChildren().add(getLvLabel());
         root.getChildren().add(getScLabel());
         
         gameTimer.start();

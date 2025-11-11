@@ -4,6 +4,8 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import main.java.arkanoid.engine.Define;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
@@ -56,14 +58,14 @@ public class SceneCache {
         System.out.println("🚀 Starting scene preload...");
         
         // Preload MenuScene trước (quan trọng!)
-        preloadScene("/com/Arkanoid/MenuGame.fxml", "menu");
+        preloadScene(Define.MENU_GAME_PATH, "menu");
         
         // Preload các scene nhẹ
-        preloadScene("/com/Arkanoid/Levels.fxml", "levels");
-        preloadScene("/com/Arkanoid/HighScores.fxml", "highscores");
+        preloadScene(Define.LEVELS_PATH, "levels");
+        preloadScene(Define.HIGH_SCORES_PATH, "highscores");
         
         // Preload GameScene - quan trọng nhất!
-        preloadScene("/com/Arkanoid/GameScene.fxml", "game");
+        preloadScene(Define.GAME_SCENE_PATH, "game");
         
         System.out.println("✅ Scene preload initiated");
     }

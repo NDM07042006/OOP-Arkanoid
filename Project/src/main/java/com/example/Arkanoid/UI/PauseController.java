@@ -1,9 +1,10 @@
 package main.java.com.example.Arkanoid.UI;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import main.java.com.example.Arkanoid.Utlis.SceneNavigator;
+import main.java.com.example.Arkanoid.Utlis.*;
 
 public class PauseController {
     private Stage stage;
@@ -14,14 +15,50 @@ public class PauseController {
 
     @FXML
     private AnchorPane anchorPane;
+    
+    @FXML
+    private Button resumeButton;
+    
+    @FXML
+    private Button restartButton;
+    
+    @FXML
+    private Button settingButton;
+    
+    @FXML
+    private Button menuButton;
+    
+    @FXML
+    private Button exitButton;
+
+    @FXML
+    public void initialize() {
+        // Setup hover effects cho tất cả các buttons
+        setupHoverEffect(resumeButton);
+        setupHoverEffect(restartButton);
+        setupHoverEffect(settingButton);
+        setupHoverEffect(menuButton);
+        setupHoverEffect(exitButton);
+    }
+    
+    private void setupHoverEffect(Button button) {
+        if (button != null) {
+            button.setOnMouseEntered(e -> {
+                SoundManager.getInstance().playButtonHover();
+            });
+        }
+    }
 
     @FXML
     public void resume() {
+        SoundManager.getInstance().playButtonClick();
         stage.close();
     }
 
     @FXML
     public void restartLevel() {
+        SoundManager.getInstance().playButtonClick();
+        
         // Đóng pause window
         stage.close();
         
@@ -30,7 +67,7 @@ public class PauseController {
         
         // Lấy level hiện tại từ cached GameController
         int currentLevel = 1; // Default
-        GameController gameController = (GameController) main.java.com.example.Arkanoid.Utlis.SceneCache.getInstance().getCachedController("game");
+        GameController gameController = (GameController) SceneCache.getInstance().getCachedController("game");
         if (gameController != null) {
             currentLevel = gameController.getLevel();
         }
@@ -43,6 +80,8 @@ public class PauseController {
 
     @FXML
     public void setting() {
+        SoundManager.getInstance().playButtonClick();
+        
         // Lấy main stage (owner của pause stage) TRƯỚC KHI đóng
         Stage mainStage = (Stage) stage.getOwner();
         
@@ -73,6 +112,8 @@ public class PauseController {
 
     @FXML
     public void menu() {
+        SoundManager.getInstance().playButtonClick();
+        
         // Đóng pause window
         stage.close();
         
@@ -85,6 +126,8 @@ public class PauseController {
 
     @FXML
     public void exit() {
+        SoundManager.getInstance().playButtonClick();
+        
         // Đóng pause window
         stage.close();
         // Đóng game window (main stage)

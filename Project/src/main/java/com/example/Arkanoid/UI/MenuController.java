@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import main.java.com.example.Arkanoid.Utlis.SoundManager;
+import main.java.arkanoid.engine.Define;
 import main.java.com.example.Arkanoid.Utlis.SceneNavigator;
 
 public class MenuController {
@@ -89,7 +90,7 @@ public class MenuController {
                 return;
             }
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/Arkanoid/Setting.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(Define.SETTING_PATH));
             Parent root = loader.load();
 
             newStage = new Stage();

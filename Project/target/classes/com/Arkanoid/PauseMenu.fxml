@@ -12,10 +12,10 @@
             <Image url="@images/Ui_09.png" />
          </image>
       </ImageView>
-      <Button layoutX="25.0" layoutY="70.0" mnemonicParsing="false" onAction="#restartLevel" prefWidth="200.0" styleClass="restart-button" text="Restart level" />
-      <Button layoutX="25.0" layoutY="150.0" mnemonicParsing="false" onAction="#menu" prefHeight="43.0" prefWidth="200.0" styleClass="menu-button" text="Main menu" />
-      <Button layoutX="25.0" layoutY="30.0" mnemonicParsing="false" onAction="#resume" prefWidth="200.0" styleClass="resume-button" text="Resume" />
-      <Button layoutX="25.0" layoutY="110.0" mnemonicParsing="false" onAction="#setting" prefHeight="43.0" prefWidth="200.0" styleClass="setting-button" text="Setting" />
-      <Button layoutX="25.0" layoutY="190.0" mnemonicParsing="false" onAction="#exit" prefWidth="200.0" styleClass="exit-button" text="Exit" />
+      <Button fx:id="restartButton" layoutX="25.0" layoutY="70.0" mnemonicParsing="false" onAction="#restartLevel" prefWidth="200.0" styleClass="restart-button" text="Restart level" />
+      <Button fx:id="menuButton" layoutX="25.0" layoutY="150.0" mnemonicParsing="false" onAction="#menu" prefHeight="43.0" prefWidth="200.0" styleClass="menu-button" text="Main menu" />
+      <Button fx:id="resumeButton" layoutX="25.0" layoutY="30.0" mnemonicParsing="false" onAction="#resume" prefWidth="200.0" styleClass="resume-button" text="Resume" />
+      <Button fx:id="settingButton" layoutX="25.0" layoutY="110.0" mnemonicParsing="false" onAction="#setting" prefHeight="43.0" prefWidth="200.0" styleClass="setting-button" text="Setting" />
+      <Button fx:id="exitButton" layoutX="25.0" layoutY="190.0" mnemonicParsing="false" onAction="#exit" prefWidth="200.0" styleClass="exit-button" text="Exit" />
    </children>
 </AnchorPane>

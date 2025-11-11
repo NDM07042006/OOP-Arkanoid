@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import main.java.arkanoid.engine.Define;
 import main.java.com.example.Arkanoid.Utlis.SceneCache;
 
 public class LevelScene {
@@ -35,7 +36,7 @@ public class LevelScene {
         // Nếu chưa cache, load bình thường
         try {
             System.out.println("🔄 Loading LevelScene from FXML");
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/Arkanoid/Levels.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(Define.LEVELS_PATH));
             Parent root = loader.load();
 
             LevelController controller = loader.getController();

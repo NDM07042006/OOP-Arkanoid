@@ -3,6 +3,7 @@ package main.java.com.example.Arkanoid.UI;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
+import main.java.arkanoid.engine.Define;
 import javafx.scene.Scene;
 
 public class EndScene {
@@ -14,7 +15,7 @@ public class EndScene {
 
     public void show() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/Arkanoid/EndScreen.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(Define.END_SCREEN_PATH));
             Parent root = loader.load();
 
             EndController endController = loader.getController();

@@ -1,11 +1,11 @@
 package main.java.com.example.Arkanoid.Utlis;
 
 import javafx.scene.media.AudioClip;
+import main.java.arkanoid.engine.Define;
 
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-import main.java.arkanoid.engine.Define;
 
 /**
  * Quản lý âm thanh trong game Arkanoid
@@ -118,7 +118,12 @@ public class SoundManager {
 
         AudioClip clip = soundEffects.get(name);
         if (clip != null) {
-            clip.play();
+            try {
+                clip.play();
+            } catch (Exception e) {
+                // Bỏ qua lỗi âm thanh để không làm gián đoạn game
+                System.err.println("⚠ Error playing sound effect " + name + ": " + e.getMessage());
+            }
         }
     }
 
@@ -130,7 +135,12 @@ public class SoundManager {
 
         AudioClip clip = soundEffects.get(name);
         if (clip != null) {
-            clip.play(volumeMultiplier * sfxVolume);
+            try {
+                clip.play(volumeMultiplier * sfxVolume);
+            } catch (Exception e) {
+                // Bỏ qua lỗi âm thanh để không làm gián đoạn game
+                System.err.println("⚠ Error playing sound effect " + name + ": " + e.getMessage());
+            }
         }
     }
 

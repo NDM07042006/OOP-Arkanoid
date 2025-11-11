@@ -5,6 +5,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import main.java.com.example.Arkanoid.Utlis.SoundManager;
+import main.java.arkanoid.engine.Define;
 import main.java.com.example.Arkanoid.Utlis.SceneCache;
 
 import java.io.IOException;
@@ -44,7 +45,7 @@ public class MenuScene {
         // Nếu chưa cache, load bình thường
         try {
             System.out.println("🔄 Loading MenuScene from FXML");
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/Arkanoid/MenuGame.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(Define.MENU_GAME_PATH));
             Parent root = loader.load();
 
             MenuController controller = loader.getController();

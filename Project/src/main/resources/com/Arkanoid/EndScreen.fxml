@@ -10,8 +10,8 @@
       <Label layoutX="280.0" layoutY="176.0" text="Score: 0" />
       <Label layoutX="265.0" layoutY="200.0" text="High Score: 0" />
       <Label layoutX="284.0" layoutY="225.0" text="Level: 0" />
-      <Button layoutX="102.0" layoutY="290.0" mnemonicParsing="false" onAction="#Restart" text="Restart" />
-      <Button layoutX="275.0" layoutY="290.0" mnemonicParsing="false" onAction="#Menu" text="Menu" />
-      <Button layoutX="412.0" layoutY="290.0" mnemonicParsing="false" onAction="#NextLevel" text="Next Level" />
+      <Button fx:id="restartButton" layoutX="102.0" layoutY="290.0" mnemonicParsing="false" onAction="#Restart" text="Restart" />
+      <Button fx:id="menuButton" layoutX="275.0" layoutY="290.0" mnemonicParsing="false" onAction="#Menu" text="Menu" />
+      <Button fx:id="nextLevelButton" layoutX="412.0" layoutY="290.0" mnemonicParsing="false" onAction="#NextLevel" text="Next Level" />
    </children>
 </AnchorPane>
