@@ -29,6 +29,16 @@ public class GameScene {
     private Score score;
     private Lives lives;
 
+    private Group root;
+
+    public Group getRoot() {
+        return root;
+    }
+
+    public void setRoot(Group root) {
+        this.root = root;
+    }
+
     public Label getScLabel() {
         scLabel = new Label("SCORE: 0");
         scLabel.setLayoutX(10);
@@ -79,7 +89,8 @@ public class GameScene {
         int baseWidth = 800;
         int baseHeight = 600;
 
-        Group root = new Group();
+        Group Root = new Group();
+        setRoot(Root);
         Scene scene = new Scene(root, baseWidth, baseHeight);
 
 
@@ -109,7 +120,7 @@ public class GameScene {
 
 
 
-        Map map = new Map(0);
+        Map map = new Map(1);
         map.loadMap(baseHeight, baseHeight);
 
         // Dịch toàn bộ map xuống dưới thêm 50 pixels
