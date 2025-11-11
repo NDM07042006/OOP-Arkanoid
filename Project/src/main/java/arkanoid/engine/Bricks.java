@@ -8,15 +8,34 @@ import javafx.scene.input.KeyEvent;
 
 public class Bricks extends GameObject {
     int Point_given;
-    int currrentPoints;
+    double currrentPoints;
+    double Max_HP;
     int width = 50;
     int height = 25;
+    boolean givePowerUp = false;
+    int PowerUp_Type;
+
+    public int getPowerUp_Type() {
+        return PowerUp_Type;
+    }
+
+    public void setPowerUp_Type(int powerUp_Type) {
+        PowerUp_Type = powerUp_Type;
+    }
+
+    public boolean isGivePowerUp() {
+        return givePowerUp;
+    }
+
+    public void setGivePowerUp(boolean givePowerUp) {
+        this.givePowerUp = givePowerUp;
+    }
 
     ImageView sprite;
     Scene scene;
 
 
-    public int getPoint_given() {
+    public double getPoint_given() {
         return Point_given;
     }
 
@@ -24,12 +43,12 @@ public class Bricks extends GameObject {
         Point_given = point_given;
     }
 
-    public int getCurrrentPoints() {
+    public double getCurrrentPoints() {
         return currrentPoints;
     }
 
-    public void setCurrrentPoints(int currrentPoints) {
-        this.currrentPoints = currrentPoints;
+    public void setCurrrentPoints(int minusPoint) {
+        this.currrentPoints -= minusPoint;
     }
 
     public int getWidth() {
@@ -65,13 +84,12 @@ public class Bricks extends GameObject {
     }
 
     public Bricks(int posX, int posY, String imagePath,
-                  int X, int Y, int screenHeight, int  screenWidth, int row, int column, int HP) {
+                  int X, int Y, int  screenWidth, int screenHeight, int row, int column, double HP) {
 
         currrentPoints = HP;
-
+        Max_HP = HP;
         this.pos_X = posX;
         this.pos_Y = posY;
-
 
         Image image = new Image(imagePath);
         sprite = new ImageView(image);
@@ -116,8 +134,16 @@ public class Bricks extends GameObject {
 
 
     public void update() {
-        if (currrentPoints == 0) {
+        if (currrentPoints <= 0) {
             destroyed = true;
         }
+
+        if (currrentPoints <= Max_HP/3 ) {
+            sprite.setViewport(new Rectangle2D(176, sprite.getViewport().getMinY(), sprite.getViewport().getWidth(), sprite.getViewport().getHeight()));
+        }
+        else if (currrentPoints <= 2*Max_HP/3 && currrentPoints >= Max_HP/3) {
+            sprite.setViewport(new Rectangle2D(176-32, sprite.getViewport().getMinY(), sprite.getViewport().getWidth(), sprite.getViewport().getHeight()));
+        }
+
     }
 }
