@@ -12,4 +12,6 @@ public abstract class CheckCollision implements Runnable {
         gameEngine.setCollisionTasks();
     }
     protected abstract void check();
+
 }
+

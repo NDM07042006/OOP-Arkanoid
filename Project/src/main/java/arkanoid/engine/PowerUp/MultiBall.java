@@ -24,5 +24,6 @@ public class MultiBall extends PowerUp {
         System.out.println(TYPE);
         gameEngine.addBall( 45);
         gameEngine.addBall( -45);
+
     }
 }

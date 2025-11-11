@@ -16,6 +16,32 @@ public class Ball extends GameObject {
     boolean paddleCollision = false;
     boolean brickCollision = false;
 
+    boolean attached = false;
+
+
+    public boolean brickCollision(){
+        return brickCollision;
+    }
+
+    public void setBrickCollision(boolean collision){
+        brickCollision = collision;
+    }
+    public boolean paddleCollision(){
+        return paddleCollision;
+    }
+
+    public void setPaddleCollision(boolean collision){
+        paddleCollision = collision;
+    }
+
+    public boolean isAttached() {
+        return attached;
+    }
+
+    public void setAttached(boolean attached) {
+        this.attached = attached;
+    }
+
     public Scene getScene() {
         return scene;
     }
@@ -93,8 +119,8 @@ public class Ball extends GameObject {
 
         sprite.setX(pos_X);
         sprite.setY(pos_Y);
-        sprite.setFitWidth(30);  // chỉnh kích thước nếu cần
-        sprite.setFitHeight(30);
+        sprite.setFitWidth(15);  // chỉnh kích thước nếu cần
+        sprite.setFitHeight(15);
     }
 
 
@@ -104,15 +130,23 @@ public class Ball extends GameObject {
 
     @Override
     public void update() {
-        if (!isMoving) return;
+        //if (!isMoving) return;
         pos_X += vel_X * speed;
         pos_Y += vel_Y * speed;
         sprite.setX(pos_X);
         sprite.setY(pos_Y);
 
-        if (pos_X <= 0 || pos_X >= Define.SCREEN_WIDTH - 16) {vel_X = - vel_X;}
-        if (pos_Y <= 0 || pos_Y >= Define.SCREEN_HEIGHT - 16) {vel_Y = - vel_Y;}
+        if (pos_X <= 0 ) {
+            vel_X = Math.abs(vel_X);
+        }
+        else if (pos_X >= Define.SCREEN_WIDTH - 16) {vel_X = -Math.abs(vel_X);;}
+
+        if (pos_Y <= 0 ) {
+            vel_Y = Math.abs(vel_Y);
+        }
+        else if (pos_Y >= Define.SCREEN_HEIGHT - 16) {vel_Y = -Math.abs(vel_Y);}
+
     }
 
-}
 
+}

@@ -3,7 +3,6 @@ package main.java.arkanoid.engine.CheckCollision;
 import java.util.Iterator;
 import java.util.List;
 import javafx.geometry.Bounds;
-import javafx.application.Platform;
 
 import main.java.arkanoid.engine.Ball;
 import main.java.arkanoid.engine.Map;
@@ -26,42 +25,41 @@ public class CheckBallAndBrick extends CheckCollision {
                         Bounds ballBounds = ball.getSprite().getBoundsInParent();
                         Bounds brickBounds = brick.getSprite().getBoundsInParent();
                         /*
-                        * Đổi hướng bóng
-                        */
-                        
+                         * Đổi hướng bóng
+                         */
+
                         // Chạm bên dưới gạch
-                        
+
                         if(ballBounds.getMinY()<=brickBounds.getMaxY()
-                        && ballBounds.getMaxY()> brickBounds.getMaxY()){
-                            ball.setVel_Y(-ball.getVel_Y());
+                                && ballBounds.getMaxY()> brickBounds.getMaxY()){
+                            ball.setVel_Y(Math.abs(ball.getVel_Y()));
                         }
-                        
+
                         // Chạm bên trên gạch
-                        
-                        if(ballBounds.getMaxY()>=brickBounds.getMinY()
-                        && ballBounds.getMinY()< brickBounds.getMinY()){
-                            ball.setVel_Y(-ball.getVel_Y());
+
+                        else if(ballBounds.getMaxY()>=brickBounds.getMinY()
+                                && ballBounds.getMinY()< brickBounds.getMinY()){
+                            ball.setVel_Y(-Math.abs(ball.getVel_Y()));
                         }
-                        
+
                         // Chạm bên phải gạch
-                        
-                        if(ballBounds.getMinX()<=brickBounds.getMaxX()
-                            && ballBounds.getMaxX()> brickBounds.getMaxX()){
-                            ball.setVel_X(-ball.getVel_X());
+
+                        else if(ballBounds.getMinX()<=brickBounds.getMaxX()
+                                && ballBounds.getMaxX()> brickBounds.getMaxX()){
+                            ball.setVel_X(Math.abs(ball.getVel_X()));
                         }
-                        
+
                         // Chạm bên trái gạch
-                        
-                        if(ballBounds.getMaxX()>=brickBounds.getMinX()
-                            && ballBounds.getMinX()< brickBounds.getMinX()){
-                            ball.setVel_X(-ball.getVel_X());
+
+                        else if(ballBounds.getMaxX()>=brickBounds.getMinX()
+                                && ballBounds.getMinX()< brickBounds.getMinX()){
+                            ball.setVel_X(-Math.abs(ball.getVel_X()));
                         }
-                        
-                        // Xóa gạch
-                        
-                        safeRemove(brick);
-                        bricksIterator.remove();
-                        break;
+
+
+                        brick.setCurrrentPoints(1);
+                        System.out.println("Collision detected");
+
                     }
                 }
                 //Set lại khi không còn va chạm nữa
@@ -69,14 +67,11 @@ public class CheckBallAndBrick extends CheckCollision {
             }
         }
     }
-    private void safeRemove(Bricks brick){
-        Platform.runLater(() -> {
-            gameEngine.remove(brick.getSprite());
-        });
-    }
-    
+
     @Override
     public void run() {
         check();
     }
+
 }
+

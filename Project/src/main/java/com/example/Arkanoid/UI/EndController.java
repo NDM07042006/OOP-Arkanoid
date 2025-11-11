@@ -23,7 +23,7 @@ public class EndController {
     @FXML
     public void Restart() {
 
-    } 
+    }
 
     @FXML
     public void Menu() {
@@ -47,6 +47,6 @@ public class EndController {
 
     @FXML
     public void NextLevel() {
-        
+
     }
 }

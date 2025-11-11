@@ -10,7 +10,9 @@ import javafx.geometry.Rectangle2D;
 public class Paddle extends GameObject{
     double vel_X;
     double vel_Y;
+
     int speed = Define.DEFAULF_PADDLE_SPEED;
+
     ImageView sprite;
     Scene scene;
 
@@ -62,7 +64,7 @@ public class Paddle extends GameObject{
 
         Image image = new Image(imagePath);
         sprite = new ImageView(image);
-        sprite.setViewport(new Rectangle2D(0, 0, 96, 16));
+        sprite.setViewport(new Rectangle2D(0, 6, 96, 16));
 
         sprite.setX(pos_X);
         sprite.setY(pos_Y);

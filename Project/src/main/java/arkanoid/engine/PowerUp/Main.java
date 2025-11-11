@@ -10,6 +10,9 @@ import javafx.stage.Stage;
 import javafx.animation.AnimationTimer;
 
 import main.java.arkanoid.engine.*;
+import main.java.com.example.Arkanoid.Utlis.Animations.PaddleGlowAnimation;
+import main.java.com.example.Arkanoid.Utlis.SoundManager;
+import java.util.ArrayList;
 
 public class Main extends Application {
     private GameEngine gameEngine = new GameEngine();
@@ -19,9 +22,11 @@ public class Main extends Application {
 
         Group root = new Group();
         Scene scene = new Scene(root, Define.SCREEN_WIDTH, Define.SCREEN_HEIGHT);
-        Map map = new Map(0);
+        Map map = new Map(10);
         gameEngine.setGame(root,map);
         map.loadMap(Define.SCREEN_WIDTH, Define.SCREEN_HEIGHT);
+
+
         for (Bricks b : map.getBrickGroup()) {
             b.setSence(scene);
             root.getChildren().add(b.getNode());
@@ -31,11 +36,15 @@ public class Main extends Application {
         player.setScene(scene);
         root.getChildren().add(player.getNode());
 
+
+
+
         // Thêm một số PowerUp để kiểm tra
-        RandomPowerUp powerUp1 = new RandomPowerUp(300, 100);
-        RandomPowerUp powerUp2 = new RandomPowerUp(400, 150);
-        gameEngine.addPowerUp(powerUp1);
-        gameEngine.addPowerUp(powerUp2);
+        //MultiBall powerUp1 = new MultiBall(300, 100);
+        //MultiBall powerUp2 = new MultiBall(400, 150);
+        //gameEngine.addPowerUp(powerUp1);
+        //gameEngine.addPowerUp(powerUp2);
+        gameEngine.addBall();
 
         game = new AnimationTimer() {
             @Override
@@ -51,6 +60,8 @@ public class Main extends Application {
                             default:
                                 break;
 
+                            case SPACE:
+                                gameEngine.MoveBall();
                         }
 
                     }
@@ -69,7 +80,7 @@ public class Main extends Application {
                         }
                     }
                 });
-                
+
                 gameEngine.update();
                 gameEngine.CheckAllCollision();
             }

@@ -23,6 +23,7 @@ public class SettingScene {
             Scene scene = new Scene(root);
             stage.setTitle("Setting");
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();

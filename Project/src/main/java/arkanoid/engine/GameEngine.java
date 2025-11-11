@@ -3,7 +3,7 @@ package main.java.arkanoid.engine;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
+import java.util.Iterator;
 import javafx.geometry.Bounds;
 import javafx.scene.Group;
 import javafx.scene.image.ImageView;
@@ -19,7 +19,7 @@ public class GameEngine {
     private List<Ball> balls = new ArrayList<>();
     private List<PowerUp> powerUps = new ArrayList<>();
     private Map map;
-    
+
     /*
      * Cài đặt luồng
      */
@@ -64,9 +64,9 @@ public class GameEngine {
     public Map getMap() {
         return map;
     }
-/*
-* Xử lý bóng
-*/
+    /*
+     * Xử lý bóng
+     */
     /*
      * Tạo vector vận tốc
      * Dữ liệu đầu vào là góc của vector vận tốc hợp với phương thẳng đứng
@@ -79,9 +79,9 @@ public class GameEngine {
         double vel_Y = -1*Define.DEFAULF_BALL_VECTOR_SPEED*Math.cos(Math.toRadians(degrees));
         return vel_Y;
     }
-    
+
     // Tạo bóng mặc định không di chuyển
-    
+
     public void addBall() {
         Bounds paddleBounds = paddle.getSprite().getBoundsInParent();
         double start_x = paddleBounds.getCenterX();
@@ -94,9 +94,9 @@ public class GameEngine {
         balls.add(ball);
         root.getChildren().add(ball.getNode());
     }
-    
+
     // Thêm bóng tự động di chuyển có hướng
-    
+
     public void addBall(double degrees) {
         Bounds paddleBounds = paddle.getSprite().getBoundsInParent();
         double start_x = paddleBounds.getCenterX();
@@ -110,15 +110,29 @@ public class GameEngine {
         balls.add(ball);
         root.getChildren().add(ball.getNode());
     }
+
+    public void MoveBall() {
+        for (Ball ball: balls) {
+            if (!ball.isMoving() && ball.isAttached() ) { // 🔹 chỉ kích hoạt lần đầu
+                ball.setMoving(true);
+                ball.setSpeed(5);
+                ball.setVel_Y(-1);
+                ball.setVel_X(0);
+                System.out.println("moving");
+            }
+            break;
+        }
+    }
+
     //Điều chỉnh speed bóng
     public void setAllBallSpeed(int extraSpeed){
         for(Ball ball:balls){
-            if(ball.getSpeed() + extraSpeed >= Define.MIN_BALL_SPEED 
-            && ball.getSpeed() + extraSpeed <= Define.MAX_BALL_SPEED){
+            if(ball.getSpeed() + extraSpeed >= Define.MIN_BALL_SPEED
+                    && ball.getSpeed() + extraSpeed <= Define.MAX_BALL_SPEED){
                 ball.setSpeed(ball.getSpeed() + extraSpeed);
             }
         }
-    } 
+    }
     /*
      * Thêm power up
      */
@@ -132,14 +146,41 @@ public class GameEngine {
      * Cập nhật trạng thái của tất cả đối tượng
      */
     public void update() {
-        paddle.update();
         for (PowerUp powerUp : powerUps) {
             powerUp.update();
         }
         for (Ball ball : balls) {
             ball.update();
         }
+
+        for (Bricks brick: map.getBrickGroup()) {
+            brick.update();
+            if (brick.isDestroyed()) {
+                switch (brick.getPowerUp_Type()) {
+                    case 1:
+                        MultiBall powerUp = new MultiBall(brick.pos_X, brick.pos_Y);
+                        addPowerUp(powerUp);
+                        break;
+                    case 0:
+                        break;
+
+                }
+
+                root.getChildren().remove(brick.getNode());
+
+            }
+        }
+        Iterator<Bricks> iterator = Map.brickGroup.iterator();
+        while (iterator.hasNext()) {
+            Bricks b = iterator.next();
+            if (b.isDestroyed()) {
+                iterator.remove(); // safely removes current element
+                b = null;
+            }
+        }
+        paddle.update();
     }
+
     /*
      * Di chuyển paddle
      */
@@ -153,8 +194,8 @@ public class GameEngine {
         paddle.setVel_X(0);
     }
     public void setPaddleSpeed(int extraSpeed){
-        if (paddle.getSpeed() + extraSpeed >= Define.MIN_PADDLE_SPEED 
-        && paddle.getSpeed() + extraSpeed <= Define.MAX_PADDLE_SPEED){
+        if (paddle.getSpeed() + extraSpeed >= Define.MIN_PADDLE_SPEED
+                && paddle.getSpeed() + extraSpeed <= Define.MAX_PADDLE_SPEED){
             paddle.setSpeed(paddle.getSpeed() + extraSpeed);
         }
     }
@@ -172,7 +213,7 @@ public class GameEngine {
      * Tắt luồng kiểm tra khi thoát game
      */
     public void shutdown() {
-        collisionExecutor.shutdown();  
+        collisionExecutor.shutdown();
     }
 
 }
