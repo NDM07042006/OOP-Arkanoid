@@ -1,6 +1,7 @@
 package main.java.com.example.Arkanoid.UI;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -14,6 +15,12 @@ public class GameController {
     
     @FXML
     private ImageView pauseButton;
+    
+    @FXML
+    private Label scoreLabel;
+    
+    @FXML
+    private Label livesLabel;
 
     @FXML
     private Stage stage;
@@ -78,12 +85,15 @@ public class GameController {
             // Tạo map mới dựa vào level number
             // Chỉ có level 1, 2, 5, 9, 10 có sẵn trong Map.java
             int mapType = level;
-            if (level > 10) {
-                mapType = 10; // Default về level 10 nếu quá
-            } else if (level == 3 || level == 4 || level == 6 || level == 7 || level == 8) {
-                mapType = 1; // Các level chưa có map thì dùng level 1
-            }
+            switch (level) {
+                case 1,2,5,9,10:
+                    mapType = level;
+                    break;
             
+                default:
+                    mapType = 1;
+                    break;
+            }
             currentMap = new Map(mapType);
             
             // Load map với kích thước của anchorPane
@@ -156,6 +166,38 @@ public class GameController {
 
     public int getLevel() {
         return levelNumber;
+    }
+    
+    /**
+     * Update score display
+     */
+    public void updateScore(int score) {
+        if (scoreLabel != null) {
+            scoreLabel.setText("SCORE: " + score);
+        }
+    }
+    
+    /**
+     * Update lives display
+     */
+    public void updateLives(int lives) {
+        if (livesLabel != null) {
+            livesLabel.setText("LIVES: " + lives);
+        }
+    }
+    
+    /**
+     * Get score label for direct access if needed
+     */
+    public Label getScoreLabel() {
+        return scoreLabel;
+    }
+    
+    /**
+     * Get lives label for direct access if needed
+     */
+    public Label getLivesLabel() {
+        return livesLabel;
     }
 
     @FXML
