@@ -1,12 +1,6 @@
 package main.java.com.example.Arkanoid.Utlis;
 
-import javafx.animation.Timeline;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
 import javafx.scene.media.AudioClip;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -22,11 +16,11 @@ public class SoundManager {
     // Map lưu sound effects (âm thanh ngắn)
     private Map<String, AudioClip> soundEffects;
 
-    // Map lưu background music (nhạc nền)
-    private Map<String, MediaPlayer> backgroundMusics;
+    // Map lưu background music (nhạc nền) - dùng AudioClip thay vì MediaPlayer
+    private Map<String, AudioClip> backgroundMusics;
 
-    // MediaPlayer hiện tại đang phát
-    private MediaPlayer currentMusic;
+    // AudioClip hiện tại đang phát
+    private AudioClip currentMusic;
     private String currentMusicName;
 
     // Volume settings
@@ -34,9 +28,6 @@ public class SoundManager {
     private double musicVolume = 0.5;
     private boolean sfxEnabled = true;
     private boolean musicEnabled = true;
-
-    // Fade transition duration
-    private final Duration FADE_DURATION = Duration.millis(1000);
 
     private SoundManager() {
         soundEffects = new HashMap<>();
@@ -58,9 +49,9 @@ public class SoundManager {
             URL resource = getClass().getResource(filePath);
             if (resource != null) {
                 AudioClip clip = new AudioClip(resource.toString());
-                clip.setVolume(sfxVolume);
+                clip.setVolume(sfxVolume); // Dùng sfxVolume thay vì hardcode
                 soundEffects.put(name, clip);
-                System.out.println("✓ Loaded sound: " + name);
+                System.out.println("✓ Loaded sound: " + name + " (volume: " + clip.getVolume() + ")");
             } else {
                 System.err.println("✗ Sound file not found: " + filePath);
             }
@@ -70,23 +61,24 @@ public class SoundManager {
     }
 
     /**
-     * Load background music từ file
+     * Load background music từ file - dùng AudioClip
      */
     private void loadBackgroundMusic(String name, String filePath) {
         try {
             URL resource = getClass().getResource(filePath);
             if (resource != null) {
-                Media media = new Media(resource.toString());
-                MediaPlayer player = new MediaPlayer(media);
-                player.setVolume(musicVolume);
-                player.setCycleCount(MediaPlayer.INDEFINITE); // Loop vô hạn
-                backgroundMusics.put(name, player);
-                System.out.println("✓ Loaded music: " + name);
+                System.out.println("Loading music from: " + resource.toString());
+                AudioClip clip = new AudioClip(resource.toString());
+                clip.setVolume(musicVolume); // Dùng musicVolume thay vì hardcode
+                clip.setCycleCount(AudioClip.INDEFINITE); // Loop vô hạn
+                backgroundMusics.put(name, clip);
+                System.out.println("✓ Loaded music: " + name + " (volume: " + clip.getVolume() + ")");
             } else {
                 System.err.println("✗ Music file not found: " + filePath);
             }
         } catch (Exception e) {
             System.err.println("✗ Error loading " + name + ": " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -97,20 +89,20 @@ public class SoundManager {
         System.out.println("\n========== LOADING SOUNDS ==========");
 
         // === MENU SOUNDS ===
-        loadSoundEffect("button_hover", "/sounds/button_hover.mp3");
-        loadSoundEffect("button_click", "/sounds/button_click.wav");
+        loadSoundEffect("button_hover", "/com/Arkanoid/sounds/button_hover.mp3");
+        loadSoundEffect("button_click", "/com/Arkanoid/sounds/button_click.wav");
 
         // === GAME SOUNDS ===
-        loadSoundEffect("paddle_hit", "/sounds/paddle_hit.wav");
-        loadSoundEffect("wall_hit", "/sounds/wall_hit.wav");
-        loadSoundEffect("brick_break", "/sounds/brick_break.wav");
-        loadSoundEffect("life_lost", "/sounds/life_lost.wav");
-        loadSoundEffect("level_complete", "/sounds/level_complete.wav");
-        loadSoundEffect("game_over", "/sounds/game_over.wav");
+        loadSoundEffect("paddle_hit", "/com/Arkanoid/sounds/paddle_hit.wav");
+        loadSoundEffect("wall_hit", "/com/Arkanoid/sounds/wall_hit.wav");
+        loadSoundEffect("brick_break", "/com/Arkanoid/sounds/brick_break.wav");
+        loadSoundEffect("life_lost", "/com/Arkanoid/sounds/lost_life.wav");
+        loadSoundEffect("level_complete", "/com/Arkanoid/sounds/level_complete.wav");
+        loadSoundEffect("game_over", "/com/Arkanoid/sounds/game_over.wav");
 
         // === BACKGROUND MUSIC ===
-        loadBackgroundMusic("menu", "/sounds/menu_theme.mp3");
-        loadBackgroundMusic("game", "/sounds/game_theme.mp3");
+        loadBackgroundMusic("menu", "/com/Arkanoid/sounds/menu_theme.wav");
+        loadBackgroundMusic("game", "/com/Arkanoid/sounds/game_theme.wav");
 
         System.out.println("====================================\n");
     }
@@ -183,91 +175,100 @@ public class SoundManager {
      * Phát background music với fade in
      */
     public void playBackgroundMusic(String name) {
-        if (!musicEnabled) return;
+        if (!musicEnabled) {
+            System.out.println("Music disabled, not playing: " + name);
+            return;
+        }
 
         // Nếu đang phát nhạc này rồi thì không làm gì
         if (currentMusicName != null && currentMusicName.equals(name)) {
+            System.out.println("Already playing: " + name);
             return;
         }
 
-        MediaPlayer newPlayer = backgroundMusics.get(name);
-        if (newPlayer == null) {
+        AudioClip newMusic = backgroundMusics.get(name);
+        if (newMusic == null) {
             System.err.println("⚠ Music not found: " + name);
+            System.err.println("Available music: " + backgroundMusics.keySet());
             return;
         }
 
-        // Fade out nhạc cũ -> Fade in nhạc mới
-        if (currentMusic != null) {
-            fadeOutAndStop(currentMusic, () -> fadeInAndPlay(newPlayer));
-        } else {
-            fadeInAndPlay(newPlayer);
-        }
+        try {
+            // Dừng nhạc cũ
+            if (currentMusic != null) {
+                System.out.println("Stopping current music: " + currentMusicName);
+                currentMusic.stop();
+            }
 
-        currentMusic = newPlayer;
-        currentMusicName = name;
+            // Phát nhạc mới trong background thread để không block UI
+            final AudioClip musicToPlay = newMusic;
+            final String musicName = name;
+
+            new Thread(() -> {
+                try {
+                    System.out.println("Playing music: " + musicName + " at volume: " + musicToPlay.getVolume());
+                    musicToPlay.play();
+                    System.out.println("✓ Started playing: " + musicName);
+
+                    // Kiểm tra xem có đang phát không
+                    if (musicToPlay.isPlaying()) {
+                        System.out.println("✓ Music is currently playing!");
+                    } else {
+                        System.err.println("⚠ Music loaded but NOT playing!");
+                    }
+                } catch (Exception e) {
+                    System.err.println("✗ Error playing music " + musicName + ": " + e.getMessage());
+                    e.printStackTrace();
+                }
+            }).start();
+
+            currentMusic = newMusic;
+            currentMusicName = name;
+
+        } catch (Exception e) {
+            System.err.println("✗ Error playing music " + name + ": " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     /**
      * Chuyển sang nhạc menu
      */
     public void playMenuMusic() {
-        playBackgroundMusic("menu");
+        try {
+            playBackgroundMusic("menu");
+        } catch (Exception e) {
+            System.err.println("⚠ Cannot play menu music (MP3 codec may not be available): " + e.getMessage());
+        }
     }
 
     /**
      * Chuyển sang nhạc game
      */
     public void playGameMusic() {
-        playBackgroundMusic("game");
+        try {
+            playBackgroundMusic("game");
+        } catch (Exception e) {
+            System.err.println("⚠ Cannot play game music (MP3 codec may not be available): " + e.getMessage());
+        }
     }
 
     /**
-     * Fade in music
-     */
-    private void fadeInAndPlay(MediaPlayer player) {
-        player.setVolume(0);
-        player.play();
-
-        Timeline fadeIn = new Timeline(
-                new KeyFrame(Duration.ZERO, new KeyValue(player.volumeProperty(), 0)),
-                new KeyFrame(FADE_DURATION, new KeyValue(player.volumeProperty(), musicVolume))
-        );
-        fadeIn.play();
-    }
-
-    /**
-     * Fade out music và stop
-     */
-    private void fadeOutAndStop(MediaPlayer player, Runnable onFinished) {
-        Timeline fadeOut = new Timeline(
-                new KeyFrame(Duration.ZERO, new KeyValue(player.volumeProperty(), player.getVolume())),
-                new KeyFrame(FADE_DURATION, new KeyValue(player.volumeProperty(), 0))
-        );
-        fadeOut.setOnFinished(e -> {
-            player.stop();
-            if (onFinished != null) {
-                onFinished.run();
-            }
-        });
-        fadeOut.play();
-    }
-
-    /**
-     * Dừng nhạc nền với fade out
+     * Dừng nhạc nền
      */
     public void stopBackgroundMusic() {
         if (currentMusic != null) {
-            fadeOutAndStop(currentMusic, null);
+            currentMusic.stop();
             currentMusicName = null;
         }
     }
 
     /**
-     * Pause nhạc nền
+     * Pause nhạc nền - AudioClip không support pause, chỉ có thể stop
      */
     public void pauseBackgroundMusic() {
         if (currentMusic != null) {
-            currentMusic.pause();
+            currentMusic.stop();
         }
     }
 
@@ -297,10 +298,13 @@ public class SoundManager {
      */
     public void setMusicVolume(double volume) {
         this.musicVolume = Math.max(0.0, Math.min(1.0, volume));
-        for (MediaPlayer player : backgroundMusics.values()) {
-            player.setVolume(this.musicVolume);
+
+        // Update tất cả music clips trong map
+        for (AudioClip clip : backgroundMusics.values()) {
+            clip.setVolume(this.musicVolume);
         }
-        // Update current playing music
+
+        // QUAN TRỌNG: Update currentMusic đang phát (nếu có)
         if (currentMusic != null) {
             currentMusic.setVolume(this.musicVolume);
         }
@@ -311,6 +315,7 @@ public class SoundManager {
      */
     public void setSfxEnabled(boolean enabled) {
         this.sfxEnabled = enabled;
+        System.out.println("SFX " + (enabled ? "enabled" : "disabled"));
     }
 
     /**
@@ -318,10 +323,26 @@ public class SoundManager {
      */
     public void setMusicEnabled(boolean enabled) {
         this.musicEnabled = enabled;
-        if (!enabled && currentMusic != null) {
-            currentMusic.pause();
-        } else if (enabled && currentMusic != null) {
-            currentMusic.play();
+        System.out.println("Music " + (enabled ? "enabled" : "disabled"));
+
+        if (!enabled) {
+            // Tắt nhạc - dừng nhạc hiện tại
+            if (currentMusic != null && currentMusic.isPlaying()) {
+                currentMusic.stop();
+                System.out.println("✓ Stopped music: " + currentMusicName);
+            }
+        } else {
+            // Bật nhạc - chỉ phát nếu volume > 0
+            if (currentMusicName != null && musicVolume > 0.0) {
+                if (currentMusic != null && !currentMusic.isPlaying()) {
+                    currentMusic.play();
+                    System.out.println("✓ Resumed music: " + currentMusicName + " (volume: " + musicVolume + ")");
+                } else if (currentMusic == null) {
+                    playBackgroundMusic(currentMusicName);
+                }
+            } else if (musicVolume == 0.0) {
+                System.out.println("⚠ Music enabled but volume is 0, not playing");
+            }
         }
     }
 
@@ -349,8 +370,8 @@ public class SoundManager {
     public void dispose() {
         stopBackgroundMusic();
         soundEffects.clear();
-        for (MediaPlayer player : backgroundMusics.values()) {
-            player.dispose();
+        for (AudioClip clip : backgroundMusics.values()) {
+            clip.stop();
         }
         backgroundMusics.clear();
         currentMusic = null;

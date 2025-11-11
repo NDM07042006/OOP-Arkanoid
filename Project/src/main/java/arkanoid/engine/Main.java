@@ -57,7 +57,7 @@ public class Main extends Application {
 
 
 
-        Map map = new Map(2);
+        Map map = new Map(3);
 
         map.loadMap(baseWidth, baseHeight);
         for (Bricks b : Map.brickGroup) {

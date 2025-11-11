@@ -38,6 +38,21 @@ public class Map {
 
     } ;
 
+    private int[][] lv3 = {
+            {0, 0, 0, 4, 4, 4, 4, 0, 0, 0},
+            {0, 0, 4, 4, 3, 3, 4, 4, 0, 0},
+            {0, 4, 4, 3, 2, 2, 3, 4, 4, 0},
+            {4, 4, 3, 2, 1, 1, 2, 3, 4, 4},
+            {4, 3, 2, 1, 0, 0, 1, 2, 3, 4},
+            {4, 3, 2, 1, 0, 0, 1, 2, 3, 4},
+            {5, 5, 5, 9, 9, 9, 9, 5, 5, 5},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+
+    } ;
+
+
     private int[][] lv5 = {
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -55,6 +70,25 @@ public class Map {
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     };
+
+    private int[][] lv6 = {
+            {5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {9, 1, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {1, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    };
+
 
     private int[][] lv2 = {
             {1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0},
@@ -111,11 +145,7 @@ public class Map {
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
     };
 
-
     //            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-
-
-
 
     public static ArrayList<Bricks> brickGroup = new ArrayList<>();
     private Scene secne;
@@ -134,6 +164,22 @@ public class Map {
             this.column = 15;
             this.lv = lv2;
         }
+
+        if (type_of_map == 3) {
+            this.row = 10;
+            this.column = 10;
+            this.lv = lv3;
+        }
+
+        if (type_of_map == 6) {
+            this.row = 15;
+            this.column = 15;
+            this.lv = lv6;
+
+        }
+
+
+
         if (type_of_map == 5) {
             this.row = 15;
             this.column = 15;
@@ -169,6 +215,7 @@ public class Map {
 
 
     public void loadMap(int screenWidth, int screenHeight) {
+        int offsetY = 50;
         for (int t = 0; t < row; t++) {
             for (int i = 0; i < column; i++) {
                 switch (lv[t][i]) {
@@ -177,7 +224,7 @@ public class Map {
                     case 1:
                         Bricks GreenBrick = new Bricks(
                                 i * screenWidth / column, // X position
-                                t * screenWidth / column/ 2,   // Y position
+                                offsetY + t * screenWidth / column/ 2,   // Y position
                                 "main/resources/com/Arkanoid/bricks.png",
                                 112, 16,
                                 screenWidth, screenHeight,
@@ -228,7 +275,7 @@ public class Map {
                                 i * screenWidth / column, // X position
                                 t * screenWidth / column/ 2,   // Y position
                                 "main/resources/com/Arkanoid/bricks.png",
-                                112, 32,
+                                112, 0,
                                 screenWidth, screenHeight,
                                 row, column, 2
                         );
@@ -236,6 +283,7 @@ public class Map {
                         PowerUpBrick.setPowerUp_Type(1);
                         PowerUpBrick.setPoint_given(100);
                         brickGroup.add(PowerUpBrick);
+                        break;
                     case 5:
                         Bricks HardBrick = new Bricks(
                                 i * screenWidth / column, // X position

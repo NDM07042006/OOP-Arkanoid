@@ -1,13 +1,12 @@
 package main.java.com.example.Arkanoid.UI;
 
-import java.io.IOException;
-
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import main.java.com.example.Arkanoid.Utlis.SceneNavigator;
+
 public class PauseController {
     private Stage stage;
 
@@ -20,33 +19,70 @@ public class PauseController {
 
     @FXML
     public void resume() {
-
+        stage.close();
     }
 
     @FXML
     public void restartLevel() {
+        stage.close();
+        Stage newStage = (Stage) stage.getOwner();
+        GameScene gameScene = new GameScene(newStage);
+        gameScene.show();
+    }
 
+    @FXML
+    public void setting() {
+        // Lấy main stage (owner của pause stage) TRƯỚC KHI đóng
+        Stage mainStage = (Stage) stage.getOwner();
+
+        // Đóng pause window hiện tại
+        stage.close();
+
+        // Tạo một stage mới cho Settings
+        Stage settingStage = new Stage();
+        settingStage.initOwner(mainStage);
+        settingStage.initModality(javafx.stage.Modality.WINDOW_MODAL);
+
+        // Hiển thị SettingScene
+        SettingScene settingScene = new SettingScene(settingStage);
+        settingScene.show();
+
+        // Khi setting stage đóng, mở lại pause scene
+        settingStage.setOnHidden(event -> {
+            // Tạo pause stage mới với cùng mainStage (game scene)
+            Stage newPauseStage = new Stage();
+            newPauseStage.initOwner(mainStage);
+            newPauseStage.initModality(javafx.stage.Modality.WINDOW_MODAL);
+
+            PauseScene pauseScene = new PauseScene(newPauseStage);
+            pauseScene.show();
+        });
     }
 
     @FXML
     public void menu() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/Arkanoid/MenuGame.fxml"));
-            Parent root = loader.load();
+        // Đóng pause window
+        stage.close();
 
-            MenuController controller = loader.getController();
-            controller.setStage(stage);
+        // Lấy main stage
+        Stage mainStage = (Stage) stage.getOwner();
 
-            Scene scene = new Scene(root);
-            stage.setTitle("Arkanoid Menu");
-            stage.setScene(scene);
-            stage.show();
+        // Sử dụng SceneNavigator để chuyển về menu nhanh
+        SceneNavigator.goToMenu(mainStage);
+    }
 
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("khong the tai MenuGame.fxml");
+    @FXML
+    public void exit() {
+        // Đóng pause window
+        stage.close();
+        // Đóng game window (main stage)
+        Stage mainStage = (Stage) stage.getOwner();
+        if (mainStage != null) {
+            mainStage.close();
         }
-    }   
+        // Thoát ứng dụng
+        System.exit(0);
+    }
 
 
 }

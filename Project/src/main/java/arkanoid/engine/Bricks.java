@@ -35,7 +35,7 @@ public class Bricks extends GameObject {
     Scene scene;
 
 
-    public double getPoint_given() {
+    public int getPoint_given() {
         return Point_given;
     }
 
@@ -51,21 +51,7 @@ public class Bricks extends GameObject {
         this.currrentPoints -= minusPoint;
     }
 
-    public int getWidth() {
-        return width;
-    }
 
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
 
     public ImageView getSprite() {
         return sprite;

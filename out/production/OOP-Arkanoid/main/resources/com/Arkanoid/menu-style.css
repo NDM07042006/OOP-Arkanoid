@@ -1,0 +1,49 @@
+/* Menu Background */
+.root {
+    -fx-background-color: transparent;
+}
+
+/* Menu Buttons - Style chung */
+.menu-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-border-width: 0;
+    -fx-cursor: hand;
+}
+
+/* Hover effect - Khi di chuột qua */
+.menu-button:hover {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFD700;
+}
+
+/* Pressed effect - Khi nhấn nút - KHÔNG CÓ ANIMATION */
+.menu-button:pressed {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFA500;
+}
+
+/* Start button - Nổi bật hơn */
+.start-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #4CAF50;
+}
+
+.start-button:hover {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFD700;
+}
+
+/* Exit button - Màu đỏ nhạt */
+.exit-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #F44336;
+}
+
+.exit-button:hover {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFD700;
+}

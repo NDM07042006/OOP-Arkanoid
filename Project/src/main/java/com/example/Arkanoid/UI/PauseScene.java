@@ -18,11 +18,12 @@ public class PauseScene {
 
             PauseController pauseController = loader.getController();
             pauseController.setStage(stage);
-            
+
             Scene scene = new Scene(root);
-            
+
             stage.setTitle("Pause");
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();

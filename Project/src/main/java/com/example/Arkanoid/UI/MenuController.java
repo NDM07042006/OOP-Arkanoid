@@ -7,6 +7,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import main.java.com.example.Arkanoid.Utlis.SoundManager;
+import main.java.com.example.Arkanoid.Utlis.SceneNavigator;
 
 public class MenuController {
 
@@ -18,23 +20,61 @@ public class MenuController {
 
     private Stage stage;
 
+    // Cooldown để tránh spam hover sound
+    private long lastHoverTime = 0;
+    private static final long HOVER_COOLDOWN = 200; // 200ms
+
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
+    // @FXML
+    // private void startGame() {
+    //     System.out.println("Start Game clicked");
+    //     // Phát âm thanh và chuyển scene đồng thời - không chờ
+    //     new Thread(() -> SoundManager.getInstance().playButtonClick()).start();
+    //     SoundManager.getInstance().playGameMusic(); // Chuyển sang nhạc game
+    //     GameScene gameScene = new GameScene(stage);
+    //     gameScene.show();
+    // }
+
     @FXML
     private void startGame() {
-        System.out.println("Start Game clicked");
+        System.out.println("⚡ Starting Game from Menu...");
+
+        // Play sound
+        SoundManager.getInstance().playButtonClick();
+
+        // Chuyển scene ngay lập tức
+        javafx.application.Platform.runLater(() -> {
+            SceneNavigator.goToGame(stage, 1);
+        });
     }
 
     @FXML
     private void showHighScores() {
-        System.out.println("High Scores clicked");
+        System.out.println("⚡ Opening High Scores...");
+
+        // Play sound
+        SoundManager.getInstance().playButtonClick();
+
+        // Chuyển scene ngay lập tức
+        javafx.application.Platform.runLater(() -> {
+            SceneNavigator.goToHighScores(stage);
+        });
     }
 
     @FXML
     private void showLevels() {
-        System.out.println("Levels clicked");
+        System.out.println("⚡ Opening Levels...");
+
+        // Play sound
+        SoundManager.getInstance().playButtonClick();
+
+        // Chuyển scene ngay lập tức
+        javafx.application.Platform.runLater(() -> {
+            SceneNavigator.goToLevels(stage);
+        });
     }
 
     @FXML
@@ -42,6 +82,7 @@ public class MenuController {
 
     @FXML
     private void toggleSetting() {
+        SoundManager.getInstance().playButtonClick();
         try {
             if (newStage != null && newStage.isShowing()) {
                 newStage.toFront();
@@ -55,9 +96,9 @@ public class MenuController {
             SettingController settingController = loader.getController();
             settingController.setStage(newStage);
 
-            Scene scene = new Scene(root, 400, 200);
+            Scene scene = new Scene(root);
 
-            newStage.setTitle("Setting");
+            newStage.setTitle("Settings");
             newStage.setResizable(false);
             newStage.setScene(scene);
             newStage.show();
@@ -69,7 +110,20 @@ public class MenuController {
 
     @FXML
     private void exitGame() {
+        SoundManager.getInstance().playButtonClick();
         System.out.println("Exit Game!");
-        if (stage != null) stage.close();
+        if (stage != null) {
+            stage.close();
+        }
+    }
+
+    // Method để add vào FXML cho hover effect
+    @FXML
+    private void onButtonHover() {
+        long currentTime = System.currentTimeMillis();
+        if (currentTime - lastHoverTime > HOVER_COOLDOWN) {
+            SoundManager.getInstance().playButtonHover();
+            lastHoverTime = currentTime;
+        }
     }
 }
