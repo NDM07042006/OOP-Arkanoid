@@ -72,11 +72,11 @@ public class GameEngine {
      * Dữ liệu đầu vào là góc của vector vận tốc hợp với phương thẳng đứng
      */
     public double setVelBall_X(double degrees){
-        double vel_X = Define.DEFAULF_BALL_SPEED*Math.sin(Math.toRadians(degrees));
+        double vel_X = Define.DEFAULF_BALL_VECTOR_SPEED*Math.sin(Math.toRadians(degrees));
         return vel_X;
     }
     public double setVelBall_y(double degrees){
-        double vel_Y = -1*Define.DEFAULF_BALL_SPEED*Math.cos(Math.toRadians(degrees));
+        double vel_Y = -1*Define.DEFAULF_BALL_VECTOR_SPEED*Math.cos(Math.toRadians(degrees));
         return vel_Y;
     }
     
@@ -84,12 +84,11 @@ public class GameEngine {
     
     public void addBall() {
         Bounds paddleBounds = paddle.getSprite().getBoundsInParent();
-        double start_x = (paddleBounds.getMaxX()-paddleBounds.getMinX())/2
-        + paddleBounds.getMinX();
+        double start_x = paddleBounds.getCenterX();
         double start_y = paddleBounds.getMinY()-30;
         Ball ball = new Ball(start_x, start_y,
                 Define.PADDLES_AND_BALLS_IMAGE_PATH);
-        ball.setSpeed(2);
+        ball.setSpeed(Define.DEFAULF_BALL_SPEED);
         ball.setVel_X(setVelBall_X( 0));
         ball.setVel_Y(setVelBall_y( 0));
         balls.add(ball);
@@ -100,13 +99,12 @@ public class GameEngine {
     
     public void addBall(double degrees) {
         Bounds paddleBounds = paddle.getSprite().getBoundsInParent();
-        double start_x = (paddleBounds.getMaxX()-paddleBounds.getMinX())/2
-        + paddleBounds.getMinX();
+        double start_x = paddleBounds.getCenterX();
         double start_y = paddleBounds.getMinY()-30;
         Ball ball = new Ball(start_x, start_y,
                 Define.PADDLES_AND_BALLS_IMAGE_PATH);
         ball.setMoving(true);
-        ball.setSpeed(2);
+        ball.setSpeed(Define.DEFAULF_BALL_SPEED);
         ball.setVel_X(setVelBall_X( degrees));
         ball.setVel_Y(setVelBall_y( degrees));
         balls.add(ball);
@@ -115,7 +113,10 @@ public class GameEngine {
     //Điều chỉnh speed bóng
     public void setAllBallSpeed(int extraSpeed){
         for(Ball ball:balls){
-            ball.setSpeed(ball.getSpeed() + extraSpeed);
+            if(ball.getSpeed() + extraSpeed >= Define.MIN_BALL_SPEED 
+            && ball.getSpeed() + extraSpeed <= Define.MAX_BALL_SPEED){
+                ball.setSpeed(ball.getSpeed() + extraSpeed);
+            }
         }
     } 
     /*
@@ -152,7 +153,10 @@ public class GameEngine {
         paddle.setVel_X(0);
     }
     public void setPaddleSpeed(int extraSpeed){
-        paddle.setSpeed(paddle.getSpeed() + extraSpeed);
+        if (paddle.getSpeed() + extraSpeed >= Define.MIN_PADDLE_SPEED 
+        && paddle.getSpeed() + extraSpeed <= Define.MAX_PADDLE_SPEED){
+            paddle.setSpeed(paddle.getSpeed() + extraSpeed);
+        }
     }
 
     /*

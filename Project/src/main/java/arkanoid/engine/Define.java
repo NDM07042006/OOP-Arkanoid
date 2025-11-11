@@ -12,8 +12,16 @@ public class Define {
     public static final String MENU_GAME_PATH               = "/com/Arkanoid/MenuGame.fxml";
     public static final String PAUSE_MENU_PATH              = "/com/Arkanoid/PauseMenu.fxml";
     public static final String SETTING_PATH                 = "/com/Arkanoid/Setting.fxml";
-    public static final double DEFAULF_BALL_SPEED           = 1.0;
-    public static final double DEFAULF_PADDLE_SPEED         = 2.0;
+
+    public static final int MAX_BALL_SPEED                  = 10;
+    public static final int DEFAULF_BALL_SPEED              = 5;
+    public static final int MIN_BALL_SPEED                  = 1;
+    public static final double DEFAULF_BALL_VECTOR_SPEED    = 2.0;
+
+    public static final int MAX_PADDLE_SPEED                = 10;
+    public static final int DEFAULF_PADDLE_SPEED            = 5;
+    public static final int MIN_PADDLE_SPEED                = 1;
+
     public static final int    SCREEN_WIDTH                 = 800;
     public static final int    SCREEN_HEIGHT                = 600;
 }
