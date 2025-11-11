@@ -20,7 +20,7 @@ public class Main extends Application {
 
         Group root = new Group();
         Scene scene = new Scene(root, Define.SCREEN_WIDTH, Define.SCREEN_HEIGHT);
-        Map map = new Map(6);
+        Map map = new Map(10);
         gameEngine.setGame(root,map);
         map.loadMap(Define.SCREEN_WIDTH, Define.SCREEN_HEIGHT);
 

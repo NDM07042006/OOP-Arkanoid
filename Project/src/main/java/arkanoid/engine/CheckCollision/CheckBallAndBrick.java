@@ -33,28 +33,28 @@ public class CheckBallAndBrick extends CheckCollision {
 
                         if(ballBounds.getMinY()<=brickBounds.getMaxY()
                                 && ballBounds.getMaxY()> brickBounds.getMaxY()){
-                            ball.setVel_Y(-ball.getVel_Y());
+                            ball.setVel_Y(Math.abs(ball.getVel_Y()));
                         }
 
                         // Chạm bên trên gạch
 
                         else if(ballBounds.getMaxY()>=brickBounds.getMinY()
                                 && ballBounds.getMinY()< brickBounds.getMinY()){
-                            ball.setVel_Y(-ball.getVel_Y());
+                            ball.setVel_Y(-Math.abs(ball.getVel_Y()));
                         }
 
                         // Chạm bên phải gạch
 
                         else if(ballBounds.getMinX()<=brickBounds.getMaxX()
                                 && ballBounds.getMaxX()> brickBounds.getMaxX()){
-                            ball.setVel_X(-ball.getVel_X());
+                            ball.setVel_X(Math.abs(ball.getVel_X()));
                         }
 
                         // Chạm bên trái gạch
 
                         else if(ballBounds.getMaxX()>=brickBounds.getMinX()
                                 && ballBounds.getMinX()< brickBounds.getMinX()){
-                            ball.setVel_X(-ball.getVel_X());
+                            ball.setVel_X(-Math.abs(ball.getVel_X()));
                         }
 
 
