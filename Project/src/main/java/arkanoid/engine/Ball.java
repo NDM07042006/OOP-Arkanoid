@@ -82,21 +82,6 @@ public class Ball extends GameObject {
         this.speed = speed;
     }
 
-    public boolean brickCollision(){
-        return brickCollision;
-    }
-
-    public void setBrickCollision(boolean collision){
-        brickCollision = collision;
-    }
-    public boolean paddleCollision(){
-        return paddleCollision;
-    }
-
-    public void setPaddleCollision(boolean collision){
-        paddleCollision = collision;
-    }
-
     public boolean isMoving() {
         return isMoving;
     }
