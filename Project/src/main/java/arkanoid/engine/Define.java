@@ -6,6 +6,8 @@ public class Define {
     public static final String SLOW_BALL_IMAGE_PATH         = "/com/Arkanoid/img/SlowBall.png";
     public static final String FAST_PADDLE_IMAGE_PATH       = "/com/Arkanoid/img/FastPaddle.png";
     public static final String SLOW_PADDLE_IMAGE_PATH       = "/com/Arkanoid/img/SlowPaddle.png";
+    public static final String RANDOM_POWER_UP_IMAGE_PATH   = "/com/Arkanoid/img/RandomPowerUp.png";
+
     public static final String PADDLES_AND_BALLS_IMAGE_PATH = "/com/Arkanoid/img/paddles_and_balls.png";
     public static final String BRICKS_IMAGE_PATH            = "/com/Arkanoid/img/bricks.png";
     public static final String END_SCREEN_PATH              = "/com/Arkanoid/EndScreen.fxml";

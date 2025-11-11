@@ -33,7 +33,7 @@ public class Main extends Application {
 
         // Thêm một số PowerUp để kiểm tra
         // SlowPaddle powerUp1 = new SlowPaddle(300, 100);
-        FastPaddle powerUp2 = new FastPaddle(400, 150);
+        MultiBall powerUp2 = new MultiBall(400, 150);
         // gameEngine.addPowerUp(powerUp1);
         gameEngine.addPowerUp(powerUp2);
 
