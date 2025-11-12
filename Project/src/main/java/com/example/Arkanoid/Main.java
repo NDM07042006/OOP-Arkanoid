@@ -19,10 +19,17 @@ public class Main extends Application {
         System.out.println("🚀 Preloading scenes...");
         SceneCache.getInstance().preloadAll();
         
-        MenuScene menu = new MenuScene(stage);
-        menu.show();
-        // EndScene endScene = new EndScene(stage);
+        // MenuScene menu = new MenuScene(stage);
+        // menu.show();
+        
+        // Test Game Over (thua)
+        // EndScene endScene = new EndScene(stage, false);
         // endScene.show();
+        
+        // Test You Win (thắng)
+        EndScene endScene = new EndScene(stage, true);
+        endScene.show();
+        
         // SettingScene settingScene = new SettingScene(stage);
         // settingScene.show();
         // PauseScene pauseScene = new PauseScene(stage);

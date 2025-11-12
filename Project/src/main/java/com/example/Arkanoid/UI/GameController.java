@@ -1,7 +1,6 @@
 package main.java.com.example.Arkanoid.UI;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -17,10 +16,7 @@ public class GameController {
     private ImageView pauseButton;
     
     @FXML
-    private Label scoreLabel;
-    
-    @FXML
-    private Label livesLabel;
+    private ImageView backgroundPlaceholder; // Background placeholder ở bên phải
 
     @FXML
     private Stage stage;
@@ -85,15 +81,12 @@ public class GameController {
             // Tạo map mới dựa vào level number
             // Chỉ có level 1, 2, 5, 9, 10 có sẵn trong Map.java
             int mapType = level;
-            switch (level) {
-                case 1,2,5,9,10:
-                    mapType = level;
-                    break;
-            
-                default:
-                    mapType = 1;
-                    break;
+            if (level > 10) {
+                mapType = 10; // Default về level 10 nếu quá
+            } else if (level == 3 || level == 4 || level == 6 || level == 7 || level == 8) {
+                mapType = 1; // Các level chưa có map thì dùng level 1
             }
+            
             currentMap = new Map(mapType);
             
             // Load map với kích thước của anchorPane
@@ -128,33 +121,40 @@ public class GameController {
                 return;
             }
             
-            // Sử dụng SpriteLoader để load background
-            // Ban đầu dùng kích thước mặc định hoặc prefSize
-            double initialWidth = anchorPane.getPrefWidth() > 0 ? anchorPane.getPrefWidth() : 600;
-            double initialHeight = anchorPane.getPrefHeight() > 0 ? anchorPane.getPrefHeight() : 400;
+            // Tính kích thước GAME AREA (bên phải): từ x=150 đến hết
+            // Total width = 800, UI panel = 150, vậy game area = 650
+            double gameAreaWidth = (anchorPane.getPrefWidth() > 0 ? anchorPane.getPrefWidth() : 800) - 150;
+            double gameAreaHeight = anchorPane.getPrefHeight() > 0 ? anchorPane.getPrefHeight() : 600;
             
-            ImageView newBackground = SpriteLoader.getBackgroundForLevel(level, initialWidth, initialHeight);
+            ImageView newBackground = SpriteLoader.getBackgroundForLevel(level, gameAreaWidth, gameAreaHeight);
             
-            // Xóa background cũ nếu có
-            if (backgroundView != null) {
-                anchorPane.getChildren().remove(backgroundView);
+            // Sử dụng backgroundPlaceholder thay vì add mới
+            if (backgroundPlaceholder != null) {
+                // Set ảnh vào placeholder (placeholder đã được anchor ở bên phải trong FXML)
+                backgroundPlaceholder.setImage(newBackground.getImage());
+                backgroundView = backgroundPlaceholder;
+                
+                System.out.println("✅ GameController: Background set to placeholder (right side) for Level " + level);
+            } else {
+                // Fallback: xóa background cũ và add mới
+                if (backgroundView != null) {
+                    anchorPane.getChildren().remove(backgroundView);
+                }
+                
+                // Set vị trí background BÊN PHẢI (từ x=150 trở đi)
+                AnchorPane.setTopAnchor(newBackground, 0.0);
+                AnchorPane.setLeftAnchor(newBackground, 150.0);  // Bắt đầu từ 150px
+                AnchorPane.setRightAnchor(newBackground, 0.0);
+                AnchorPane.setBottomAnchor(newBackground, 0.0);
+                
+                // Thêm background mới ở vị trí đầu tiên (phía sau tất cả)
+                backgroundView = newBackground;
+                anchorPane.getChildren().add(0, backgroundView);
+                backgroundView.toBack();
+                
+                System.out.println("✅ GameController: Background loaded at right side for Level " + level);
             }
             
-            // Bind kích thước background với AnchorPane
-            newBackground.fitWidthProperty().bind(anchorPane.widthProperty());
-            newBackground.fitHeightProperty().bind(anchorPane.heightProperty());
-            
-            // Set vị trí background ở góc trên bên trái
-            AnchorPane.setTopAnchor(newBackground, 0.0);
-            AnchorPane.setLeftAnchor(newBackground, 0.0);
-            AnchorPane.setRightAnchor(newBackground, 0.0);
-            AnchorPane.setBottomAnchor(newBackground, 0.0);
-            
-            // Thêm background mới ở vị trí đầu tiên (phía sau tất cả)
-            backgroundView = newBackground;
-            anchorPane.getChildren().add(0, backgroundView);
-            
-            System.out.println("✅ GameController: Background loaded and bound to AnchorPane for Level " + level);
             System.out.println("   - AnchorPane size: " + anchorPane.getWidth() + "x" + anchorPane.getHeight());
             System.out.println("   - AnchorPane prefSize: " + anchorPane.getPrefWidth() + "x" + anchorPane.getPrefHeight());
             
@@ -166,38 +166,6 @@ public class GameController {
 
     public int getLevel() {
         return levelNumber;
-    }
-    
-    /**
-     * Update score display
-     */
-    public void updateScore(int score) {
-        if (scoreLabel != null) {
-            scoreLabel.setText("SCORE: " + score);
-        }
-    }
-    
-    /**
-     * Update lives display
-     */
-    public void updateLives(int lives) {
-        if (livesLabel != null) {
-            livesLabel.setText("LIVES: " + lives);
-        }
-    }
-    
-    /**
-     * Get score label for direct access if needed
-     */
-    public Label getScoreLabel() {
-        return scoreLabel;
-    }
-    
-    /**
-     * Get lives label for direct access if needed
-     */
-    public Label getLivesLabel() {
-        return livesLabel;
     }
 
     @FXML

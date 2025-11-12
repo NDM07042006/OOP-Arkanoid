@@ -67,9 +67,15 @@ public class PauseController {
         
         // Lấy level hiện tại từ cached GameController
         int currentLevel = 1; // Default
-        GameController gameController = (GameController) SceneCache.getInstance().getCachedController("game");
-        if (gameController != null) {
-            currentLevel = gameController.getLevel();
+        try {
+            Object controller = SceneCache.getInstance().getCachedController("game");
+            if (controller != null) {
+                // Sử dụng reflection để lấy level
+                java.lang.reflect.Method getLevel = controller.getClass().getMethod("getLevel");
+                currentLevel = (Integer) getLevel.invoke(controller);
+            }
+        } catch (Exception e) {
+            System.err.println("⚠️ Could not get current level, using default: " + e.getMessage());
         }
         
         System.out.println("🔄 Restarting Level " + currentLevel + "...");

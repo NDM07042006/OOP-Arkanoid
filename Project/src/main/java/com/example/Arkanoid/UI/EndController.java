@@ -7,6 +7,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import main.java.arkanoid.engine.Define;
@@ -15,6 +17,9 @@ import main.java.com.example.Arkanoid.Utlis.SoundManager;
 public class EndController {
     @FXML
     private AnchorPane anchorPane;
+    
+    @FXML
+    private ImageView backgroundImage;
 
     @FXML
     private Stage stage;
@@ -27,9 +32,36 @@ public class EndController {
     
     @FXML
     private Button nextLevelButton;
+    
+    private boolean isWin = false; // Trạng thái thắng/thua
 
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+    
+    /**
+     * Set trạng thái thắng/thua và load background tương ứng
+     * @param win true = thắng (you_win), false = thua (game_over)
+     */
+    public void setWinStatus(boolean win) {
+        this.isWin = win;
+        loadBackground();
+    }
+    
+    private void loadBackground() {
+        try {
+            String imagePath = isWin ? Define.YOU_WIN_IMAGE_PATH : Define.GAME_OVER_IMAGE_PATH;
+            Image image = new Image(getClass().getResourceAsStream(imagePath));
+            
+            if (backgroundImage != null) {
+                backgroundImage.setImage(image);
+                backgroundImage.toBack(); // Đảm bảo background ở phía sau
+                System.out.println("✅ EndController: Loaded " + (isWin ? "YOU_WIN" : "GAME_OVER") + " background");
+            }
+        } catch (Exception e) {
+            System.err.println("❌ Error loading end game background: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
     
     @FXML
@@ -38,6 +70,11 @@ public class EndController {
         setupHoverEffect(restartButton);
         setupHoverEffect(menuButton);
         setupHoverEffect(nextLevelButton);
+        
+        // Load background mặc định (game over) nếu chưa set
+        if (backgroundImage != null && backgroundImage.getImage() == null) {
+            loadBackground();
+        }
     }
     
     private void setupHoverEffect(Button button) {

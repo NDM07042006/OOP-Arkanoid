@@ -8,9 +8,21 @@ import javafx.scene.Scene;
 
 public class EndScene {
     private Stage stage;
+    private boolean isWin;
 
-    public EndScene(Stage stage) {
+    /**
+     * Constructor cho EndScene
+     * @param stage Stage hiện tại
+     * @param win true = thắng (you_win), false = thua (game_over)
+     */
+    public EndScene(Stage stage, boolean win) {
         this.stage = stage;
+        this.isWin = win;
+    }
+    
+    // Constructor cũ để backward compatible
+    public EndScene(Stage stage) {
+        this(stage, false); // Mặc định là thua
     }
 
     public void show() {
@@ -20,9 +32,10 @@ public class EndScene {
 
             EndController endController = loader.getController();
             endController.setStage(stage);
+            endController.setWinStatus(isWin); // Set trạng thái thắng/thua
 
             Scene scene = new Scene(root);
-            stage.setTitle("End Game!");
+            stage.setTitle(isWin ? "Victory!" : "Game Over!");
             stage.setScene(scene);
             stage.setResizable(false);
             stage.show();

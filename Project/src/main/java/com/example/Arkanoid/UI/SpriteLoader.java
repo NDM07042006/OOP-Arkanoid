@@ -71,9 +71,10 @@ public class SpriteLoader {
                 return new ImageView();
             }
             
-            // Tạo ImageView
+            // Tạo ImageView với preserveRatio=true để hiển thị toàn bộ ảnh
             ImageView imageView = new ImageView(backgroundImage);
-            imageView.setPreserveRatio(false);
+            imageView.setPreserveRatio(true);  // Giữ tỷ lệ ảnh gốc
+            imageView.setSmooth(true);         // Làm mịn ảnh khi scale
             imageView.setFitWidth(fitWidth);
             imageView.setFitHeight(fitHeight);
             

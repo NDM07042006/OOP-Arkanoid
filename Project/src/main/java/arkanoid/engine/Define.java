@@ -18,6 +18,10 @@ public class Define {
     // Backgrounds (base path, append level number + extension)
     public static final String BACKGROUND_BASE_PATH         = "/com/Arkanoid/images/background_";
     
+    // End game backgrounds
+    public static final String GAME_OVER_IMAGE_PATH         = "/com/Arkanoid/images/game_over.gif";
+    public static final String YOU_WIN_IMAGE_PATH           = "/com/Arkanoid/images/you_win.gif";
+    
     // UI Images
     public static final String UI_09_IMAGE_PATH             = "/com/Arkanoid/images/Ui_09.png";
     
