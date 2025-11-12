@@ -301,7 +301,6 @@ public class Map {
                                 row, column, 2
                         );
                         PowerUpBrick.setGivePowerUp(true);
-                        PowerUpBrick.setPowerUp_Type(1);
                         PowerUpBrick.setPoint_given(100);
                         brickGroup.add(PowerUpBrick);
                         break;
