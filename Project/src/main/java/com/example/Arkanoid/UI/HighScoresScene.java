@@ -38,7 +38,7 @@ public class HighScoresScene {
         // Nếu chưa cache, load bình thường
         try {
             System.out.println("🔄 Loading HighScoresScene from FXML");
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(Define.HIGH_SCORE_PATH));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(Define.HIGH_SCORES_PATH));
             Parent root = loader.load();
 
             HighScoresController controller = loader.getController();

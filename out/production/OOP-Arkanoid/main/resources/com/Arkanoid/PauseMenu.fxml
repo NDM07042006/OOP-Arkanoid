@@ -1,87 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Slider?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="450.0" spacing="15.0" style="-fx-background-color: #2C3E50;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.example.Arkanoid.UI.SettingController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-    </padding>
-    <children>
-        <!-- Title -->
-        <Label text="SETTINGS" textFill="WHITE">
-            <font>
-                <Font name="System Bold" size="24.0" />
-            </font>
-        </Label>
-
-        <!-- Music Volume -->
-        <VBox spacing="5.0">
-            <children>
-                <HBox alignment="CENTER_LEFT" spacing="10.0">
-                    <children>
-                        <Label minWidth="120.0" text="Music Volume:" textFill="WHITE">
-                            <font>
-                                <Font size="14.0" />
-                            </font>
-                        </Label>
-                        <Slider fx:id="musicVolumeSlider" blockIncrement="0.1" max="1.0" prefWidth="200.0" value="0.5" />
-                        <Label fx:id="musicVolumeLabel" minWidth="50.0" text="50%" textFill="WHITE">
-                            <font>
-                                <Font size="14.0" />
-                            </font>
-                        </Label>
-                    </children>
-                </HBox>
-                <CheckBox fx:id="musicEnabledCheckBox" selected="true" text="Enable Music" textFill="WHITE">
-                    <padding>
-                        <Insets left="10.0" />
-                    </padding>
-                </CheckBox>
-            </children>
-        </VBox>
-
-        <!-- Sound Effects Volume -->
-        <VBox spacing="5.0">
-            <children>
-                <HBox alignment="CENTER_LEFT" spacing="10.0">
-                    <children>
-                        <Label minWidth="120.0" text="SFX Volume:" textFill="WHITE">
-                            <font>
-                                <Font size="14.0" />
-                            </font>
-                        </Label>
-                        <Slider fx:id="sfxVolumeSlider" blockIncrement="0.1" max="1.0" prefWidth="200.0" value="0.7" />
-                        <Label fx:id="sfxVolumeLabel" minWidth="50.0" text="70%" textFill="WHITE">
-                            <font>
-                                <Font size="14.0" />
-                            </font>
-                        </Label>
-                    </children>
-                </HBox>
-                <CheckBox fx:id="sfxEnabledCheckBox" selected="true" text="Enable Sound Effects" textFill="WHITE">
-                    <padding>
-                        <Insets left="10.0" />
-                    </padding>
-                </CheckBox>
-            </children>
-        </VBox>
-
-        <!-- Buttons -->
-        <HBox alignment="CENTER" spacing="20.0">
-            <VBox.margin>
-                <Insets top="10.0" />
-            </VBox.margin>
-            <children>
-                <Button mnemonicParsing="false" onAction="#testSound" prefWidth="100.0" style="-fx-background-color: #3498DB; -fx-text-fill: white; -fx-font-weight: bold;" text="Test Sound" />
-                <Button mnemonicParsing="false" onAction="#exitSetting" prefWidth="100.0" style="-fx-background-color: #E74C3C; -fx-text-fill: white; -fx-font-weight: bold;" text="Close" />
-            </children>
-        </HBox>
-    </children>
-</VBox>
+<AnchorPane fx:id="controller" prefHeight="250.0" prefWidth="165.0" style="-fx-background-color: transparent;" stylesheets="@pause-style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.example.Arkanoid.UI.PauseController">
+   <children>
+      <ImageView fitHeight="250.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Ui_09.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="restartButton" layoutX="25.0" layoutY="70.0" mnemonicParsing="false" onAction="#restartLevel" prefWidth="200.0" styleClass="restart-button" text="Restart level" />
+      <Button fx:id="menuButton" layoutX="25.0" layoutY="150.0" mnemonicParsing="false" onAction="#menu" prefHeight="43.0" prefWidth="200.0" styleClass="menu-button" text="Main menu" />
+      <Button fx:id="resumeButton" layoutX="25.0" layoutY="30.0" mnemonicParsing="false" onAction="#resume" prefWidth="200.0" styleClass="resume-button" text="Resume" />
+      <Button fx:id="settingButton" layoutX="25.0" layoutY="110.0" mnemonicParsing="false" onAction="#setting" prefHeight="43.0" prefWidth="200.0" styleClass="setting-button" text="Setting" />
+      <Button fx:id="exitButton" layoutX="25.0" layoutY="190.0" mnemonicParsing="false" onAction="#exit" prefWidth="200.0" styleClass="exit-button" text="Exit" />
+   </children>
+</AnchorPane>

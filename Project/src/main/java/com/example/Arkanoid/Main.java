@@ -13,6 +13,7 @@ public class Main extends Application {
     public void start(Stage stage) {
         EndScene endScene = new EndScene(stage);
         endScene.show();
+        System.out.println(stage.getScene());
     }
 
     public static void main(String[] args) {

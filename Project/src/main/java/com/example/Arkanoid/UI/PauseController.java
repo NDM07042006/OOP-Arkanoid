@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import main.java.com.example.Arkanoid.Utlis.SceneNavigator;
 
 public class PauseController {
+    private GameController gameController; // tham chiếu tới game hiện tại
     private Stage stage;
 
     public void setStage(Stage stage) {
@@ -62,7 +63,9 @@ public class PauseController {
     @FXML
     public void menu() {
         // Đóng pause window
+
         stage.close();
+
 
         // Lấy main stage
         Stage mainStage = (Stage) stage.getOwner();

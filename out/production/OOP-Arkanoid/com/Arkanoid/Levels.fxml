@@ -9,123 +9,123 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="600.0" style="-fx-background-color: #1a1a2e;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.example.Arkanoid.UI.LevelController">
-    <children>
-        <Label layoutX="170.0" layoutY="20.0" text="SELECT LEVEL" textFill="#eee">
-            <font>
-                <Font name="System Bold" size="36.0" />
-            </font>
-        </Label>
-
-        <!-- Level 1 - Row 1, Col 1 -->
-        <Rectangle fx:id="level1Bg" fill="#3498db" arcWidth="15" arcHeight="15"
-                   layoutX="50.0" layoutY="80.0" width="220.0" height="90.0"
-                   onMouseClicked="#selectLevel1" style="-fx-cursor: hand; -fx-stroke: #2980b9; -fx-stroke-width: 2;" />
-        <Label layoutX="120.0" layoutY="115.0" text="LEVEL 1" textFill="#fff" mouseTransparent="true">
-            <font>
-                <Font name="System Bold" size="24.0" />
-            </font>
-        </Label>
-
-        <!-- Level 2 - Row 1, Col 2 -->
-        <Rectangle fx:id="level2Bg" fill="#e74c3c" arcWidth="15" arcHeight="15"
-                   layoutX="330.0" layoutY="80.0" width="220.0" height="90.0"
-                   onMouseClicked="#selectLevel2" style="-fx-cursor: hand; -fx-stroke: #c0392b; -fx-stroke-width: 2;" />
-        <Label layoutX="400.0" layoutY="115.0" text="LEVEL 2" textFill="#fff" mouseTransparent="true">
-            <font>
-                <Font name="System Bold" size="24.0" />
-            </font>
-        </Label>
-
-        <!-- Level 3 - Row 2, Col 1 -->
-        <Rectangle fx:id="level3Bg" fill="#2ecc71" arcWidth="15" arcHeight="15"
-                   layoutX="50.0" layoutY="190.0" width="220.0" height="90.0"
-                   onMouseClicked="#selectLevel3" style="-fx-cursor: hand; -fx-stroke: #27ae60; -fx-stroke-width: 2;" />
-        <Label layoutX="120.0" layoutY="225.0" text="LEVEL 3" textFill="#fff" mouseTransparent="true">
-            <font>
-                <Font name="System Bold" size="24.0" />
-            </font>
-        </Label>
-
-        <!-- Level 4 - Row 2, Col 2 -->
-        <Rectangle fx:id="level4Bg" fill="#f39c12" arcWidth="15" arcHeight="15"
-                   layoutX="330.0" layoutY="190.0" width="220.0" height="90.0"
-                   onMouseClicked="#selectLevel4" style="-fx-cursor: hand; -fx-stroke: #d68910; -fx-stroke-width: 2;" />
-        <Label layoutX="400.0" layoutY="225.0" text="LEVEL 4" textFill="#fff" mouseTransparent="true">
-            <font>
-                <Font name="System Bold" size="24.0" />
-            </font>
-        </Label>
-
-        <!-- Level 5 - Row 3, Col 1 -->
-        <Rectangle fx:id="level5Bg" fill="#9b59b6" arcWidth="15" arcHeight="15"
-                   layoutX="50.0" layoutY="300.0" width="220.0" height="90.0"
-                   onMouseClicked="#selectLevel5" style="-fx-cursor: hand; -fx-stroke: #8e44ad; -fx-stroke-width: 2;" />
-        <Label layoutX="120.0" layoutY="335.0" text="LEVEL 5" textFill="#fff" mouseTransparent="true">
-            <font>
-                <Font name="System Bold" size="24.0" />
-            </font>
-        </Label>
-
-        <!-- Level 6 - Row 3, Col 2 -->
-        <Rectangle fx:id="level6Bg" fill="#1abc9c" arcWidth="15" arcHeight="15"
-                   layoutX="330.0" layoutY="300.0" width="220.0" height="90.0"
-                   onMouseClicked="#selectLevel6" style="-fx-cursor: hand; -fx-stroke: #16a085; -fx-stroke-width: 2;" />
-        <Label layoutX="400.0" layoutY="335.0" text="LEVEL 6" textFill="#fff" mouseTransparent="true">
-            <font>
-                <Font name="System Bold" size="24.0" />
-            </font>
-        </Label>
-
-        <!-- Level 7 - Row 4, Col 1 -->
-        <Rectangle fx:id="level7Bg" fill="#e67e22" arcWidth="15" arcHeight="15"
-                   layoutX="50.0" layoutY="410.0" width="220.0" height="90.0"
-                   onMouseClicked="#selectLevel7" style="-fx-cursor: hand; -fx-stroke: #ca6f1e; -fx-stroke-width: 2;" />
-        <Label layoutX="120.0" layoutY="445.0" text="LEVEL 7" textFill="#fff" mouseTransparent="true">
-            <font>
-                <Font name="System Bold" size="24.0" />
-            </font>
-        </Label>
-
-        <!-- Level 8 - Row 4, Col 2 -->
-        <Rectangle fx:id="level8Bg" fill="#34495e" arcWidth="15" arcHeight="15"
-                   layoutX="330.0" layoutY="410.0" width="220.0" height="90.0"
-                   onMouseClicked="#selectLevel8" style="-fx-cursor: hand; -fx-stroke: #2c3e50; -fx-stroke-width: 2;" />
-        <Label layoutX="400.0" layoutY="445.0" text="LEVEL 8" textFill="#fff" mouseTransparent="true">
-            <font>
-                <Font name="System Bold" size="24.0" />
-            </font>
-        </Label>
-
-        <!-- Level 9 - Row 5, Col 1 -->
-        <Rectangle fx:id="level9Bg" fill="#c0392b" arcWidth="15" arcHeight="15"
-                   layoutX="50.0" layoutY="520.0" width="220.0" height="90.0"
-                   onMouseClicked="#selectLevel9" style="-fx-cursor: hand; -fx-stroke: #a93226; -fx-stroke-width: 2;" />
-        <Label layoutX="120.0" layoutY="555.0" text="LEVEL 9" textFill="#fff" mouseTransparent="true">
-            <font>
-                <Font name="System Bold" size="24.0" />
-            </font>
-        </Label>
-
-        <!-- Level 10 - Row 5, Col 2 -->
-        <Rectangle fx:id="level10Bg" fill="#8e44ad" arcWidth="15" arcHeight="15"
-                   layoutX="330.0" layoutY="520.0" width="220.0" height="90.0"
-                   onMouseClicked="#selectLevel10" style="-fx-cursor: hand; -fx-stroke: #7d3c98; -fx-stroke-width: 2;" />
-        <Label layoutX="390.0" layoutY="555.0" text="LEVEL 10" textFill="#fff" mouseTransparent="true">
-            <font>
-                <Font name="System Bold" size="24.0" />
-            </font>
-        </Label>
-
-        <!-- Back Button -->
-        <Button layoutX="250.0" layoutY="615.0" mnemonicParsing="false" onAction="#backToMenu" prefWidth="100.0" text="Back" textFill="WHITE">
-            <font>
-                <Font name="System Bold" size="14.0" />
-            </font>
-            <style>
-                -fx-background-color: #e94560;
-                -fx-background-radius: 10;
-                -fx-cursor: hand;
-            </style>
-        </Button>
-    </children>
+   <children>
+      <Label layoutX="170.0" layoutY="20.0" text="SELECT LEVEL" textFill="#eee">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      
+      <!-- Level 1 - Row 1, Col 1 -->
+      <Rectangle fx:id="level1Bg" fill="#3498db" arcWidth="15" arcHeight="15" 
+         layoutX="50.0" layoutY="80.0" width="220.0" height="90.0" 
+         onMouseClicked="#selectLevel1" style="-fx-cursor: hand; -fx-stroke: #2980b9; -fx-stroke-width: 2;" />
+      <Label layoutX="120.0" layoutY="115.0" text="LEVEL 1" textFill="#fff" mouseTransparent="true">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      
+      <!-- Level 2 - Row 1, Col 2 -->
+      <Rectangle fx:id="level2Bg" fill="#e74c3c" arcWidth="15" arcHeight="15" 
+         layoutX="330.0" layoutY="80.0" width="220.0" height="90.0" 
+         onMouseClicked="#selectLevel2" style="-fx-cursor: hand; -fx-stroke: #c0392b; -fx-stroke-width: 2;" />
+      <Label layoutX="400.0" layoutY="115.0" text="LEVEL 2" textFill="#fff" mouseTransparent="true">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      
+      <!-- Level 3 - Row 2, Col 1 -->
+      <Rectangle fx:id="level3Bg" fill="#2ecc71" arcWidth="15" arcHeight="15" 
+         layoutX="50.0" layoutY="190.0" width="220.0" height="90.0" 
+         onMouseClicked="#selectLevel3" style="-fx-cursor: hand; -fx-stroke: #27ae60; -fx-stroke-width: 2;" />
+      <Label layoutX="120.0" layoutY="225.0" text="LEVEL 3" textFill="#fff" mouseTransparent="true">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      
+      <!-- Level 4 - Row 2, Col 2 -->
+      <Rectangle fx:id="level4Bg" fill="#f39c12" arcWidth="15" arcHeight="15" 
+         layoutX="330.0" layoutY="190.0" width="220.0" height="90.0" 
+         onMouseClicked="#selectLevel4" style="-fx-cursor: hand; -fx-stroke: #d68910; -fx-stroke-width: 2;" />
+      <Label layoutX="400.0" layoutY="225.0" text="LEVEL 4" textFill="#fff" mouseTransparent="true">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      
+      <!-- Level 5 - Row 3, Col 1 -->
+      <Rectangle fx:id="level5Bg" fill="#9b59b6" arcWidth="15" arcHeight="15" 
+         layoutX="50.0" layoutY="300.0" width="220.0" height="90.0" 
+         onMouseClicked="#selectLevel5" style="-fx-cursor: hand; -fx-stroke: #8e44ad; -fx-stroke-width: 2;" />
+      <Label layoutX="120.0" layoutY="335.0" text="LEVEL 5" textFill="#fff" mouseTransparent="true">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      
+      <!-- Level 6 - Row 3, Col 2 -->
+      <Rectangle fx:id="level6Bg" fill="#1abc9c" arcWidth="15" arcHeight="15" 
+         layoutX="330.0" layoutY="300.0" width="220.0" height="90.0" 
+         onMouseClicked="#selectLevel6" style="-fx-cursor: hand; -fx-stroke: #16a085; -fx-stroke-width: 2;" />
+      <Label layoutX="400.0" layoutY="335.0" text="LEVEL 6" textFill="#fff" mouseTransparent="true">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      
+      <!-- Level 7 - Row 4, Col 1 -->
+      <Rectangle fx:id="level7Bg" fill="#e67e22" arcWidth="15" arcHeight="15" 
+         layoutX="50.0" layoutY="410.0" width="220.0" height="90.0" 
+         onMouseClicked="#selectLevel7" style="-fx-cursor: hand; -fx-stroke: #ca6f1e; -fx-stroke-width: 2;" />
+      <Label layoutX="120.0" layoutY="445.0" text="LEVEL 7" textFill="#fff" mouseTransparent="true">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      
+      <!-- Level 8 - Row 4, Col 2 -->
+      <Rectangle fx:id="level8Bg" fill="#34495e" arcWidth="15" arcHeight="15" 
+         layoutX="330.0" layoutY="410.0" width="220.0" height="90.0" 
+         onMouseClicked="#selectLevel8" style="-fx-cursor: hand; -fx-stroke: #2c3e50; -fx-stroke-width: 2;" />
+      <Label layoutX="400.0" layoutY="445.0" text="LEVEL 8" textFill="#fff" mouseTransparent="true">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      
+      <!-- Level 9 - Row 5, Col 1 -->
+      <Rectangle fx:id="level9Bg" fill="#c0392b" arcWidth="15" arcHeight="15" 
+         layoutX="50.0" layoutY="520.0" width="220.0" height="90.0" 
+         onMouseClicked="#selectLevel9" style="-fx-cursor: hand; -fx-stroke: #a93226; -fx-stroke-width: 2;" />
+      <Label layoutX="120.0" layoutY="555.0" text="LEVEL 9" textFill="#fff" mouseTransparent="true">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      
+      <!-- Level 10 - Row 5, Col 2 -->
+      <Rectangle fx:id="level10Bg" fill="#8e44ad" arcWidth="15" arcHeight="15" 
+         layoutX="330.0" layoutY="520.0" width="220.0" height="90.0" 
+         onMouseClicked="#selectLevel10" style="-fx-cursor: hand; -fx-stroke: #7d3c98; -fx-stroke-width: 2;" />
+      <Label layoutX="390.0" layoutY="555.0" text="LEVEL 10" textFill="#fff" mouseTransparent="true">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      
+      <!-- Back Button -->
+      <Button layoutX="250.0" layoutY="615.0" mnemonicParsing="false" onAction="#backToMenu" prefWidth="100.0" text="Back" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <style>
+            -fx-background-color: #e94560;
+            -fx-background-radius: 10;
+            -fx-cursor: hand;
+         </style>
+      </Button>
+   </children>
 </AnchorPane>

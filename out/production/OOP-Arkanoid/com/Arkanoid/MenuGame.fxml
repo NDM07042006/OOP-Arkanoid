@@ -11,7 +11,7 @@
         <!-- Background Image -->
         <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="false">
             <image>
-                <Image url="@img/menu.jpg" />
+                <Image url="@images/menu.jpg" />
             </image>
         </ImageView>
 

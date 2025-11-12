@@ -61,11 +61,11 @@ public class SceneCache {
         preloadScene(Define.MENU_GAME_PATH, "menu");
 
         // Preload các scene nhẹ
-        preloadScene(Define.LEVELS, "levels");
-        preloadScene(Define.HIGH_SCORE_PATH, "highscores");
+        preloadScene(Define.LEVELS_PATH, "levels");
+        preloadScene(Define.HIGH_SCORES_PATH, "highscores");
 
         // Preload GameScene - quan trọng nhất!
-        preloadScene(Define.GAME_SCENE, "game");
+        preloadScene(Define.GAME_SCENE_PATH, "game");
 
         System.out.println("✅ Scene preload initiated");
     }

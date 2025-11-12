@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.animation.AnimationTimer;
 
@@ -17,22 +18,23 @@ public class Main extends Application {
     private GameEngine gameEngine = new GameEngine();
     @Override
     public void start(Stage primaryStage) throws Exception {
+        GameEngine gameEngine = new GameEngine();
 
-        Group root = new Group();
-        Scene scene = new Scene(root, Define.SCREEN_WIDTH, Define.SCREEN_HEIGHT);
+        AnchorPane anchorPane = new AnchorPane();
+        Scene scene = new Scene(anchorPane, Define.SCREEN_WIDTH, Define.SCREEN_HEIGHT);
         Map map = new Map(10);
-        gameEngine.setGame(root,map);
+        gameEngine.setGame(anchorPane,map);
         map.loadMap(Define.SCREEN_WIDTH, Define.SCREEN_HEIGHT);
 
 
         for (Bricks b : map.getBrickGroup()) {
             b.setSence(scene);
-            root.getChildren().add(b.getNode());
+            anchorPane.getChildren().add(b.getNode());
         }
 
         Paddle player = gameEngine.getPaddle();
         player.setScene(scene);
-        root.getChildren().add(player.getNode());
+        anchorPane.getChildren().add(player.getNode());
 
 
 

@@ -116,7 +116,6 @@ public class Ball extends GameObject {
     @Override
     public void update() {
         //if (!isMoving) return;
-        System.out.println(pos_X + " "+ pos_Y);
         pos_X += vel_X * speed;
         pos_Y += vel_Y * speed;
         sprite.setX(pos_X);
@@ -130,7 +129,7 @@ public class Ball extends GameObject {
         if (pos_Y <= 0 ) {
             vel_Y = Math.abs(vel_Y);
         }
-        else if (pos_Y >= Define.SCREEN_HEIGHT - 16) {vel_Y = -Math.abs(vel_Y);}
+        else if (pos_Y >= Define.SCREEN_HEIGHT + 50) {destroyed = true;}
 
     }
 

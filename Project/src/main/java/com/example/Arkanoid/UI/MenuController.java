@@ -50,6 +50,7 @@ public class MenuController {
         javafx.application.Platform.runLater(() -> {
             SceneNavigator.goToGame(stage, 1);
         });
+
     }
 
     @FXML

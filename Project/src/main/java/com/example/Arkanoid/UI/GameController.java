@@ -1,27 +1,54 @@
 package main.java.com.example.Arkanoid.UI;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.image.Image;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import main.java.arkanoid.engine.Define;
+import main.java.arkanoid.engine.*;
+import javafx.animation.AnimationTimer;
+import main.java.com.example.Arkanoid.Data.Lives;
+
 
 public class GameController {
+    private Lives lives = new Lives();
+
     @FXML
     private AnchorPane anchorPane;
 
     @FXML
+    private ImageView pauseButton;
+
+    @FXML
+    private Label scoreLabel;
+
+    @FXML
+    private Label livesLabel;
+
+    @FXML
     private Stage stage;
+
+    private AnimationTimer mainLoop;
+    private GameEngine gameEngine;
+    private Map map;
+
 
     private int levelNumber = 1; // Default level
     private ImageView backgroundView;
     private boolean needsBackgroundLoad = false; // Flag để track khi cần load background
+    private Map currentMap; // Lưu map hiện tại
 
     @FXML
     public void initialize() {
+        System.out.println("🔧 GameController.initialize() called");
+        System.out.println("   - anchorPane: " + (anchorPane != null ? "OK" : "NULL"));
+        System.out.println("   - needsBackgroundLoad: " + needsBackgroundLoad);
+        System.out.println("   - levelNumber: " + levelNumber);
+
         // FXML components đã được inject, anchorPane sẵn sàng
         // Nếu level đã được set trước, load background ngay
         if (needsBackgroundLoad && anchorPane != null) {
@@ -37,13 +64,93 @@ public class GameController {
     public void setLevel(int levelNumber) {
         this.levelNumber = levelNumber;
         System.out.println("GameController: Level set to " + levelNumber);
+        System.out.println("   - anchorPane: " + (anchorPane != null ? "OK" : "NULL"));
 
         // Nếu anchorPane đã sẵn sàng, load ngay
         if (anchorPane != null) {
+            System.out.println("   - Loading background immediately...");
             loadBackgroundForLevel(levelNumber);
+            System.out.println("   - Loading map immediately...");
+            loadMapForLevel(levelNumber);
         } else {
             // Nếu chưa, đợi initialize() gọi
+            System.out.println("   - Waiting for initialize() to load background...");
             needsBackgroundLoad = true;
+        }
+    }
+
+    private void loadMapForLevel(int level) {
+        try {
+
+            if (anchorPane == null) {
+                System.err.println("⚠️ AnchorPane not initialized yet, skipping map load");
+                return;
+            }
+
+            // Xóa map cũ nếu có
+
+
+            lives.setLives(10);
+            lives.setBalls(gameEngine.getBalls());
+            gameEngine = new GameEngine();
+            Scene scene = anchorPane.getScene();
+            map = new Map(level);
+            gameEngine.setGame(anchorPane, map);
+            map.loadMap(Define.SCREEN_WIDTH, Define.SCREEN_HEIGHT);
+
+            for (Bricks b : map.getBrickGroup()) {
+                b.setSence(scene);
+                anchorPane.getChildren().add(b.getNode());
+            }
+
+            Paddle player = gameEngine.getPaddle();
+            player.setScene(scene);
+            anchorPane.getChildren().add(player.getNode());
+
+            gameEngine.addBall();
+
+
+
+// only register input ONCE
+            scene.setOnKeyPressed(keyEvent -> {
+                System.out.println("checking");
+                switch (keyEvent.getCode()) {
+                    case A :
+                        gameEngine.moveLeft();
+                        break;
+
+                    case D :
+                        gameEngine.moveRight();
+                        break;
+
+                    case SPACE :
+                        gameEngine.MoveBall();
+                        break;
+
+                }
+            });
+
+            scene.setOnKeyReleased(keyEvent -> {
+                switch (keyEvent.getCode()) {
+                    case A, D : gameEngine.notMove();
+
+
+                }
+            });
+
+// create main loop
+            mainLoop = new AnimationTimer() {
+                @Override
+                public void handle(long now) {
+                    gameEngine.update();
+                    gameEngine.CheckAllCollision();
+                }
+            };
+            mainLoop.start();
+
+        } catch (Exception e) {
+            System.err.println("❌ Error loading map for level " + level);
+            e.printStackTrace();
         }
     }
 
@@ -55,59 +162,35 @@ public class GameController {
                 return;
             }
 
-            // Load sprite sheet
-            Image spriteSheet = new Image(getClass().getResourceAsStream(Define.BACKGROUND));
+            // Sử dụng SpriteLoader để load background
+            // Ban đầu dùng kích thước mặc định hoặc prefSize
+            double initialWidth = anchorPane.getPrefWidth() > 0 ? anchorPane.getPrefWidth() : 600;
+            double initialHeight = anchorPane.getPrefHeight() > 0 ? anchorPane.getPrefHeight() : 400;
 
-            if (spriteSheet.isError()) {
-                System.err.println("❌ Failed to load background sprite sheet");
-                return;
+            ImageView newBackground = SpriteLoader.getBackgroundForLevel(level, initialWidth, initialHeight);
+
+            // Xóa background cũ nếu có
+            if (backgroundView != null) {
+                anchorPane.getChildren().remove(backgroundView);
             }
 
-            // Tính toán kích thước của mỗi background trong sprite sheet
-            // Giả sử 10 backgrounds được sắp xếp theo grid 2 cột x 5 hàng
-            double totalWidth = spriteSheet.getWidth();
-            double totalHeight = spriteSheet.getHeight();
-            double bgWidth = totalWidth / 2;  // 2 cột
-            double bgHeight = totalHeight / 5; // 5 hàng
+            // Bind kích thước background với AnchorPane
+            newBackground.fitWidthProperty().bind(anchorPane.widthProperty());
+            newBackground.fitHeightProperty().bind(anchorPane.heightProperty());
 
-            // Tính vị trí của background dựa trên level (1-10)
-            int row = (level - 1) / 2;  // Hàng (0-4)
-            int col = (level - 1) % 2;  // Cột (0-1)
+            // Set vị trí background ở góc trên bên trái
+            AnchorPane.setTopAnchor(newBackground, 0.0);
+            AnchorPane.setLeftAnchor(newBackground, 0.0);
+            AnchorPane.setRightAnchor(newBackground, 0.0);
+            AnchorPane.setBottomAnchor(newBackground, 0.0);
 
-            double x = col * bgWidth;
-            double y = row * bgHeight;
+            // Thêm background mới ở vị trí đầu tiên (phía sau tất cả)
+            backgroundView = newBackground;
+            anchorPane.getChildren().add(0, backgroundView);
 
-            // Tạo viewport để crop phần background tương ứng
-            Rectangle2D viewport = new Rectangle2D(x, y, bgWidth, bgHeight);
-
-            // Đợi anchorPane có kích thước trước khi tạo ImageView
-            double paneWidth = anchorPane.getWidth();
-            double paneHeight = anchorPane.getHeight();
-
-            // Nếu pane chưa có kích thước, dùng giá trị mặc định
-            if (paneWidth <= 0) paneWidth = 800;  // Default width
-            if (paneHeight <= 0) paneHeight = 600; // Default height
-
-            // Tạo hoặc update ImageView
-            if (backgroundView == null) {
-                backgroundView = new ImageView(spriteSheet);
-                backgroundView.setPreserveRatio(false);
-                backgroundView.setFitWidth(paneWidth);
-                backgroundView.setFitHeight(paneHeight);
-
-                // Đặt background ở phía sau tất cả các node khác
-                anchorPane.getChildren().add(0, backgroundView);
-            } else {
-                backgroundView.setImage(spriteSheet);
-                backgroundView.setFitWidth(paneWidth);
-                backgroundView.setFitHeight(paneHeight);
-            }
-
-            backgroundView.setViewport(viewport);
-
-            System.out.println("✅ Loaded background for Level " + level +
-                    " (viewport: x=" + x + ", y=" + y +
-                    ", width=" + bgWidth + ", height=" + bgHeight + ")");
+            System.out.println("✅ GameController: Background loaded and bound to AnchorPane for Level " + level);
+            System.out.println("   - AnchorPane size: " + anchorPane.getWidth() + "x" + anchorPane.getHeight());
+            System.out.println("   - AnchorPane prefSize: " + anchorPane.getPrefWidth() + "x" + anchorPane.getPrefHeight());
 
         } catch (Exception e) {
             System.err.println("❌ Error loading background for level " + level);
@@ -119,14 +202,97 @@ public class GameController {
         return levelNumber;
     }
 
+    /**
+     * Update score display
+     */
+    public void updateScore(int score) {
+        if (scoreLabel != null) {
+            scoreLabel.setText("SCORE: " + score);
+        }
+    }
+
+    /**
+     * Update lives display
+     */
+    public void updateLives(int lives) {
+        if (livesLabel != null) {
+            livesLabel.setText("LIVES: " + lives);
+        }
+    }
+
+    /**
+     * Get score label for direct access if needed
+     */
+    public Label getScoreLabel() {
+        return scoreLabel;
+    }
+
+    /**
+     * Get lives label for direct access if needed
+     */
+    public Label getLivesLabel() {
+        return livesLabel;
+    }
+
     @FXML
     public void pause() {
-        // Tạo một stage mới cho pause (giống như GameScene)
+        // Tạo một stage mới cho pause
         Stage pauseStage = new Stage();
+        pauseStage.initStyle(javafx.stage.StageStyle.TRANSPARENT); // Phải set TRƯỚC initOwner
         pauseStage.initOwner(stage);
         pauseStage.initModality(Modality.WINDOW_MODAL);
 
         PauseScene pauseScene = new PauseScene(pauseStage);
         pauseScene.show();
     }
+
+
+    @FXML
+    public void restartLevel() {
+        destroyAll();
+        stage.close();
+        Stage newStage = (Stage) stage.getOwner();
+        GameScene gameScene = new GameScene(newStage);
+        gameScene.show();
+    }
+
+
+
+
+
+    public void destroyAll() {
+        System.out.println("🧹 Destroying everything in GameController...");
+
+        // 1️⃣ Stop animation loop
+        if (mainLoop != null) {
+            mainLoop.stop();
+            mainLoop = null;
+        }
+
+        // 2️⃣ Stop all engines and threads
+        if (gameEngine != null) {
+            gameEngine.destroyAll(); // You created this earlier in GameEngine
+            gameEngine.update();
+            gameEngine.shutdown();
+            gameEngine = null;
+
+        }
+
+        // 3️⃣ Remove all nodes from the pane
+        if (anchorPane != null) {
+            anchorPane.getChildren().clear();
+        }
+
+        // 4️⃣ Clear map reference
+        if (map != null) {
+            map = null;
+        }
+
+        // 5️⃣ Reset background (optional)
+        backgroundView = null;
+
+        System.gc(); // suggest GC cleanup
+        System.out.println("✅ GameController: All objects destroyed and memory cleared.");
+    }
+
 }

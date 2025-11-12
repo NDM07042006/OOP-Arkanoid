@@ -70,6 +70,10 @@ public class SceneNavigator {
             long endTime = System.nanoTime();
             double timeTaken = (endTime - startTime) / 1_000_000.0; // Convert to ms
             System.out.println("⏱️ Navigation took: " + String.format("%.2f", timeTaken) + "ms");
+
+
+
+
         } else {
             // Fallback: load bình thường nếu chưa cache
             System.out.println("🔄 Loading GameScene Level " + level + " (not cached)");

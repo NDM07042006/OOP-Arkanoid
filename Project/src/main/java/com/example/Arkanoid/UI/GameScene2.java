@@ -35,7 +35,7 @@ public class GameScene2 {
                 gameController = (GameController) SceneCache.getInstance().getCachedController("game");
             } else {
                 System.out.println("🔄 Loading GameScene from FXML...");
-                FXMLLoader loader = new FXMLLoader(getClass().getResource(Define.GAME_SCENE));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(Define.GAME_SCENE_PATH));
                 Parent root = loader.load();
 
                 scene = new Scene(root);
@@ -57,6 +57,7 @@ public class GameScene2 {
 
             long endTime = System.currentTimeMillis();
             System.out.println("⏱️ GameScene show() took: " + (endTime - startTime) + "ms");
+            System.out.println("TFFFFF");
 
         } catch (Exception e) {
             System.err.println("❌ Error loading GameScene:");

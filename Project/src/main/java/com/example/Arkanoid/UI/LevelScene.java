@@ -36,7 +36,7 @@ public class LevelScene {
         // Nếu chưa cache, load bình thường
         try {
             System.out.println("🔄 Loading LevelScene from FXML");
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(Define.LEVELS));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(Define.LEVELS_PATH));
             Parent root = loader.load();
 
             LevelController controller = loader.getController();

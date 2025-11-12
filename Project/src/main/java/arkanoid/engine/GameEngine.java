@@ -6,25 +6,68 @@ import java.util.concurrent.Executors;
 import java.util.Iterator;
 import javafx.geometry.Bounds;
 import javafx.scene.Group;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 import main.java.arkanoid.engine.PowerUp.*;
 import main.java.arkanoid.engine.CheckCollision.*;
 import javafx.scene.layout.Pane;
+import main.java.com.example.Arkanoid.Data.Lives;
+import main.java.com.example.Arkanoid.Data.Score;
 import main.java.com.example.Arkanoid.Utlis.Animations.ParticleSystem;
+import javafx.scene.layout.AnchorPane;
+
 
 
 
 //test phần engine sẽ sửa sau
 public class GameEngine {
-    private Group root;
+    private AnchorPane AnchorPane;
     private Paddle paddle = new Paddle(200, 500, Define.PADDLES_AND_BALLS_IMAGE_PATH);
     private List<Ball> balls = new ArrayList<>();
     private List<PowerUp> powerUps = new ArrayList<>();
     private Map map;
     private Pane gamePane = new Pane();
     private ParticleSystem particleSystem = new ParticleSystem(gamePane);
+
+    private Label scLabel;
+    private Label liLabel;
+    private Score score = new Score();
+    private Lives lives = new Lives();
+
+
+
+    public Label getScLabel() {
+        scLabel = new Label("SCORE: 0");
+        scLabel.setLayoutX(10);
+        scLabel.setLayoutY(10);
+        return scLabel;
+    }
+
+
+    public Label getLiLabel() {
+        liLabel = new Label("LIVES: 0" );
+        liLabel.setLayoutX(10);
+        liLabel.setLayoutY(50);
+        return liLabel;
+    }
+
+    public Score getScore() {
+        return score;
+    }
+
+    public void setScore(Score score) {
+        this.score = score;
+    }
+
+    public Lives getLives() {
+        return lives;
+    }
+
+    public void setLives(Lives lives) {
+        this.lives = lives;
+    }
 
     public Pane getGamePane() {
         return gamePane;
@@ -52,15 +95,15 @@ public class GameEngine {
     /*
      * Getter setter game
      */
-    public void setGame(Group root, Map map) {
-        this.root = root;
+    public void setGame(AnchorPane AnchorPane, Map map) {
+        this.AnchorPane = AnchorPane;
         this.map = map;
         PowerUp.setGameEngine(this);
         CheckCollision.setCheckCollision(this);
     }
 
     public void remove(ImageView node) {
-        root.getChildren().remove(node);
+        AnchorPane.getChildren().remove(node);
     }
     /*
      * Thêm luồng
@@ -113,7 +156,7 @@ public class GameEngine {
         ball.setVel_X(setVelBall_X( 0));
         ball.setVel_Y(setVelBall_y( 0));
         balls.add(ball);
-        root.getChildren().add(ball.getNode());
+        AnchorPane.getChildren().add(ball.getNode());
         ball.setAttached(true);
         ball.setSpeed(0);
     }
@@ -131,7 +174,7 @@ public class GameEngine {
         ball.setVel_X(setVelBall_X( degrees));
         ball.setVel_Y(setVelBall_y( degrees));
         balls.add(ball);
-        root.getChildren().add(ball.getNode());
+        AnchorPane.getChildren().add(ball.getNode());
     }
 
     public void MoveBall() {
@@ -162,7 +205,7 @@ public class GameEngine {
      */
     public void addPowerUp(PowerUp powerUp) {
         powerUps.add(powerUp);
-        root.getChildren().add(powerUp.getSprite());
+        AnchorPane.getChildren().add(powerUp.getSprite());
     }
 
 
@@ -177,9 +220,21 @@ public class GameEngine {
             ball.update();
         }
 
+        Iterator<Ball> iteratorBall = balls.iterator();
+        while (iteratorBall.hasNext()) {
+            Ball b = iteratorBall.next();
+            if (b.isDestroyed()) {
+                iteratorBall.remove(); // safely removes current element
+                b = null;
+            }
+        }
+
         for (Bricks brick: map.getBrickGroup()) {
             brick.update();
             if (brick.isDestroyed()) {
+                score.setScore(score.getScore() + brick.Point_given);
+                scLabel.setText("SCORE: " + score.getScore());
+
                 switch (brick.getPowerUp_Type()) {
                     case 1:
                         MultiBall powerUp = new MultiBall(brick.pos_X, brick.pos_Y);
@@ -190,7 +245,7 @@ public class GameEngine {
 
                 }
 
-                root.getChildren().remove(brick.getNode());
+                AnchorPane.getChildren().remove(brick.getNode());
 
             }
         }
@@ -203,6 +258,20 @@ public class GameEngine {
             }
         }
         paddle.update();
+        if (paddle.isDestroyed()) {
+            AnchorPane.getChildren().remove(paddle.getNode());
+            paddle = null;
+        }
+
+        if (balls.size() <= 0 ) {
+            lives.updateLives();
+            liLabel.setText("LIVES: " + lives.getLives());
+            addBall();
+
+        }
+
+
+
     }
 
     /*
@@ -262,5 +331,70 @@ public class GameEngine {
     public void shutdown() {
         collisionExecutor.shutdown();
     }
+
+    public void destroyAll() {
+        try {
+            System.out.println("🧹 Destroying all game objects...");
+
+            // 1️⃣ Ngừng mọi hoạt động animation / particle
+            if (particleSystem != null) {
+                particleSystem.clear();
+                particleSystem = null;
+            }
+
+            // 2️⃣ Tắt luồng kiểm tra va chạm
+            if (collisionExecutor != null && !collisionExecutor.isShutdown()) {
+                collisionExecutor.shutdownNow();
+            }
+            if (collisionTasks != null) {
+                collisionTasks.clear();
+            }
+
+            // 3️⃣ Xóa toàn bộ node khỏi AnchorPane
+            if (AnchorPane != null) {
+                AnchorPane.getChildren().clear();
+            }
+
+            // 4️⃣ Xóa danh sách object
+            if (balls != null) {
+                for (Ball b : balls) {
+                    b.setDestroyed(true); // Nếu Ball có hàm destroy() để cleanup riêng
+                }
+                balls.clear();
+            }
+
+            if (powerUps != null) {
+                for (PowerUp p : powerUps) {
+                    p.setDestroyed(true); // Nếu PowerUp có hàm destroy() riêng
+                }
+                powerUps.clear();
+            }
+
+            if (map != null && map.getBrickGroup() != null) {
+                for (Bricks brick : map.getBrickGroup()) {
+                    brick.setDestroyed(true); // Nếu có
+                }
+                map.getBrickGroup().clear();
+            }
+
+            // 5️⃣ Dọn player paddle
+            if (paddle != null && paddle.getNode() != null) {
+                paddle.setDestroyed(true); // nếu có destroy()
+            }
+            paddle = null;
+
+            // 6️⃣ Dọn Map, GamePane, v.v.
+            map = null;
+            gamePane = null;
+            AnchorPane = null;
+
+            System.out.println("✅ All game objects destroyed successfully.");
+
+        } catch (Exception e) {
+            System.err.println("❌ Error while destroying game objects:");
+            e.printStackTrace();
+        }
+    }
+
 
 }
