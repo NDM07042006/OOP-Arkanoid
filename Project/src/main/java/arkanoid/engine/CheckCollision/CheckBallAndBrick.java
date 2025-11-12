@@ -3,7 +3,6 @@ package main.java.arkanoid.engine.CheckCollision;
 import java.util.Iterator;
 import java.util.List;
 import javafx.geometry.Bounds;
-import javafx.application.Platform;
 
 import main.java.arkanoid.engine.Ball;
 import main.java.arkanoid.engine.Map;
@@ -76,11 +75,6 @@ public class CheckBallAndBrick extends CheckCollision {
                 else ball.setBrickCollision(false);
             }
         }
-    }
-    private void safeRemove(Bricks brick){
-        Platform.runLater(() -> {
-            gameEngine.remove(brick.getSprite());
-        });
     }
 
     @Override

@@ -238,13 +238,34 @@ public class GameEngine {
                  */
                 SoundManager.getInstance().playBrickBreak();
                 switch (brick.getPowerUp_Type()) {
-                    case 1:
-                        MultiBall powerUp = new MultiBall(brick.pos_X, brick.pos_Y);
-                        addPowerUp(powerUp);
-                        break;
                     case 0:
                         break;
-
+                    case 1:
+                        MultiBall multiBall = new MultiBall(brick.pos_X, brick.pos_Y);
+                        addPowerUp(multiBall);
+                        break;
+                    case 2:
+                        FastBall fastBall= new FastBall(brick.pos_X, brick.pos_Y);
+                        addPowerUp(fastBall);
+                        break;
+                    case 3:
+                        SlowBall slowBall= new SlowBall(brick.pos_X, brick.pos_Y);
+                        addPowerUp(slowBall);
+                        break;
+                    case 4:
+                        FastPaddle fastPaddle= new FastPaddle(brick.pos_X, brick.pos_Y);
+                        addPowerUp(fastPaddle);
+                        break;
+                    case 5:
+                        SlowPaddle slowPaddle= new SlowPaddle(brick.pos_X, brick.pos_Y);
+                        addPowerUp(slowPaddle);
+                        break;
+                    case 6:
+                        RandomPowerUp randomPowerUp = new RandomPowerUp(brick.pos_X, brick.pos_Y);
+                        addPowerUp(randomPowerUp);
+                        break;
+                    default:
+                        break;
                 }
 
                 AnchorPane.getChildren().remove(brick.getNode());

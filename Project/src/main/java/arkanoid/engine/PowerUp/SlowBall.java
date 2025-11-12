@@ -18,6 +18,7 @@ public class SlowBall extends PowerUp{
 
     @Override
     public void applyEffect(){
+        System.out.println(TYPE);
         gameEngine.setAllBallSpeed(-1);
     }
 }

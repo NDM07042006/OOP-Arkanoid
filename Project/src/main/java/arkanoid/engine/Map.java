@@ -7,6 +7,9 @@ public class Map {
     public static int row;
     public static int column;
     public int[][] lv;
+    private static int randomPowerUpType() {
+        return (int)(Math.random() * 6) + 1;
+    }
     /*
     private int[][] lv1 = {
             {1, 0, 1, 1, 1, 1, 0, 0, 0, 1},
@@ -302,6 +305,7 @@ public class Map {
                         );
                         PowerUpBrick.setGivePowerUp(true);
                         PowerUpBrick.setPoint_given(100);
+                        PowerUpBrick.setPowerUp_Type(randomPowerUpType());
                         brickGroup.add(PowerUpBrick);
                         break;
                     case 5:

@@ -13,7 +13,7 @@ public class Bricks extends GameObject {
     int width = 50;
     int height = 25;
     boolean givePowerUp = false;
-    int PowerUp_Type;
+    int PowerUp_Type = 0;
 
     public int getPowerUp_Type() {
         return PowerUp_Type;
