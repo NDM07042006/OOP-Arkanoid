@@ -20,6 +20,7 @@ public class PauseController {
 
     @FXML
     public void resume() {
+        gameController.getMainLoop().start();
         stage.close();
     }
 

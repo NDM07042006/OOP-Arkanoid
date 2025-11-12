@@ -18,6 +18,7 @@ import java.sql.SQLOutput;
 
 public class GameController {
 
+    public ImageView backgroundPlaceholder;
     @FXML
     private AnchorPane anchorPane;
 
@@ -42,6 +43,14 @@ public class GameController {
     private boolean needsBackgroundLoad = false; // Flag để track khi cần load background
     private Map currentMap; // Lưu map hiện tại
     private Scene scene;
+
+    public AnimationTimer getMainLoop() {
+        return mainLoop;
+    }
+
+    public void setMainLoop(AnimationTimer mainLoop) {
+        this.mainLoop = mainLoop;
+    }
 
     @FXML
     public void initialize() {
@@ -96,7 +105,7 @@ public class GameController {
             scene = anchorPane.getScene();
             map = new Map(level);
             gameEngine.setGame(anchorPane, map, player);
-            map.loadMap(Define.SCREEN_WIDTH-150, Define.SCREEN_HEIGHT);
+            map.loadMap(Define.SCREEN_WIDTH, Define.SCREEN_HEIGHT);
 
             for (Bricks b : map.getBrickGroup()) {
                 b.setSence(scene);
@@ -276,6 +285,7 @@ public class GameController {
     @FXML
     public void pause() {
         // Tạo một stage mới cho pause
+        mainLoop.stop();
         Stage pauseStage = new Stage();
         pauseStage.initStyle(javafx.stage.StageStyle.TRANSPARENT); // Phải set TRƯỚC initOwner
         pauseStage.initOwner(stage);

@@ -58,6 +58,6 @@ public class Define {
     public static final int MIN_PADDLE_SPEED                = 1;
 
     // Screen Size
-    public static final int    SCREEN_WIDTH                 = 800;
-    public static final int    SCREEN_HEIGHT                = 600;
+    public static final int    SCREEN_WIDTH                 = 450;
+    public static final int    SCREEN_HEIGHT                = 650;
 }
