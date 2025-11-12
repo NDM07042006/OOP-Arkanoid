@@ -105,7 +105,7 @@ public class GameController {
             scene = anchorPane.getScene();
             map = new Map(level);
             gameEngine.setGame(anchorPane, map, player);
-            map.loadMap(Define.SCREEN_WIDTH, Define.SCREEN_HEIGHT);
+            map.loadMap(Define.BACKGROUND_WIDTH, Define.BACKGROUND_HEIGHT);
 
             for (Bricks b : map.getBrickGroup()) {
                 b.setSence(scene);
@@ -320,7 +320,7 @@ public class GameController {
         gameEngine.setLives(10);
         map = new Map(levelNumber);
         gameEngine.setGame(anchorPane, map, newplayer);
-        map.loadMap(Define.SCREEN_WIDTH-150, Define.SCREEN_HEIGHT);
+        map.loadMap(Define.BACKGROUND_WIDTH, Define.BACKGROUND_HEIGHT);
 
         for (Bricks b : map.getBrickGroup()) {
             b.setSence(scene);

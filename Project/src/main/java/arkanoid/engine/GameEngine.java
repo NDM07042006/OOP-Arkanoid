@@ -152,6 +152,11 @@ public class GameEngine {
     public Map getMap() {
         return map;
     }
+
+    public void addScore(int point){
+        score.addScore(point);
+    }
+
     /*
      * Xử lý bóng
      */
@@ -255,6 +260,8 @@ public class GameEngine {
         for (Bricks brick: map.getBrickGroup()) {
             brick.update();
             if (brick.isDestroyed()) {
+                addScore(brick.getPoint_given());
+
                 /*
                 score.setScore(score.getScore() + brick.Point_given);
                 scLabel.setText("SCORE: " + score.getScore());

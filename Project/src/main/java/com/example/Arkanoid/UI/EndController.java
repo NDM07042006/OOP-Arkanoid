@@ -13,9 +13,17 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import main.java.arkanoid.engine.Define;
+import main.java.com.example.Arkanoid.Utlis.SceneNavigator;
 
 public class EndController {
     public Button restartButton;
+    private static GameController gameController; // tham chiếu tới game hiện tại
+
+    public static void setGameController(GameController game) {
+        gameController = game;
+        System.out.println("d");
+
+    }
     
     @FXML
     private AnchorPane anchorPane;
@@ -85,12 +93,17 @@ public class EndController {
 
     @FXML
     public void Restart() {
+        gameController.closeLevel();
+        javafx.application.Platform.runLater(() -> {
+            SceneNavigator.goToGame(stage, gameController.getLevel());
+        });
 
     }
 
     @FXML
     public void Menu() {
         try {
+            gameController.closeLevel();
             FXMLLoader loader = new FXMLLoader(getClass().getResource(Define.MENU_GAME_PATH));
             Parent root = loader.load();
 
@@ -110,6 +123,12 @@ public class EndController {
 
     @FXML
     public void NextLevel() {
+        gameController.closeLevel();
+        javafx.application.Platform.runLater(() -> {
+            if (gameController.getLevel() < 10)
+            SceneNavigator.goToGame(stage, gameController.getLevel()+1);
+        });
+
 
     }
 }

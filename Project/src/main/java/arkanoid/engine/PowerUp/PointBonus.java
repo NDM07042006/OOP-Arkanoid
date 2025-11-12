@@ -11,6 +11,10 @@ public class PointBonus extends PowerUp {
         super(x, y, image);
     }
 
+    private int randomPoint() {
+        return (int)(Math.random() * 101);
+    }
+
     @Override
     public PowerUpType getType() {
         return TYPE;
@@ -20,5 +24,6 @@ public class PointBonus extends PowerUp {
     public void applyEffect(){
         System.out.println(TYPE);
         //Thêm hàm Cộng điểm của gameEngine ở đây
+        gameEngine.addScore(randomPoint());
     }
 }

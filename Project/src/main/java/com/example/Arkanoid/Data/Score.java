@@ -35,25 +35,6 @@ public class Score {
         return highScoreEntries;
     }
 
-    private Bricks bricks;
-
-    public Bricks getBricks() {
-        return bricks;
-    }
-
-    public void setBricks(Bricks bricks) {
-        this.bricks = bricks;
-    }
-
-    public void updateScore() {
-        if (bricks != null) {
-            System.out.println("Updating score... current=" + score + " + " + bricks.getPoint_given());
-            score += bricks.getPoint_given();
-        } else {
-            System.out.println("brick is null!");
-        }
-    }
-
     public void addScore(int points) {
         score += points;
     }
