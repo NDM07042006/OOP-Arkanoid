@@ -262,6 +262,49 @@ public class SoundManager {
             currentMusicName = null;
         }
     }
+    
+    /**
+     * Dừng tất cả âm thanh (sound effects + music)
+     * Sử dụng khi đóng app để cleanup
+     */
+    public void stopAllSounds() {
+        System.out.println("🔇 Stopping all sounds...");
+        
+        try {
+            // Stop background music
+            if (currentMusic != null) {
+                currentMusic.stop();
+                currentMusic = null;
+            }
+            currentMusicName = null;
+            
+            // Stop all sound effects
+            for (AudioClip clip : soundEffects.values()) {
+                try {
+                    if (clip != null) {
+                        clip.stop();
+                    }
+                } catch (Exception e) {
+                    // Ignore errors during shutdown
+                }
+            }
+            
+            // Stop all background music clips
+            for (AudioClip clip : backgroundMusics.values()) {
+                try {
+                    if (clip != null) {
+                        clip.stop();
+                    }
+                } catch (Exception e) {
+                    // Ignore errors during shutdown
+                }
+            }
+            
+            System.out.println("✅ All sounds stopped");
+        } catch (Exception e) {
+            System.err.println("⚠ Error while stopping sounds: " + e.getMessage());
+        }
+    }
 
     /**
      * Pause nhạc nền - AudioClip không support pause, chỉ có thể stop

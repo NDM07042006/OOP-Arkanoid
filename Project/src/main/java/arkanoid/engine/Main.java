@@ -1,6 +1,7 @@
 package main.java.arkanoid.engine;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import main.java.com.example.Arkanoid.UI.*;
@@ -22,6 +23,17 @@ public class Main extends Application {
         // Preload scenes trong background để lần sau mở nhanh hơn
         System.out.println("🚀 Preloading scenes...");
         SceneCache.getInstance().preloadAll();
+
+        // Thêm handler để đóng app đúng cách khi close window
+        stage.setOnCloseRequest(event -> {
+            System.out.println("🛑 Closing application...");
+            // Stop all sounds
+            SoundManager.getInstance().stopAllSounds();
+            // Exit JavaFX Platform
+            Platform.exit();
+            // Force exit JVM
+            System.exit(0);
+        });
 
         MenuScene menu = new MenuScene(stage);
         menu.show();

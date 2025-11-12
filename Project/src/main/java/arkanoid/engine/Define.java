@@ -47,8 +47,8 @@ public class Define {
 
     // ==================== GAME CONSTANTS ====================
     // Ball Speed
-    public static final int MAX_BALL_SPEED                  = 13;
-    public static final int DEFAULF_BALL_SPEED              = 5;
+    public static final int MAX_BALL_SPEED                  = 1;
+    public static final int DEFAULF_BALL_SPEED              = 1;
     public static final int MIN_BALL_SPEED                  = 1;
     public static final double DEFAULF_BALL_VECTOR_SPEED    = 2.0;
 
