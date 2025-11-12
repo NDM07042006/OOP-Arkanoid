@@ -78,6 +78,17 @@ public class GameController {
 
         // Nếu anchorPane đã sẵn sàng, load ngay
         if (anchorPane != null) {
+            if (!anchorPane.getChildren().contains(scoreLabel)) {
+                anchorPane.getChildren().add(scoreLabel);
+            }
+
+            if (!anchorPane.getChildren().contains(livesLabel)) {
+                anchorPane.getChildren().add(livesLabel);
+            }
+
+            if (!anchorPane.getChildren().contains(pauseButton)) {
+                anchorPane.getChildren().add(pauseButton);
+            }
             System.out.println("   - Loading background immediately...");
             loadBackgroundForLevel(levelNumber);
             System.out.println("   - Loading map immediately...");
@@ -315,25 +326,26 @@ public class GameController {
     @FXML
     public void restartLevel() {
         gameEngine.destroyAll();
+        setLevel(levelNumber);
 
-        System.out.println("Testing runing ksgdfjkhabsdfuvsdjbfhgasfdghfnadtftghaysgedfbioahsbdfuiohaksduyfgboyyesgdf");
-        Paddle newplayer = new Paddle(200, 500, Define.PADDLES_AND_BALLS_IMAGE_PATH);
-        gameEngine.setLives(10);
-        map = new Map(levelNumber);
-        gameEngine.setGame(anchorPane, map, newplayer);
-        map.loadMap(Define.BACKGROUND_WIDTH, Define.BACKGROUND_HEIGHT);
+        // System.out.println("Testing runing ksgdfjkhabsdfuvsdjbfhgasfdghfnadtftghaysgedfbioahsbdfuiohaksduyfgboyyesgdf");
+        // Paddle newplayer = new Paddle(200, 500, Define.PADDLES_AND_BALLS_IMAGE_PATH);
+        // gameEngine.setLives(10);
+        // map = new Map(levelNumber);
+        // gameEngine.setGame(anchorPane, map, newplayer);
+        // map.loadMap(Define.BACKGROUND_WIDTH, Define.BACKGROUND_HEIGHT);
 
-        for (Bricks b : map.getBrickGroup()) {
-            b.setSence(scene);
-            anchorPane.getChildren().add(b.getNode());
-        }
+        // for (Bricks b : map.getBrickGroup()) {
+        //     b.setSence(scene);
+        //     anchorPane.getChildren().add(b.getNode());
+        // }
 
-        gameEngine.update();
-        newplayer.setScene(scene);
-        anchorPane.getChildren().add(newplayer.getNode());
-        loadBackgroundForLevel(levelNumber);
-        gameEngine.addBall();
-        gameEngine.setLives(10);
+        // gameEngine.update();
+        // newplayer.setScene(scene);
+        // anchorPane.getChildren().add(newplayer.getNode());
+        // loadBackgroundForLevel(levelNumber);
+        // gameEngine.addBall();
+        // gameEngine.setLives(10);
 
     }
 
