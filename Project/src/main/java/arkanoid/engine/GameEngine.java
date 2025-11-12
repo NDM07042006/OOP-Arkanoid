@@ -34,9 +34,15 @@ public class GameEngine {
     private Label scLabel;
     private Label liLabel;
     private Score score = new Score();
-    private Lives lives = new Lives();
+    private int lives;
 
+    public int getLives() {
+        return lives;
+    }
 
+    public void setLives(int lives) {
+        this.lives = lives;
+    }
 
     public Label getScLabel() {
         scLabel = new Label("SCORE: 0");
@@ -61,13 +67,7 @@ public class GameEngine {
         this.score = score;
     }
 
-    public Lives getLives() {
-        return lives;
-    }
 
-    public void setLives(Lives lives) {
-        this.lives = lives;
-    }
 
     public Pane getGamePane() {
         return gamePane;
@@ -232,8 +232,11 @@ public class GameEngine {
         for (Bricks brick: map.getBrickGroup()) {
             brick.update();
             if (brick.isDestroyed()) {
+                /*
                 score.setScore(score.getScore() + brick.Point_given);
                 scLabel.setText("SCORE: " + score.getScore());
+
+                 */
 
                 switch (brick.getPowerUp_Type()) {
                     case 1:
@@ -263,11 +266,9 @@ public class GameEngine {
             paddle = null;
         }
 
-        if (balls.size() <= 0  ) {
-            lives.updateLives();
-            liLabel.setText("LIVES: " + lives.getLives());
+        if (balls.size() <= 0  && lives > 0) {
+            lives --;
             addBall();
-
         }
 
 
@@ -292,7 +293,7 @@ public class GameEngine {
         for (Ball b: balls) {
             if (b.isAttached()) {
                 b.setSpeed(paddle.getSpeed());
-                b.setVel_X(2);
+                b.setVel_X(paddle.getVel_X());
                 b.setVel_Y(0);
             }
         }

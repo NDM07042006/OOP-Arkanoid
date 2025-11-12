@@ -81,6 +81,16 @@ public class Paddle extends GameObject{
         pos_Y += vel_Y * speed;
         sprite.setX(pos_X);
         sprite.setY(pos_Y);
+
+        if (pos_X <= 150 ) {
+            pos_X = 150;
+            vel_X = 0;
+        }
+        if (pos_X > Define.SCREEN_WIDTH - 120) {
+            pos_X = Define.SCREEN_WIDTH - 120;
+            vel_X = 0;
+
+        }
     }
 
 }

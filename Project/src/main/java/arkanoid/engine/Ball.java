@@ -121,7 +121,7 @@ public class Ball extends GameObject {
         sprite.setX(pos_X);
         sprite.setY(pos_Y);
 
-        if (pos_X <= 0 ) {
+        if (pos_X <= 150 ) {
             vel_X = Math.abs(vel_X);
         }
         else if (pos_X >= Define.SCREEN_WIDTH - 16) {vel_X = -Math.abs(vel_X);;}
@@ -130,6 +130,16 @@ public class Ball extends GameObject {
             vel_Y = Math.abs(vel_Y);
         }
         else if (pos_Y >= Define.SCREEN_HEIGHT + 50) {destroyed = true;}
+
+        if (attached) {
+            if (pos_X <= 200) {
+                pos_X = 200;
+            }
+            if (pos_X >= Define.SCREEN_WIDTH - 70) {
+                pos_X = Define.SCREEN_WIDTH - 70;
+            }
+        }
+
 
     }
 

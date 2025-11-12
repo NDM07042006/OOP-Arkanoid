@@ -244,7 +244,7 @@ public class Map {
                         break;
                     case 1:
                         Bricks GreenBrick = new Bricks(
-                                80+i * screenWidth / column, // X position
+                                150+i * screenWidth / column, // X position
                                  t * screenWidth / column/ 2,   // Y position
                                 Define.BRICKS_IMAGE_PATH,
                                 112, 16,
@@ -257,7 +257,7 @@ public class Map {
                         break;
                     case 2:
                         Bricks YellowBrick = new Bricks(
-                                80+i * screenWidth / column, // X position
+                                150+i * screenWidth / column, // X position
                                 t * screenWidth / column/ 2,   // Y position
                                 Define.BRICKS_IMAGE_PATH,
                                 112, 32,
@@ -269,7 +269,7 @@ public class Map {
                         break;
                     case 3:
                         Bricks OrangeBrick = new Bricks(
-                                80+i * screenWidth / column, // X position
+                                150+i * screenWidth / column, // X position
                                 t * screenWidth / column/ 2,   // Y position
                                 Define.BRICKS_IMAGE_PATH,
                                 112, 48,
@@ -281,7 +281,7 @@ public class Map {
                         break;
                     case 4:
                         Bricks RedBrick = new Bricks(
-                                80+i * screenWidth / column, // X position
+                                150+i * screenWidth / column, // X position
                                 t * screenWidth / column/ 2,   // Y position
                                 Define.BRICKS_IMAGE_PATH,
                                 112, 64,
@@ -293,7 +293,7 @@ public class Map {
                         break;
                     case 9:
                         Bricks PowerUpBrick = new Bricks(
-                                80+i * screenWidth / column, // X position
+                                150+i * screenWidth / column, // X position
                                 t * screenWidth / column/ 2,   // Y position
                                 Define.BRICKS_IMAGE_PATH,
                                 112, 0,
@@ -307,7 +307,7 @@ public class Map {
                         break;
                     case 5:
                         Bricks HardBrick = new Bricks(
-                                80+i * screenWidth / column, // X position
+                                150+i * screenWidth / column, // X position
                                 t * screenWidth / column/ 2,   // Y position
                                 Define.BRICKS_IMAGE_PATH,
                                 112, 64+16,

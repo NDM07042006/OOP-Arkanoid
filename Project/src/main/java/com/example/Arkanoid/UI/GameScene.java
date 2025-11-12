@@ -22,9 +22,7 @@ import main.java.com.example.Arkanoid.Data.*;
 public class GameScene {
     private Stage stage;
 
-    private Label scLabel;
     private Label lvLabel;
-    private Label liLabel;
     private Button pause;
     private Score score;
     private Lives lives;
@@ -39,12 +37,6 @@ public class GameScene {
         this.root = root;
     }
 
-    public Label getScLabel() {
-        scLabel = new Label("SCORE: 0");
-        scLabel.setLayoutX(10);
-        scLabel.setLayoutY(10);
-        return scLabel;
-    }
 
     public Label getLvLabel() {
         lvLabel = new Label("LEVEL: 0");
@@ -53,12 +45,6 @@ public class GameScene {
         return lvLabel;
     }
 
-    public Label getLiLabel() {
-        liLabel = new Label("LIVES: 0" );
-        liLabel.setLayoutX(10);
-        liLabel.setLayoutY(50);
-        return liLabel;
-    }
 
     public Button getPause() {
         pause = new Button("PAUSE");
@@ -215,7 +201,6 @@ public class GameScene {
                         // Cập nhật score khi brick bị phá hủy
                         int points = b.getPoint_given();
                         score.setScore(score.getScore() + points);
-                        scLabel.setText("SCORE: " + score.getScore());
 
                         root.getChildren().remove(b.getNode());
                         iterator.remove(); // Xóa khỏi list để không bị cộng lại
@@ -229,7 +214,6 @@ public class GameScene {
                 // Kiểm tra nếu bóng rơi xuống dưới (game over hoặc reset)
                 if (ball.getPos_Y() > baseHeight) {
                     lives.updateLives();
-                    liLabel.setText("LIVES: " + lives.getLives());
                     // Reset bóng về vị trí paddle
                     ball.setMoving(false);
                     ball.setSpeed(0);
@@ -272,9 +256,7 @@ public class GameScene {
         });
 
         root.getChildren().add(pauseButton);
-        root.getChildren().add(getLiLabel());
         root.getChildren().add(getLvLabel());
-        root.getChildren().add(getScLabel());
 
         gameTimer.start();
 
