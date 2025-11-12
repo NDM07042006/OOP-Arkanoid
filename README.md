@@ -7,7 +7,7 @@ Group 2 - Class INT_2204_11
 2. Phạm Hoài Nam  
 3. Hoàng Trọng Nhật Linh  
 4. Trần Nguyễn Hoàng    
-**Instructor:** Kiều Văn Tuyên
+**Instructor:** Kiều Văn Tuyên  
 **Semester:** HK1 - 2025-2026
 ## Description
 
@@ -16,7 +16,7 @@ This is a classic Arkanoid game developed in Java as a final project for Object-
 **Key feature**  
 1. Tựa game được phát triển bằng Java 17+ với JavaFX/Swing for GUI.
 2. Thực hiện các nguyên tắc OOP cốt lõi: Đóng gói, Kế thừa, Đa hình và Trừu tượng.
-3. Sử dụng các design patterns: Singleton,  
+3. Sử dụng các design patterns: Singleton, Factory Method, etc. 
 4. Tính năng đa luồng để game vẫn hoạt động mượt mà và UI đáp ứng người dùng
 5. Bao gồm sound effects, animations, and power-up systems.
 6. Hỗ trợ lưu high score
@@ -39,22 +39,17 @@ Class Diagram
 1. **Singleton Pattern**  
     Used in: SoundManager, SceneCache.  
 2. **Template Method Pattern**  
-    Used in: PowerUp
-3. **Stratery Pattern**  
-    Used in: CheckCollision
-4. **Facade Pattern**  
+    Used in: PowerUp, CheckCollision
+3. **Facade Pattern**  
     Used in: SceneNavigator.
-5. **Factory Method**  
-    Used in: SpriteLoader.
-6. **Observer Pattern** 
+4. **Observer Pattern**  
     Used in: EventHandleController.
 ## Multithreading Implementation  
 
 ---
-**1. Rendering Thread:** Handles graphics rendering (EDT for JavaFX Application Thread)   
-**2. Audio Thread Pool:** Plays sound effects asynchronously.  
-**3.Game Loop Thread:** Updates game logic at 30 FPS
 
+**GameEngine:** Điều phối và xử lý các logic song song, bao gồm 3 luồng va chạm rồi đông bộ bằng UI  
+**SoundManager:** Phương thức playBackgroundMusic tạo một thread để play tránh blocking luồng UI khi tải và khởi động nền
 
 ## Installation
 
@@ -97,7 +92,14 @@ Class Diagram
 | PointBonus    | Gain extra points     |![PointBonus.png](Project/src/main/resources/com/Arkanoid/img/PointBonus.png)  |
                                                                  |
 
-**Scoring System**  
+**Scoring System** 
+- Green Bricks: 50
+- Yellow Bricks: 60
+- Orange Bricks: 70
+- Red Bricks: 80
+- PowerUp: Random from 0 to 100
+- Hard Bricks: 80
+
 
 ## Demo 
 
@@ -109,15 +111,13 @@ Class Diagram
 
 ![Menu.jpg](Project/src/main/resources/com/Arkanoid/img/Menu.jpg)
 
-**Gameplay**  
-
-**Power-ups in Action**   
+**Gameplay**
 
 **Highscore** 
 
 ![High_Score.jpg](Project/src/main/resources/com/Arkanoid/img/High_Score.jpg)
-
-**VideoDemo**  
+ 
+**Video** 
 
 ## Future Improvements
 
@@ -131,7 +131,7 @@ Class Diagram
    - More power-up varieties(shield,etc.)  
    - Achievements system.  
 3. Technical improvements
-    - AI opponnt mode.  
+    - AI opponent mode.  
     - Multiplayer mode.  
     - Online mode  
 
@@ -158,7 +158,7 @@ This project is developed for educational purposes only.
 
 ---
 1. The game was developed as part of the Object-Oriented Programming with Java course curriculum.
-2. All code is written by group members.  
+2. Code is written by group members.  
 3. The project demonstrates practical application of OOP concepts and design patterns.
 
 ---
