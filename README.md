@@ -123,17 +123,17 @@ Class Diagram
 
 ---
 ### Planned Features
-1. Additional game modes  
-   - Time attacks mode.  
-   - Co-op multiplayer mode.  
+1. Thêm các chế độ chơi mới  
+   - Chế độ giới hạn thời gian.  
+   - Chế độ nhiều người chơi kết hợp.  
 2. Enhanced gameplay
-   - Boss battle at end of final levels.  
-   - More power-up varieties(shield,etc.)  
-   - Achievements system.  
+   - Đánh boss ở level cuối cùng.  
+   - Nhiều power-up đa dạng hơn(shield,etc.)  
+   - Hệ thống thành tựu.  
 3. Technical improvements
-    - AI opponent mode.  
-    - Multiplayer mode.  
-    - Online mode  
+    - Đối đầu với AI(bot).  
+    - Chế độ nhiều người chơi.  
+    - Chế độ online  
 
 ## Technologies Used
 
@@ -150,16 +150,16 @@ Class Diagram
 ## License  
 
 ---
-This project is developed for educational purposes only.
+Project được phát triển dành cho học tập và không có giá trị về thương mại.
 
-**Academic Integrity**: This code is provided as a reference. Please follow your institution's academic integrity policies.  
+**Academic Integrity**: Code này được cung cấp như một tài liệu tham khảo tuân theo các chính sách trong học tập của tổ chức của bạn.  
 
 ## Notes 
 
 ---
-1. The game was developed as part of the Object-Oriented Programming with Java course curriculum.
-2. Code is written by group members.  
-3. The project demonstrates practical application of OOP concepts and design patterns.
+1. Trò chơi được phát triển làm bài tập lớn phục vụ cho bộ môn OOP sử dụng ngôn ngữ Java.
+2. Code được viết bởi thành viên trong nhóm.  
+3. The project áp dụng các design pattern và khái niệm trong OOP.
 
 ---
 _Last updated: 12/11/2025_
