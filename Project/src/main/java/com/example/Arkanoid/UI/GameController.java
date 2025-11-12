@@ -89,14 +89,13 @@ public class GameController {
 
             // Xóa map cũ nếu có
 
-
+            gameEngine = new GameEngine();
             lives.setLives(10);
             lives.setBalls(gameEngine.getBalls());
-            gameEngine = new GameEngine();
             Scene scene = anchorPane.getScene();
             map = new Map(level);
             gameEngine.setGame(anchorPane, map);
-            map.loadMap(Define.SCREEN_WIDTH, Define.SCREEN_HEIGHT);
+            map.loadMap(Define.SCREEN_WIDTH-80, Define.SCREEN_HEIGHT);
 
             for (Bricks b : map.getBrickGroup()) {
                 b.setSence(scene);

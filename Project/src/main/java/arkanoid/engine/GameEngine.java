@@ -263,7 +263,7 @@ public class GameEngine {
             paddle = null;
         }
 
-        if (balls.size() <= 0 ) {
+        if (balls.size() <= 0  ) {
             lives.updateLives();
             liLabel.setText("LIVES: " + lives.getLives());
             addBall();
