@@ -188,10 +188,25 @@ public class GameController {
                 @Override
                 public void handle(long now) {
                     if (gameEngine != null) {
-                    gameEngine.update();
-                    gameEngine.CheckAllCollision();
+                        gameEngine.update();
+                        gameEngine.CheckAllCollision();
+                        
+                        // Update UI labels
+                        updateLives(gameEngine.getLives());
+                        updateScore(gameEngine.getScore().getScore());
+                        
+                        // Check game over
+                        if (gameEngine.isGameOver()) {
+                            mainLoop.stop();
+                            showEndScreen(false); // false = thua
+                        }
+                        
+                        // Check win
+                        if (gameEngine.isWin()) {
+                            mainLoop.stop();
+                            showEndScreen(true); // true = thắng
+                        }
                     }
-
                 }
             };
             mainLoop.start();
@@ -323,7 +338,28 @@ public class GameController {
 
     public void closeLevel() {
         gameEngine.destroyAll();
-
+    }
+    
+    /**
+     * Show end screen with win/lose status
+     * @param isWin true = thắng, false = thua
+     */
+    private void showEndScreen(boolean isWin) {
+        try {
+            // Stop game
+            if (mainLoop != null) {
+                mainLoop.stop();
+            }
+            
+            // Create EndScene with win/lose status
+            EndScene endScene = new EndScene(stage, isWin);
+            endScene.show();
+            
+            System.out.println("✅ Showing end screen: " + (isWin ? "YOU WIN!" : "GAME OVER"));
+        } catch (Exception e) {
+            System.err.println("❌ Error showing end screen: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
 
