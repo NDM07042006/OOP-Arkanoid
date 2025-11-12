@@ -8,7 +8,7 @@ public class Map {
     public int column;
     public int[][] lv;
     private static int randomPowerUpType() {
-        return (int)(Math.random() * 6) + 1;
+        return (int)(Math.random() * 8) + 1;
     }
     /*
     private int[][] lv1 = {

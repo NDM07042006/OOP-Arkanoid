@@ -43,6 +43,10 @@ public class GameEngine {
         this.lives = lives;
     }
 
+    public void addLife() {
+        lives++;
+    }
+
     public Label getScLabel() {
         scLabel = new Label("SCORE: 0");
         scLabel.setLayoutX(10);
@@ -266,6 +270,16 @@ public class GameEngine {
                     case 6:
                         RandomPowerUp randomPowerUp = new RandomPowerUp(brick.pos_X, brick.pos_Y);
                         addPowerUp(randomPowerUp);
+                        break;
+
+                    case 7:
+                        PointBonus pointBonus= new PointBonus(brick.pos_X, brick.pos_Y);
+                        addPowerUp(pointBonus);
+                        break;
+
+                    case 8:
+                        ExtraLife extraLife= new ExtraLife(brick.pos_X, brick.pos_Y);
+                        addPowerUp(extraLife);
                         break;
                     default:
                         break;

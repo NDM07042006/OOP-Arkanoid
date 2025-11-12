@@ -12,7 +12,7 @@
 
         <!-- Panel bên trái (UI area) - có thể thêm background khác nếu muốn -->
         <Label fx:id="scoreLabel" layoutX="34.0" layoutY="186.0" styleClass="score-label" text="SCORE: 0" />
-        <Label fx:id="livesLabel" layoutX="37.0" layoutY="63.0" styleClass="lives-label" text="LIVES: 3" />
+        <Label fx:id="livesLabel" layoutX="37.0" layoutY="63.0" styleClass="lives-label" text="LIVES: 678" />
         <ImageView fx:id="pauseButton" fitHeight="50.0" fitWidth="130.0" layoutX="34.0" layoutY="512.0" onMouseClicked="#pause" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
             <image>
                 <Image url="@images/pause.png" />

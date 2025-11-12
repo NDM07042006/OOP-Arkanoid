@@ -105,7 +105,7 @@ public class GameController {
             scene = anchorPane.getScene();
             map = new Map(level);
             gameEngine.setGame(anchorPane, map, player);
-            map.loadMap(Define.SCREEN_WIDTH, Define.SCREEN_HEIGHT);
+            map.loadMap(Define.BACKGROUND_WIDTH, Define.BACKGROUND_HEIGHT);
 
             for (Bricks b : map.getBrickGroup()) {
                 b.setSence(scene);
@@ -190,6 +190,7 @@ public class GameController {
                     if (gameEngine != null) {
                     gameEngine.update();
                     gameEngine.CheckAllCollision();
+
                     }
 
                 }
@@ -228,7 +229,7 @@ public class GameController {
 
             // Set vị trí background ở góc trên bên trái
             AnchorPane.setTopAnchor(newBackground, 0.0);
-            AnchorPane.setLeftAnchor(newBackground, 0.0);
+            AnchorPane.setLeftAnchor(newBackground, (Double) 150.0);
             AnchorPane.setRightAnchor(newBackground, 0.0);
             AnchorPane.setBottomAnchor(newBackground, 0.0);
 
@@ -318,13 +319,24 @@ public class GameController {
         loadBackgroundForLevel(levelNumber);
         gameEngine.addBall();
         gameEngine.setLives(10);
-
     }
 
     public void closeLevel() {
         gameEngine.destroyAll();
 
     }
+    /*
+    @FXML
+
+    public void endGame() {
+        if (live == 0){
+            stage.close();
+            EndScene endScene = (EndScene)
+        }
+    }
+
+
+     */
 
 
 

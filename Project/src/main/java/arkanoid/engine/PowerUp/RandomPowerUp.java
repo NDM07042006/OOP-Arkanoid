@@ -14,6 +14,8 @@ public class RandomPowerUp extends PowerUp {
     private static SlowBall   effectSlowBall   = new SlowBall(0, 0);
     private static FastPaddle effectFastPaddle = new FastPaddle(0, 0);
     private static SlowPaddle effectSlowPaddle = new SlowPaddle(0, 0);
+    private static ExtraLife  effectExtraLife  = new ExtraLife(0, 0);
+    private static PointBonus effectPointBonus = new PointBonus(0, 0);
 
     public RandomPowerUp(double x, double y) {
         super(x, y, image);
@@ -51,6 +53,14 @@ public class RandomPowerUp extends PowerUp {
             case SLOW_PADDLE:
                 // Gọi hiệu ứng SLOW_PADDLE
                 effectSlowPaddle.applyEffect();
+                break;
+            case EXTRA_LIFE:
+                // Gọi hiệu ứng EXTRA_LÌE
+                effectExtraLife.applyEffect();
+                break;
+            case POINT_BONUS:
+                // Gọi hiệu ứng POINT_BONUS
+                effectPointBonus.applyEffect();
                 break;
             default:
                 break;

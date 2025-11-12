@@ -9,6 +9,9 @@ public class Define {
     public static final String FAST_PADDLE_IMAGE_PATH       = "/com/Arkanoid/img/FastPaddle.png";
     public static final String SLOW_PADDLE_IMAGE_PATH       = "/com/Arkanoid/img/SlowPaddle.png";
     public static final String RANDOM_POWER_UP_IMAGE_PATH   = "/com/Arkanoid/img/RandomPowerUp.png";
+    public static final String EXTRA_LIFE_IMAGE_PATH        = "/com/Arkanoid/img/ExtraLife.png";
+    public static final String POINT_BONUS_IMAGE_PATH        = "/com/Arkanoid/img/PointBonus.png";
+
 
     // Game assets
     public static final String PADDLES_AND_BALLS_IMAGE_PATH = "/com/Arkanoid/img/paddles_and_balls.png";
@@ -58,6 +61,12 @@ public class Define {
     public static final int MIN_PADDLE_SPEED                = 1;
 
     // Screen Size
-    public static final int    SCREEN_WIDTH                 = 450;
+    public static final int    SCREEN_WIDTH                 = 800;
     public static final int    SCREEN_HEIGHT                = 650;
+    public static final int    BACKGROUND_WIDTH             = 650;
+    public static final int    BACKGROUND_HEIGHT             = 650;
+    public static final int    UI_PANEL                     = 150;
+
+
+
 }

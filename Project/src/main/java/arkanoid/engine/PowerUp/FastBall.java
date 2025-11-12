@@ -20,6 +20,6 @@ public class FastBall extends PowerUp {
     @Override
     public void applyEffect(){
         System.out.println(TYPE);
-        gameEngine.setAllBallSpeed(2);
+        gameEngine.setAllBallSpeed(1);
     }
 }

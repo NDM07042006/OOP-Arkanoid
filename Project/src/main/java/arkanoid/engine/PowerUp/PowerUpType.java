@@ -7,5 +7,7 @@ public enum PowerUpType {
     SLOW_BALL,
     FAST_PADDLE,
     SLOW_PADDLE,
+    EXTRA_LIFE,
+    POINT_BONUS,
     RANDOM_POWER_UP,
 }
