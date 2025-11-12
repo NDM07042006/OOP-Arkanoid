@@ -11,6 +11,7 @@ import main.java.arkanoid.engine.Bricks;
 import main.java.com.example.Arkanoid.Utlis.Animations.ParticleSystem;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import main.java.com.example.Arkanoid.Utlis.SoundManager;
 
 
 public class CheckBallAndBrick extends CheckCollision {
@@ -65,8 +66,8 @@ public class CheckBallAndBrick extends CheckCollision {
 
 
                         brick.setCurrrentPoints(1);
-                        System.out.println("Collision detected");
                         particleSystem.createExplosion(brick.getPos_X(), brick.getPos_Y(), Color.ORANGE, 50);
+                        SoundManager.getInstance().playWallHit();
 
 
                     }

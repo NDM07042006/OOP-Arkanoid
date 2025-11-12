@@ -17,8 +17,7 @@ import main.java.com.example.Arkanoid.Data.Lives;
 import main.java.com.example.Arkanoid.Data.Score;
 import main.java.com.example.Arkanoid.Utlis.Animations.ParticleSystem;
 import javafx.scene.layout.AnchorPane;
-
-
+import main.java.com.example.Arkanoid.Utlis.SoundManager;
 
 
 //test phần engine sẽ sửa sau
@@ -237,7 +236,7 @@ public class GameEngine {
                 scLabel.setText("SCORE: " + score.getScore());
 
                  */
-
+                SoundManager.getInstance().playBrickBreak();
                 switch (brick.getPowerUp_Type()) {
                     case 1:
                         MultiBall powerUp = new MultiBall(brick.pos_X, brick.pos_Y);
