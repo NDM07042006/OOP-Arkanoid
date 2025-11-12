@@ -19,6 +19,6 @@ public class FastPaddle extends PowerUp {
     @Override
     public void applyEffect(){
         System.out.println(TYPE);
-        gameEngine.setPaddleSpeed(10);
+        gameEngine.setPaddleSpeed(2);
     }
 }
