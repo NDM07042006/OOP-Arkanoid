@@ -17,6 +17,8 @@ import java.sql.SQLOutput;
 
 
 public class GameController {
+    @FXML
+    private ImageView image;
 
     public ImageView backgroundPlaceholder;
     @FXML
@@ -78,9 +80,14 @@ public class GameController {
 
         // Nếu anchorPane đã sẵn sàng, load ngay
         if (anchorPane != null) {
+
+            if (!anchorPane.getChildren().contains(image)) {
+                anchorPane.getChildren().add(image);
+            }
             if (!anchorPane.getChildren().contains(scoreLabel)) {
                 anchorPane.getChildren().add(scoreLabel);
             }
+            
 
             if (!anchorPane.getChildren().contains(livesLabel)) {
                 anchorPane.getChildren().add(livesLabel);
@@ -254,7 +261,7 @@ public class GameController {
 
             // Set vị trí background ở góc trên bên trái
             AnchorPane.setTopAnchor(newBackground, 0.0);
-            AnchorPane.setLeftAnchor(newBackground, 0.0);
+            AnchorPane.setLeftAnchor(newBackground, 150.0);
             AnchorPane.setRightAnchor(newBackground, 0.0);
             AnchorPane.setBottomAnchor(newBackground, 0.0);
 

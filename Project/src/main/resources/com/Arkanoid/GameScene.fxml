@@ -9,10 +9,15 @@
     <children>
         <!-- Background placeholder - giữ tỷ lệ ảnh, fit vào game area bên phải -->
         <ImageView fx:id="backgroundPlaceholder" mouseTransparent="true" pickOnBounds="false" preserveRatio="true" smooth="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <ImageView fx:id = "image" fitHeight="644.0" fitWidth="155.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/DataPane.gif" />
+         </image>
+      </ImageView>
 
         <!-- Panel bên trái (UI area) - có thể thêm background khác nếu muốn -->
         <Label fx:id="scoreLabel" layoutX="34.0" layoutY="186.0" styleClass="score-label" text="SCORE: 0" />
-        <Label fx:id="livesLabel" layoutX="37.0" layoutY="63.0" styleClass="lives-label" text="LIVES: 678" />
+        <Label fx:id="livesLabel" layoutX="37.0" layoutY="63.0" styleClass="lives-label" text="LIVES: 3" />
         <ImageView fx:id="pauseButton" fitHeight="50.0" fitWidth="130.0" layoutX="34.0" layoutY="512.0" onMouseClicked="#pause" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
             <image>
                 <Image url="@images/pause.png" />
