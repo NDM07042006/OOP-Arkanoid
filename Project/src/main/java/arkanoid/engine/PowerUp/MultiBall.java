@@ -18,4 +18,11 @@ public class MultiBall extends PowerUp {
         return TYPE;
     }
 
+    @Override
+    public void applyEffect() {
+        // Thêm 2 quả bóng mới vào trò chơi
+        System.out.println(TYPE);
+        gameEngine.addBall( 45);
+        gameEngine.addBall( -45);
+    }
 }

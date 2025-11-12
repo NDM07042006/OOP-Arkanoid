@@ -1,20 +1,20 @@
 package main.java.arkanoid.engine.PowerUp;
 
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import main.java.arkanoid.engine.GameObject;
+import main.java.arkanoid.engine.GameEngine;
 
 public abstract class PowerUp extends GameObject {
 
     protected static final double FALL_SPEED = 1;
     protected static final int WIDTH = 30;// độ to của power up khi hiển thị
     protected static final int HEIGHT = 30;
+    protected static GameEngine gameEngine;
     protected double x;
     protected double y;
     protected ImageView sprite;
-    protected Scene scene;
 
     public PowerUp(double x, double y, Image image) {
         this.x = x;
@@ -25,6 +25,10 @@ public abstract class PowerUp extends GameObject {
         this.sprite.setFitWidth(WIDTH);
         this.sprite.setFitHeight(HEIGHT);
         this.sprite.setPreserveRatio(true);
+    }
+
+    public static void setGameEngine(GameEngine engine) {
+        gameEngine = engine;
     }
 
     public double getX() {
@@ -46,5 +50,6 @@ public abstract class PowerUp extends GameObject {
     }
 
     public abstract PowerUpType getType();
+    public abstract void applyEffect();
 
 }
