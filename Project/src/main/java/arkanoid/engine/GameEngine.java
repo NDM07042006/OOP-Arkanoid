@@ -23,12 +23,12 @@ import main.java.com.example.Arkanoid.Utlis.SoundManager;
 //test phần engine sẽ sửa sau
 public class GameEngine {
     private AnchorPane AnchorPane;
-    private Paddle paddle = new Paddle(200, 500, Define.PADDLES_AND_BALLS_IMAGE_PATH);
+    private Paddle paddle;
     private List<Ball> balls = new ArrayList<>();
     private List<PowerUp> powerUps = new ArrayList<>();
     private Map map;
-    private Pane gamePane = new Pane();
-    private ParticleSystem particleSystem = new ParticleSystem(gamePane);
+    private Pane gamePane ;
+    private ParticleSystem particleSystem;
 
     private Label scLabel;
     private Label liLabel;
@@ -94,9 +94,12 @@ public class GameEngine {
     /*
      * Getter setter game
      */
-    public void setGame(AnchorPane AnchorPane, Map map) {
+    public void setGame(AnchorPane AnchorPane, Map map, Paddle paddle) {
+        Pane gamePane = new Pane();
+        ParticleSystem particleSystem = new ParticleSystem(gamePane);
         this.AnchorPane = AnchorPane;
         this.map = map;
+        this.paddle = paddle;
         PowerUp.setGameEngine(this);
         CheckCollision.setCheckCollision(this);
     }
@@ -280,10 +283,12 @@ public class GameEngine {
                 b = null;
             }
         }
-        paddle.update();
-        if (paddle.isDestroyed()) {
-            AnchorPane.getChildren().remove(paddle.getNode());
-            paddle = null;
+        if (paddle != null) {
+            paddle.update();
+            if (paddle.isDestroyed()) {
+                AnchorPane.getChildren().remove(paddle.getNode());
+                paddle = null;
+            }
         }
 
         if (balls.size() <= 0  && lives > 0) {
@@ -299,27 +304,32 @@ public class GameEngine {
      * Di chuyển paddle
      */
     public void moveLeft(){
+        if (paddle != null) {
         paddle.setVel_X(-2);
         for (Ball b: balls) {
-            if (b.isAttached()) {
-                b.setSpeed(paddle.getSpeed());
-                b.setVel_Y(0);
-                b.setVel_X(-2);
+              if (b.isAttached()) {
+                  b.setSpeed(paddle.getSpeed());
+                  b.setVel_Y(0);
+                  b.setVel_X(-2);
+                }
             }
         }
     }
-    public void moveRight(){
-        paddle.setVel_X(2);
-        for (Ball b: balls) {
-            if (b.isAttached()) {
-                b.setSpeed(paddle.getSpeed());
-                b.setVel_X(paddle.getVel_X());
-                b.setVel_Y(0);
+    public void moveRight() {
+        if (paddle != null) {
+            paddle.setVel_X(2);
+            for (Ball b : balls) {
+                if (b.isAttached()) {
+                    b.setSpeed(paddle.getSpeed());
+                    b.setVel_X(paddle.getVel_X());
+                    b.setVel_Y(0);
+                }
             }
-        }
 
+        }
     }
     public void notMove(){
+        if (paddle != null) {
         paddle.setVel_X(0);
         for (Ball b: balls) {
             if (b.isAttached()) {
@@ -330,6 +340,8 @@ public class GameEngine {
             }
         }
     }
+    }
+
     public void setPaddleSpeed(int extraSpeed){
         if (paddle.getSpeed() + extraSpeed >= Define.MIN_PADDLE_SPEED
                 && paddle.getSpeed() + extraSpeed <= Define.MAX_PADDLE_SPEED){
@@ -362,11 +374,14 @@ public class GameEngine {
                 particleSystem.clear();
                 particleSystem = null;
             }
-
+            /*
             // 2️⃣ Tắt luồng kiểm tra va chạm
             if (collisionExecutor != null && !collisionExecutor.isShutdown()) {
                 collisionExecutor.shutdownNow();
             }
+
+             */
+
             if (collisionTasks != null) {
                 collisionTasks.clear();
             }
@@ -405,9 +420,14 @@ public class GameEngine {
             paddle = null;
 
             // 6️⃣ Dọn Map, GamePane, v.v.
+            /*
             map = null;
             gamePane = null;
             AnchorPane = null;
+
+             */
+
+
 
             System.out.println("✅ All game objects destroyed successfully.");
 

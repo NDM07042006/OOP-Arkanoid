@@ -19,15 +19,16 @@ public class CheckBallAndPaddle extends CheckCollision {
         Iterator<Ball> iterator = balls.iterator();
         while (iterator.hasNext()) {
             Ball ball = iterator.next();
+            if (paddle != null) {
             if (ball.getNode().getBoundsInParent().intersects(paddle.getNode().getBoundsInParent())) {
-                if(!ball.paddleCollision()){
+                if (!ball.paddleCollision()) {
                     Bounds paddleBounds = paddle.getSprite().getBoundsInParent();
                     double paddleLength = paddleBounds.getMaxX() - paddleBounds.getMinX();
-                    double paddleMidPoint = paddleLength/2 +paddleBounds.getMinX();
+                    double paddleMidPoint = paddleLength / 2 + paddleBounds.getMinX();
                     ball.setPaddleCollision(true);
                     Bounds ballBounds = ball.getSprite().getBoundsInParent();
-                    double ballMidPoint = (ballBounds.getMaxX() - ballBounds.getMinX())/2 +ballBounds.getMinX();
-                    double degrees = (ballMidPoint - paddleMidPoint)/(paddleLength/2)*75;
+                    double ballMidPoint = (ballBounds.getMaxX() - ballBounds.getMinX()) / 2 + ballBounds.getMinX();
+                    double degrees = (ballMidPoint - paddleMidPoint) / (paddleLength / 2) * 75;
                     ball.setVel_X(gameEngine.setVelBall_X(degrees));
                     ball.setVel_Y(gameEngine.setVelBall_y(degrees));
 
@@ -35,8 +36,8 @@ public class CheckBallAndPaddle extends CheckCollision {
 
                     SoundManager.getInstance().playPaddleHit();
 
-                }
-                else ball.setPaddleCollision(false);
+                } else ball.setPaddleCollision(false);
+            }
 
             }
         }

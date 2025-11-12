@@ -34,8 +34,8 @@ public class Map {
             {0, 2, 2, 2, 2, 2, 2, 2, 2, 0},
             {0, 3, 3, 3, 3, 3, 3, 3, 3, 0},
             {0, 4, 4, 4, 4, 4, 4, 4, 4, 0},
+            {0, 9, 9, 9, 9, 9, 9, 9, 9, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 2, 2, 0, 2, 2},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 
@@ -306,6 +306,7 @@ public class Map {
                         PowerUpBrick.setGivePowerUp(true);
                         PowerUpBrick.setPoint_given(100);
                         PowerUpBrick.setPowerUp_Type(randomPowerUpType());
+
                         brickGroup.add(PowerUpBrick);
                         break;
                     case 5:

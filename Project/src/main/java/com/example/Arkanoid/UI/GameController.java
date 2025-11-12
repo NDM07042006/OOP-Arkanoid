@@ -13,9 +13,10 @@ import main.java.arkanoid.engine.*;
 import javafx.animation.AnimationTimer;
 import main.java.com.example.Arkanoid.Data.Lives;
 
+import java.sql.SQLOutput;
+
 
 public class GameController {
-    private Lives lives = new Lives();
 
     @FXML
     private AnchorPane anchorPane;
@@ -88,13 +89,13 @@ public class GameController {
             }
 
             // Xóa map cũ nếu có
+            Paddle player = new Paddle(200, 500, Define.PADDLES_AND_BALLS_IMAGE_PATH);
 
             gameEngine = new GameEngine();
-            lives.setLives(10);
-            lives.setBalls(gameEngine.getBalls());
+            gameEngine.setLives(10);
             Scene scene = anchorPane.getScene();
             map = new Map(level);
-            gameEngine.setGame(anchorPane, map);
+            gameEngine.setGame(anchorPane, map, player);
             map.loadMap(Define.SCREEN_WIDTH-150, Define.SCREEN_HEIGHT);
 
             for (Bricks b : map.getBrickGroup()) {
@@ -102,7 +103,6 @@ public class GameController {
                 anchorPane.getChildren().add(b.getNode());
             }
 
-            Paddle player = gameEngine.getPaddle();
             player.setScene(scene);
             anchorPane.getChildren().add(player.getNode());
 
@@ -113,7 +113,9 @@ public class GameController {
 
 // only register input ONCE
             scene.setOnKeyPressed(keyEvent -> {
-                System.out.println("checking");
+                if (gameEngine != null ) {
+                    System.out.println("still got it ");
+                }
                 switch (keyEvent.getCode()) {
                     case A :
                         gameEngine.moveLeft();
@@ -126,6 +128,34 @@ public class GameController {
                     case SPACE :
                         gameEngine.MoveBall();
                         break;
+
+                    case R:
+                        gameEngine.destroyAll();
+                        break;
+
+                    case P:
+                        Paddle newplayer = new Paddle(200, 500, Define.PADDLES_AND_BALLS_IMAGE_PATH);
+                        gameEngine.setLives(10);
+                        map = new Map(level);
+                        gameEngine.setGame(anchorPane, map, newplayer);
+                        map.loadMap(Define.SCREEN_WIDTH-150, Define.SCREEN_HEIGHT);
+
+                        for (Bricks b : map.getBrickGroup()) {
+                            b.setSence(scene);
+                            anchorPane.getChildren().add(b.getNode());
+                        }
+
+                        newplayer.setScene(scene);
+                        anchorPane.getChildren().add(newplayer.getNode());
+
+                        gameEngine.addBall();
+                        gameEngine.setLives(10);
+                        break;
+
+
+
+
+
 
                 }
             });
@@ -142,8 +172,18 @@ public class GameController {
             mainLoop = new AnimationTimer() {
                 @Override
                 public void handle(long now) {
+                    if (gameEngine != null) {
                     gameEngine.update();
+                    System.out.println("still got it ");
+
                     gameEngine.CheckAllCollision();
+                    }
+                    if  (scene != null) {
+                        System.out.println("Scene con");
+                    }
+
+
+
                 }
             };
             mainLoop.start();
