@@ -1,0 +1,450 @@
+@startuml Arkanoid Class Diagram
+
+' ==================== HIGH RESOLUTION SETTINGS ====================
+skinparam dpi 300
+scale 1.5
+
+' ==================== STYLING ====================
+skinparam classAttributeIconSize 0
+skinparam classFontSize 10
+skinparam packageStyle rectangle
+skinparam linetype ortho
+
+' ==================== MAIN APPLICATION ====================
+package "Main Application" {
+    class Main {
+        + start(Stage): void
+        + main(String[]): void
+    }
+}
+
+' ==================== GAME ENGINE ====================
+package "arkanoid.engine" <<Frame>> {
+
+    class GameEngine {
+        - score: Score
+        - lives: Lives
+        - balls: ArrayList<Ball>
+        - paddle: Paddle
+        - map: Map
+        - running: boolean
+        + start(): void
+        + pause(): void
+        + resume(): void
+        + update(): void
+        + getScore(): Score
+        + getLives(): Lives
+    }
+
+    abstract class GameObject {
+        # x: double
+        # y: double
+        # sprite: ImageView
+        + getNode(): Node
+        + setPosition(double, double): void
+        + getX(): double
+        + getY(): double
+    }
+
+    class Ball {
+        - velocityX: double
+        - velocityY: double
+        - speed: double
+        + move(): void
+        + bounce(): void
+        + setVelocity(double, double): void
+    }
+
+    class Paddle {
+        - speed: double
+        - width: double
+        + moveLeft(): void
+        + moveRight(): void
+        + setSpeed(double): void
+    }
+
+    class Bricks {
+        - hp: int
+        - point: int
+        - type: int
+        + hit(): void
+        + isDestroyed(): boolean
+        + getPoints(): int
+    }
+
+    class Map {
+        {static} + brickGroup: ArrayList<Bricks>
+        - levelType: int
+        + loadMap(int, int): void
+        + createBrick(int, int, int): Bricks
+    }
+
+    class Define {
+        {static} + SCREEN_WIDTH: int
+        {static} + SCREEN_HEIGHT: int
+        {static} + GAME_SCENE_PATH: String
+        {static} + MENU_GAME_PATH: String
+        {static} + BACKGROUND_BASE_PATH: String
+        {static} + BUTTON_HOVER_SOUND: String
+        {static} + GAME_OVER_IMAGE_PATH: String
+        {static} + YOU_WIN_IMAGE_PATH: String
+    }
+}
+
+' ==================== POWER-UPS ====================
+package "arkanoid.engine.PowerUp" {
+
+    abstract class PowerUp {
+        # FALL_SPEED: double
+        {static} - gameEngine: GameEngine
+        # x: double
+        # y: double
+        + {abstract} activate(): void
+        + fall(): void
+        + getNode(): Node
+    }
+
+    class FastBall {
+        + activate(): void
+    }
+
+    class SlowBall {
+        + activate(): void
+    }
+
+    class FastPaddle {
+        + activate(): void
+    }
+
+    class SlowPaddle {
+        + activate(): void
+    }
+
+    class MultiBall {
+        + activate(): void
+    }
+
+    enum PowerUpType {
+        FAST_BALL
+        SLOW_BALL
+        FAST_PADDLE
+        SLOW_PADDLE
+        MULTI_BALL
+    }
+}
+
+' ==================== COLLISION DETECTION ====================
+package "arkanoid.engine.CheckCollision" {
+
+    abstract class CheckCollision {
+        + {abstract} run(): void
+        + {abstract} check(): void
+    }
+
+    class CheckBallAndPaddle {
+        - ball: Ball
+        - paddle: Paddle
+        + run(): void
+        + check(): void
+    }
+
+    class CheckBallAndBrick {
+        - ball: Ball
+        - bricks: ArrayList<Bricks>
+        + run(): void
+        + check(): void
+    }
+
+    class CheckPowerUpAndPaddle {
+        - powerUp: PowerUp
+        - paddle: Paddle
+        + run(): void
+        + check(): void
+    }
+}
+
+' ==================== UI CONTROLLERS ====================
+package "com.example.Arkanoid.UI" {
+
+    class GameController {
+        - anchorPane: AnchorPane
+        - backgroundPlaceholder: ImageView
+        - scoreLabel: Label
+        - livesLabel: Label
+        - levelNumber: int
+        + setLevel(int): void
+        + setStage(Stage): void
+        + pause(): void
+        - loadBackgroundForLevel(int): void
+        - loadMapForLevel(int): void
+        - updateScoreLabel(): void
+        - updateLivesLabel(): void
+    }
+
+    class MenuController {
+        - stage: Stage
+        + setStage(Stage): void
+        + start(): void
+        + levels(): void
+        + highScores(): void
+        + settings(): void
+        + exit(): void
+    }
+
+    class EndController {
+        - backgroundImage: ImageView
+        - scoreLabel: Label
+        - highScoreLabel: Label
+        - levelLabel: Label
+        - isWin: boolean
+        + setWinStatus(boolean): void
+        + setGameInfo(int, int, int): void
+        + Restart(): void
+        + Menu(): void
+        + NextLevel(): void
+    }
+
+    class PauseController {
+        - currentLevel: int
+        + setCurrentLevel(int): void
+        + resume(): void
+        + restart(): void
+        + menu(): void
+    }
+
+    class LevelController {
+        - stage: Stage
+        + setStage(Stage): void
+        + selectLevel(int): void
+        + back(): void
+    }
+
+    class HighScoresController {
+        - stage: Stage
+        + setStage(Stage): void
+        + loadHighScores(): void
+        + back(): void
+    }
+
+    class SettingController {
+        - stage: Stage
+        - musicSlider: Slider
+        - sfxSlider: Slider
+        + setStage(Stage): void
+        + save(): void
+        + back(): void
+    }
+}
+
+' ==================== UI SCENES ====================
+package "com.example.Arkanoid.UI" {
+
+    class MenuScene {
+        - stage: Stage
+        + MenuScene(Stage)
+        + show(): void
+    }
+
+    class GameScene2 {
+        - stage: Stage
+        - level: int
+        + GameScene2(Stage, int)
+        + show(): void
+    }
+
+    class EndScene {
+        - stage: Stage
+        - isWin: boolean
+        + EndScene(Stage, boolean)
+        + show(): void
+    }
+
+    class PauseScene {
+        - stage: Stage
+        + PauseScene(Stage)
+        + show(): void
+    }
+
+    class LevelScene {
+        - stage: Stage
+        + LevelScene(Stage)
+        + show(): void
+    }
+
+    class HighScoresScene {
+        - stage: Stage
+        + HighScoresScene(Stage)
+        + show(): void
+    }
+
+    class SettingScene {
+        - stage: Stage
+        + SettingScene(Stage)
+        + show(): void
+    }
+
+    class SpriteLoader {
+        {static} + getBackgroundForLevel(int, double, double): ImageView
+    }
+}
+
+' ==================== UTILITIES ====================
+package "com.example.Arkanoid.Utlis" {
+
+    class SoundManager <<Singleton>> {
+        {static} - instance: SoundManager
+        - soundEffects: Map<String, AudioClip>
+        - backgroundMusics: Map<String, AudioClip>
+        - currentMusic: AudioClip
+        - sfxVolume: double
+        - musicVolume: double
+        {static} + getInstance(): SoundManager
+        + loadAllSounds(): void
+        + playButtonHover(): void
+        + playButtonClick(): void
+        + playMenuMusic(): void
+        + playGameMusic(): void
+        + stopBackgroundMusic(): void
+        + stopAllSounds(): void
+        + setSfxVolume(double): void
+        + setMusicVolume(double): void
+    }
+
+    class SceneCache <<Singleton>> {
+        {static} - instance: SceneCache
+        - sceneCache: Map<String, Scene>
+        - controllerCache: Map<String, Object>
+        {static} + getInstance(): SceneCache
+        + preloadScene(String, String): CompletableFuture<Void>
+        + preloadAll(): void
+        + getCachedScene(String): Scene
+        + getCachedController(String): Object
+        + clearCache(String): void
+    }
+
+    class SceneNavigator <<Utility>> {
+        {static} + goToMenu(Stage): void
+        {static} + goToGame(Stage, int): void
+        {static} + goToLevels(Stage): void
+        {static} + goToHighScores(Stage): void
+    }
+}
+
+' ==================== DATA MODELS ====================
+package "com.example.Arkanoid.Data" {
+
+    class Score {
+        - score: int
+        + setScore(int): void
+        + getScore(): int
+        + addScore(int): void
+    }
+
+    class Lives {
+        - lives: int
+        + setLives(int): void
+        + getLives(): int
+        + loseLife(): void
+    }
+
+    class HighScoreEntry {
+        - playerName: String
+        - score: int
+        - level: int
+        - date: LocalDateTime
+        + getPlayerName(): String
+        + getScore(): int
+        + getLevel(): int
+    }
+}
+
+' ==================== RELATIONSHIPS ====================
+
+' Inheritance
+GameObject <|-- Ball
+GameObject <|-- Paddle
+GameObject <|-- Bricks
+GameObject <|-- PowerUp
+
+PowerUp <|-- FastBall
+PowerUp <|-- SlowBall
+PowerUp <|-- FastPaddle
+PowerUp <|-- SlowPaddle
+PowerUp <|-- MultiBall
+
+CheckCollision <|-- CheckBallAndPaddle
+CheckCollision <|-- CheckBallAndBrick
+CheckCollision <|-- CheckPowerUpAndPaddle
+
+' Composition & Aggregation
+GameEngine *-- Ball
+GameEngine *-- Paddle
+GameEngine *-- Map
+GameEngine *-- Score
+GameEngine *-- Lives
+Map o-- Bricks
+
+' Dependencies
+GameController ..> GameEngine : uses
+GameController ..> SpriteLoader : uses
+GameController ..> SceneNavigator : uses
+
+EndController ..> SoundManager : uses
+MenuController ..> SceneNavigator : uses
+PauseController ..> SceneNavigator : uses
+LevelController ..> SceneNavigator : uses
+
+MenuScene --> MenuController : creates
+GameScene2 --> GameController : creates
+EndScene --> EndController : creates
+PauseScene --> PauseController : creates
+
+Main --> MenuScene : creates
+Main --> SoundManager : uses
+Main --> SceneCache : uses
+
+CheckBallAndPaddle --> Ball : checks
+CheckBallAndPaddle --> Paddle : checks
+CheckBallAndBrick --> Ball : checks
+CheckBallAndBrick --> Bricks : checks
+CheckPowerUpAndPaddle --> PowerUp : checks
+CheckPowerUpAndPaddle --> Paddle : checks
+
+PowerUp --> GameEngine : activates on
+PowerUp --> PowerUpType : has type
+
+SceneNavigator ..> SceneCache : uses
+SpriteLoader ..> Define : uses
+
+' Notes
+note right of SoundManager
+  Singleton Pattern
+  Manages all game sounds
+  and background music
+end note
+
+note right of SceneCache
+  Singleton Pattern + Cache Pattern
+  Preloads scenes for
+  instant navigation
+end note
+
+note right of PowerUp
+  Template Method Pattern
+  Each subclass implements
+  activate() differently
+end note
+
+note right of CheckCollision
+  Strategy Pattern
+  Different collision
+  detection algorithms
+end note
+
+note bottom of SceneNavigator
+  Facade Pattern
+  Simplifies scene
+  navigation with cache
+end note
+
+@enduml
