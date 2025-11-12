@@ -378,8 +378,7 @@ public class GameEngine {
             // 2️⃣ Tắt luồng kiểm tra va chạm
             if (collisionExecutor != null && !collisionExecutor.isShutdown()) {
                 collisionExecutor.shutdownNow();
-            }
-
+            }\
              */
 
             if (collisionTasks != null) {

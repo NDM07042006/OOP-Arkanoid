@@ -37,11 +37,11 @@ public class GameController {
     private GameEngine gameEngine;
     private Map map;
 
-
-    private int levelNumber = 1; // Default level
+    public int levelNumber = 1; // Default level
     private ImageView backgroundView;
     private boolean needsBackgroundLoad = false; // Flag để track khi cần load background
     private Map currentMap; // Lưu map hiện tại
+    private Scene scene;
 
     @FXML
     public void initialize() {
@@ -90,10 +90,10 @@ public class GameController {
 
             // Xóa map cũ nếu có
             Paddle player = new Paddle(200, 500, Define.PADDLES_AND_BALLS_IMAGE_PATH);
-
+            levelNumber = level;
             gameEngine = new GameEngine();
             gameEngine.setLives(10);
-            Scene scene = anchorPane.getScene();
+            scene = anchorPane.getScene();
             map = new Map(level);
             gameEngine.setGame(anchorPane, map, player);
             map.loadMap(Define.SCREEN_WIDTH-150, Define.SCREEN_HEIGHT);
@@ -114,7 +114,6 @@ public class GameController {
 // only register input ONCE
             scene.setOnKeyPressed(keyEvent -> {
                 if (gameEngine != null ) {
-                    System.out.println("still got it ");
                 }
                 switch (keyEvent.getCode()) {
                     case A :
@@ -136,7 +135,10 @@ public class GameController {
                     case P:
                         Paddle newplayer = new Paddle(200, 500, Define.PADDLES_AND_BALLS_IMAGE_PATH);
                         gameEngine.setLives(10);
-                        map = new Map(level);
+                        map = new Map(levelNumber);
+                        System.out.println(levelNumber + " level typeshit");
+
+
                         gameEngine.setGame(anchorPane, map, newplayer);
                         map.loadMap(Define.SCREEN_WIDTH-150, Define.SCREEN_HEIGHT);
 
@@ -147,9 +149,13 @@ public class GameController {
 
                         newplayer.setScene(scene);
                         anchorPane.getChildren().add(newplayer.getNode());
-
+                        loadBackgroundForLevel(levelNumber);
                         gameEngine.addBall();
                         gameEngine.setLives(10);
+                        break;
+
+                    case ESCAPE:
+                        pause();
                         break;
 
 
@@ -174,15 +180,8 @@ public class GameController {
                 public void handle(long now) {
                     if (gameEngine != null) {
                     gameEngine.update();
-                    System.out.println("still got it ");
-
                     gameEngine.CheckAllCollision();
                     }
-                    if  (scene != null) {
-                        System.out.println("Scene con");
-                    }
-
-
 
                 }
             };
@@ -289,11 +288,26 @@ public class GameController {
 
     @FXML
     public void restartLevel() {
-        destroyAll();
-        stage.close();
-        Stage newStage = (Stage) stage.getOwner();
-        GameScene gameScene = new GameScene(newStage);
-        gameScene.show();
+        gameEngine.destroyAll();
+        gameEngine.update();
+        Paddle newplayer = new Paddle(200, 500, Define.PADDLES_AND_BALLS_IMAGE_PATH);
+        gameEngine.setLives(10);
+        map = new Map(levelNumber);
+        gameEngine.setGame(anchorPane, map, newplayer);
+        map.loadMap(Define.SCREEN_WIDTH-150, Define.SCREEN_HEIGHT);
+
+        for (Bricks b : map.getBrickGroup()) {
+            b.setSence(scene);
+            anchorPane.getChildren().add(b.getNode());
+        }
+
+        gameEngine.update();
+        newplayer.setScene(scene);
+        anchorPane.getChildren().add(newplayer.getNode());
+        loadBackgroundForLevel(levelNumber);
+        gameEngine.addBall();
+        gameEngine.setLives(10);
+
     }
 
 

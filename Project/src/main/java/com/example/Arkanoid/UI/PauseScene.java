@@ -26,6 +26,7 @@ public class PauseScene {
             stage.setScene(scene);
             stage.setResizable(false);
             stage.show();
+
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Khong tim thay file PauseMenu.fxml");

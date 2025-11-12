@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import main.java.com.example.Arkanoid.Utlis.SceneNavigator;
 
 public class PauseController {
-    private GameController gameController; // tham chiếu tới game hiện tại
+    private static GameController gameController; // tham chiếu tới game hiện tại
     private Stage stage;
 
     public void setStage(Stage stage) {
@@ -23,13 +23,21 @@ public class PauseController {
         stage.close();
     }
 
+    public static void setGameController(GameController gameController) {
+        gameController = gameController;
+
+        
+    }
+
     @FXML
     public void restartLevel() {
-        stage.close();
-        Stage newStage = (Stage) stage.getOwner();
-        GameScene gameScene = new GameScene(newStage);
-        gameScene.show();
+        gameController.restartLevel();
+
     }
+
+
+
+
 
     @FXML
     public void setting() {
