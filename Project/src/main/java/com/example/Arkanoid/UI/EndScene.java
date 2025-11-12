@@ -3,8 +3,8 @@ package main.java.com.example.Arkanoid.UI;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
-import main.java.arkanoid.engine.Define;
 import javafx.scene.Scene;
+import main.java.arkanoid.engine.Define;
 
 public class EndScene {
     private Stage stage;

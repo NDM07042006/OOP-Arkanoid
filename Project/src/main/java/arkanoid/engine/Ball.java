@@ -104,8 +104,8 @@ public class Ball extends GameObject {
 
         sprite.setX(pos_X);
         sprite.setY(pos_Y);
-        sprite.setFitWidth(15);  // chỉnh kích thước nếu cần
-        sprite.setFitHeight(15);
+        sprite.setFitWidth(20);  // chỉnh kích thước nếu cần
+        sprite.setFitHeight(20);
     }
 
 
@@ -121,8 +121,15 @@ public class Ball extends GameObject {
         sprite.setX(pos_X);
         sprite.setY(pos_Y);
 
-        if (pos_X <= 0 || pos_X >= Define.SCREEN_WIDTH - 16) {vel_X = - vel_X;}
-        if (pos_Y <= 0 || pos_Y >= Define.SCREEN_HEIGHT - 16) {vel_Y = - vel_Y;}
+        if (pos_X <= 0 ) {
+            vel_X = Math.abs(vel_X);
+        }
+        else if (pos_X >= Define.SCREEN_WIDTH - 16) {vel_X = -Math.abs(vel_X);;}
+
+        if (pos_Y <= 0 ) {
+            vel_Y = Math.abs(vel_Y);
+        }
+        else if (pos_Y >= Define.SCREEN_HEIGHT + 50) {destroyed = true;}
 
     }
 

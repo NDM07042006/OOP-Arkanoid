@@ -17,16 +17,16 @@ public class SceneCache {
     private static SceneCache instance;
     private Map<String, Scene> sceneCache = new HashMap<>();
     private Map<String, Object> controllerCache = new HashMap<>();
-    
+
     private SceneCache() {}
-    
+
     public static SceneCache getInstance() {
         if (instance == null) {
             instance = new SceneCache();
         }
         return instance;
     }
-    
+
     /**
      * Preload một scene trong background
      */
@@ -37,7 +37,7 @@ public class SceneCache {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
                 Parent root = loader.load();
                 Object controller = loader.getController();
-                
+
                 Platform.runLater(() -> {
                     Scene scene = new Scene(root);
                     sceneCache.put(sceneName, scene);
@@ -50,47 +50,47 @@ public class SceneCache {
             }
         });
     }
-    
+
     /**
      * Preload nhiều scenes cùng lúc
      */
     public void preloadAll() {
         System.out.println("🚀 Starting scene preload...");
-        
+
         // Preload MenuScene trước (quan trọng!)
         preloadScene(Define.MENU_GAME_PATH, "menu");
-        
+
         // Preload các scene nhẹ
         preloadScene(Define.LEVELS_PATH, "levels");
         preloadScene(Define.HIGH_SCORES_PATH, "highscores");
-        
+
         // Preload GameScene - quan trọng nhất!
         preloadScene(Define.GAME_SCENE_PATH, "game");
-        
+
         System.out.println("✅ Scene preload initiated");
     }
-    
+
     /**
      * Lấy scene đã cache (instant)
      */
     public Scene getCachedScene(String sceneName) {
         return sceneCache.get(sceneName);
     }
-    
+
     /**
      * Lấy controller đã cache
      */
     public Object getCachedController(String sceneName) {
         return controllerCache.get(sceneName);
     }
-    
+
     /**
      * Kiểm tra scene đã được cache chưa
      */
     public boolean isCached(String sceneName) {
         return sceneCache.containsKey(sceneName);
     }
-    
+
     /**
      * Xóa cache của một scene
      */
@@ -98,7 +98,7 @@ public class SceneCache {
         sceneCache.remove(sceneName);
         controllerCache.remove(sceneName);
     }
-    
+
     /**
      * Xóa toàn bộ cache
      */
@@ -106,7 +106,7 @@ public class SceneCache {
         sceneCache.clear();
         controllerCache.clear();
     }
-    
+
     /**
      * Load hoặc lấy từ cache
      */
@@ -121,11 +121,11 @@ public class SceneCache {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
                     Parent root = loader.load();
                     Object controller = loader.getController();
-                    
+
                     Scene scene = new Scene(root);
                     sceneCache.put(sceneName, scene);
                     controllerCache.put(sceneName, controller);
-                    
+
                     return scene;
                 } catch (Exception e) {
                     e.printStackTrace();

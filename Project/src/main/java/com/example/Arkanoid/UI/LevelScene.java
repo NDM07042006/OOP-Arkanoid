@@ -17,7 +17,7 @@ public class LevelScene {
     public void show() {
         // Thử lấy từ cache trước
         Scene cachedScene = SceneCache.getInstance().getCachedScene("levels");
-        
+
         if (cachedScene != null) {
             // Sử dụng cached scene (instant!)
             System.out.println("⚡ Using cached LevelScene");
@@ -25,14 +25,14 @@ public class LevelScene {
             if (controller != null) {
                 controller.setStage(stage);
             }
-            
+
             stage.setTitle("Select Level");
             stage.setScene(cachedScene);
             stage.setResizable(false);
             stage.show();
             return;
         }
-        
+
         // Nếu chưa cache, load bình thường
         try {
             System.out.println("🔄 Loading LevelScene from FXML");
@@ -43,10 +43,10 @@ public class LevelScene {
             controller.setStage(stage);
 
             Scene scene = new Scene(root);
-            
+
             // Cache lại cho lần sau
             SceneCache.getInstance().getCachedScene("levels"); // Will cache it
-            
+
             stage.setTitle("Select Level");
             stage.setScene(scene);
             stage.setResizable(false);

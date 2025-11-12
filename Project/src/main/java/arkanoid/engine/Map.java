@@ -38,6 +38,55 @@ public class Map {
 
     } ;
 
+    private int[][] lv2 = {
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 4, 3, 2, 1, 0, 0, 0, 0, 0},
+            {0, 4, 3, 2, 1, 4, 0, 0, 0, 0},
+            {0, 4, 3, 2, 1, 4, 3, 0, 0, 0},
+            {0, 4, 3, 2, 1, 4, 3, 2, 0, 0},
+            {0, 4, 3, 2, 1, 4, 3, 2, 1, 0},
+            {5, 5, 5, 5, 5, 5, 5, 5, 5, 1},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+
+    } ;
+
+
+    private int[][] lv3 = {
+            {0, 0, 0, 4, 4, 4, 4, 0, 0, 0},
+            {0, 0, 4, 4, 3, 3, 4, 4, 0, 0},
+            {0, 4, 4, 3, 2, 2, 3, 4, 4, 0},
+            {4, 4, 3, 2, 1, 1, 2, 3, 4, 4},
+            {4, 3, 2, 1, 1, 1, 1, 2, 3, 4},
+            {4, 3, 2, 1, 0, 0, 1, 2, 3, 4},
+            {5, 5, 5, 0, 0, 0, 0, 5, 5, 5},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+
+    } ;
+
+
+    private int[][] lv4 = {
+            {0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0},
+            {0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0},
+            {0, 0, 0, 1, 1, 4, 1, 1, 1, 4, 1, 1, 0, 0, 0},
+            {0, 0, 1, 1, 1, 4, 1, 1, 1, 4, 1, 1, 1, 0, 0},
+            {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0},
+            {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0},
+            {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0},
+            {0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
+            {0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    };
+
+
     private int[][] lv5 = {
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -56,24 +105,25 @@ public class Map {
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     };
 
-    private int[][] lv2 = {
-            {1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-            {0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0},
-            {0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-            {0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 2, 2},
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 2},
-            {0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1},
-            {0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-            {0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 2},
+    private int[][] lv6 = {
+            {5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5},
+            {0, 0, 4, 4, 0, 0, 3, 3, 0, 0, 2, 2, 0, 0, 9},
+            {0, 0, 4, 4, 0, 0, 3, 3, 0, 0, 2, 2, 0, 9, 0},
+            {0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5},
+            {9, 0, 0, 3, 3, 0, 0, 2, 2, 0, 0, 1, 1, 0, 0},
+            {0, 9, 0, 3, 3, 0, 0, 2, 2, 0, 0, 1, 1, 0, 0},
+            {5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0},
+            {0, 0, 4, 4, 0, 0, 3, 3, 0, 0, 2, 2, 0, 0, 9},
+            {0, 0, 4, 4, 0, 0, 3, 3, 0, 0, 2, 2, 0, 9, 0},
+            {0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5},
+            {9, 0, 0, 3, 3, 0, 0, 2, 2, 0, 0, 1, 1, 0, 0},
+            {0, 9, 0, 3, 3, 0, 0, 2, 2, 0, 0, 1, 1, 0, 0},
+            {5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    };
 
-    } ;
+
 
     private int[][] lv9 = {
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -111,11 +161,7 @@ public class Map {
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
     };
 
-
     //            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-
-
-
 
     public static ArrayList<Bricks> brickGroup = new ArrayList<>();
     private Scene secne;
@@ -130,9 +176,20 @@ public class Map {
             this.lv = lv1;
         }
         if (type_of_map == 2) {
+            this.row = 10;
+            this.column = 10;
+            this.lv = lv2;
+        }
+
+        if (type_of_map == 3) {
+            this.row = 10;
+            this.column = 10;
+            this.lv = lv3;
+        }
+        if (type_of_map == 4) {
             this.row = 15;
             this.column = 15;
-            this.lv = lv2;
+            this.lv = lv4;
         }
         if (type_of_map == 5) {
             this.row = 15;
@@ -140,7 +197,21 @@ public class Map {
             this.lv = lv5;
         }
 
+        if (type_of_map == 6) {
+            this.row = 15;
+            this.column = 15;
+            this.lv = lv6;
 
+        }
+
+
+
+
+        if (type_of_map == 9) {
+            this.row = 15;
+            this.column = 15;
+            this.lv = lv9;
+        }
         if (type_of_map == 10) {
             this.row = 15;
             this.column = 15;
@@ -150,11 +221,7 @@ public class Map {
 
 
 
-        if (type_of_map == 9) {
-            this.row = 15;
-            this.column = 15;
-            this.lv = lv9;
-        }
+
     }
 
     public void setSecne(Scene scene) {
@@ -169,6 +236,7 @@ public class Map {
 
 
     public void loadMap(int screenWidth, int screenHeight) {
+        int offsetY = 50;
         for (int t = 0; t < row; t++) {
             for (int i = 0; i < column; i++) {
                 switch (lv[t][i]) {
@@ -176,8 +244,8 @@ public class Map {
                         break;
                     case 1:
                         Bricks GreenBrick = new Bricks(
-                                i * screenWidth / column, // X position
-                                t * screenWidth / column/ 2,   // Y position
+                                80+i * screenWidth / column, // X position
+                                 t * screenWidth / column/ 2,   // Y position
                                 Define.BRICKS_IMAGE_PATH,
                                 112, 16,
                                 screenWidth, screenHeight,
@@ -189,7 +257,7 @@ public class Map {
                         break;
                     case 2:
                         Bricks YellowBrick = new Bricks(
-                                i * screenWidth / column, // X position
+                                80+i * screenWidth / column, // X position
                                 t * screenWidth / column/ 2,   // Y position
                                 Define.BRICKS_IMAGE_PATH,
                                 112, 32,
@@ -201,7 +269,7 @@ public class Map {
                         break;
                     case 3:
                         Bricks OrangeBrick = new Bricks(
-                                i * screenWidth / column, // X position
+                                80+i * screenWidth / column, // X position
                                 t * screenWidth / column/ 2,   // Y position
                                 Define.BRICKS_IMAGE_PATH,
                                 112, 48,
@@ -213,7 +281,7 @@ public class Map {
                         break;
                     case 4:
                         Bricks RedBrick = new Bricks(
-                                i * screenWidth / column, // X position
+                                80+i * screenWidth / column, // X position
                                 t * screenWidth / column/ 2,   // Y position
                                 Define.BRICKS_IMAGE_PATH,
                                 112, 64,
@@ -225,10 +293,10 @@ public class Map {
                         break;
                     case 9:
                         Bricks PowerUpBrick = new Bricks(
-                                i * screenWidth / column, // X position
+                                80+i * screenWidth / column, // X position
                                 t * screenWidth / column/ 2,   // Y position
                                 Define.BRICKS_IMAGE_PATH,
-                                112, 32,
+                                112, 0,
                                 screenWidth, screenHeight,
                                 row, column, 2
                         );
@@ -236,9 +304,10 @@ public class Map {
                         PowerUpBrick.setPowerUp_Type(1);
                         PowerUpBrick.setPoint_given(100);
                         brickGroup.add(PowerUpBrick);
+                        break;
                     case 5:
                         Bricks HardBrick = new Bricks(
-                                i * screenWidth / column, // X position
+                                80+i * screenWidth / column, // X position
                                 t * screenWidth / column/ 2,   // Y position
                                 Define.BRICKS_IMAGE_PATH,
                                 112, 64+16,

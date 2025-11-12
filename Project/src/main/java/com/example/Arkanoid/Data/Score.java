@@ -76,15 +76,15 @@ public class Score {
         if (isHighScore()) {
             HighScoreEntry newEntry = new HighScoreEntry(playerName, score);
             highScoreEntries.add(newEntry);
-            
+
             // Sort giảm dần (điểm cao nhất trước)
             Collections.sort(highScoreEntries);
-            
+
             // Giới hạn chỉ giữ top MAX_HIGH_SCORES
             if (highScoreEntries.size() > MAX_HIGH_SCORES) {
                 highScoreEntries = new ArrayList<>(highScoreEntries.subList(0, MAX_HIGH_SCORES));
             }
-            
+
             saveHighScore(highScoreEntries);
             System.out.println("High score added: " + newEntry);
         }
@@ -95,7 +95,7 @@ public class Score {
             // Tạo thư mục Data nếu chưa tồn tại
             File file = new File(FILE_PATH);
             file.getParentFile().mkdirs();
-            
+
             try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_PATH))) {
                 oos.writeObject(entries);
                 System.out.println("High scores saved to: " + FILE_PATH);
@@ -117,7 +117,7 @@ public class Score {
             return new ArrayList<>();
         }
     }
-    
+
     // Method để lấy high score cao nhất
     public int getTopHighScore() {
         if (highScoreEntries.isEmpty()) {
@@ -125,19 +125,19 @@ public class Score {
         }
         return highScoreEntries.get(0).getScore();
     }
-    
+
     // Method để reset điểm hiện tại (khi bắt đầu game mới)
     public void resetScore() {
         score = 0;
     }
-    
+
     // Method để prompt người chơi nhập tên
     public static String promptForPlayerName() {
         TextInputDialog dialog = new TextInputDialog("Player");
         dialog.setTitle("New High Score!");
         dialog.setHeaderText("Congratulations! You achieved a high score!");
         dialog.setContentText("Enter your name:");
-        
+
         return dialog.showAndWait().orElse("Anonymous");
     }
 }

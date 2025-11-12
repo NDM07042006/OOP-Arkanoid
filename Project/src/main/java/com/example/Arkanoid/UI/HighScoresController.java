@@ -10,10 +10,10 @@ import main.java.com.example.Arkanoid.Utlis.SoundManager;
 import java.util.List;
 
 public class HighScoresController {
-    
+
     @FXML
     private ListView<String> highScoreListView;
-    
+
     private Stage stage;
 
     public void setStage(Stage stage) {
@@ -27,16 +27,16 @@ public class HighScoresController {
 
     private void loadHighScores() {
         System.out.println("🔍 HighScoresController: loadHighScores() called");
-        
+
         // Tạo Score object để load high scores
         Score scoreData = new Score();
         List<HighScoreEntry> highScores = scoreData.getHighScoreEntries();
-        
+
         System.out.println("🔍 Loaded " + highScores.size() + " high score entries");
-        
+
         // Xóa dữ liệu cũ
         highScoreListView.getItems().clear();
-        
+
         if (highScores.isEmpty()) {
             System.out.println("⚠️ No high scores found!");
             highScoreListView.getItems().add("No high scores yet!");
@@ -50,22 +50,22 @@ public class HighScoresController {
                 String rank = String.format("#%d", i + 1);
                 String name = entry.getPlayerName();
                 String score = String.format("%,d", entry.getScore());
-                
+
                 // Format: #1  PlayerName ........ 5,000
                 String displayText = String.format("%-5s %-15s %10s pts", rank, name, score);
                 highScoreListView.getItems().add(displayText);
                 System.out.println("   " + displayText);
             }
         }
-        
+
         // Style cho ListView items
         highScoreListView.setStyle(
-            "-fx-font-size: 18px; " +
-            "-fx-font-family: 'Monospaced'; " +
-            "-fx-text-fill: white; " +
-            "-fx-background-color: #16213e;"
+                "-fx-font-size: 18px; " +
+                        "-fx-font-family: 'Monospaced'; " +
+                        "-fx-text-fill: white; " +
+                        "-fx-background-color: #16213e;"
         );
-        
+
         System.out.println("✅ High scores loaded successfully!");
     }
 

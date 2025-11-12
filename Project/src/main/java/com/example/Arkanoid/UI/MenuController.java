@@ -7,8 +7,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import main.java.com.example.Arkanoid.Utlis.SoundManager;
 import main.java.arkanoid.engine.Define;
+import main.java.com.example.Arkanoid.Utlis.SoundManager;
 import main.java.com.example.Arkanoid.Utlis.SceneNavigator;
 
 public class MenuController {
@@ -20,7 +20,7 @@ public class MenuController {
     private Slider volumeSlider;
 
     private Stage stage;
-    
+
     // Cooldown để tránh spam hover sound
     private long lastHoverTime = 0;
     private static final long HOVER_COOLDOWN = 200; // 200ms
@@ -42,36 +42,37 @@ public class MenuController {
     @FXML
     private void startGame() {
         System.out.println("⚡ Starting Game from Menu...");
-        
+
         // Play sound
         SoundManager.getInstance().playButtonClick();
-        
+
         // Chuyển scene ngay lập tức
         javafx.application.Platform.runLater(() -> {
             SceneNavigator.goToGame(stage, 1);
         });
+
     }
 
     @FXML
     private void showHighScores() {
         System.out.println("⚡ Opening High Scores...");
-        
+
         // Play sound
         SoundManager.getInstance().playButtonClick();
-        
+
         // Chuyển scene ngay lập tức
         javafx.application.Platform.runLater(() -> {
             SceneNavigator.goToHighScores(stage);
         });
     }
-    
+
     @FXML
     private void showLevels() {
         System.out.println("⚡ Opening Levels...");
-        
+
         // Play sound
         SoundManager.getInstance().playButtonClick();
-        
+
         // Chuyển scene ngay lập tức
         javafx.application.Platform.runLater(() -> {
             SceneNavigator.goToLevels(stage);
@@ -117,7 +118,7 @@ public class MenuController {
             stage.close();
         }
     }
-    
+
     // Method để add vào FXML cho hover effect
     @FXML
     private void onButtonHover() {

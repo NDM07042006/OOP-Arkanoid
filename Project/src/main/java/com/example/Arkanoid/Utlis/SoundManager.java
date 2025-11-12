@@ -1,7 +1,6 @@
 package main.java.com.example.Arkanoid.Utlis;
 
 import javafx.scene.media.AudioClip;
-import main.java.arkanoid.engine.Define;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -90,20 +89,20 @@ public class SoundManager {
         System.out.println("\n========== LOADING SOUNDS ==========");
 
         // === MENU SOUNDS ===
-        loadSoundEffect("button_hover", Define.BUTTON_HOVER_SOUND);
-        loadSoundEffect("button_click", Define.BUTTON_CLICK_SOUND);
+        loadSoundEffect("button_hover", "/com/Arkanoid/sounds/button_hover.mp3");
+        loadSoundEffect("button_click", "/com/Arkanoid/sounds/button_click.wav");
 
         // === GAME SOUNDS ===
-        loadSoundEffect("paddle_hit", Define.PADDLE_HIT_SOUND);
-        loadSoundEffect("wall_hit", Define.WALL_HIT_SOUND);
-        loadSoundEffect("brick_break", Define.BRICK_BREAK_SOUND);
-        loadSoundEffect("life_lost", Define.LIFE_LOST_SOUND);
-        loadSoundEffect("level_complete", Define.LEVEL_COMPLETE_SOUND);
-        loadSoundEffect("game_over", Define.GAME_OVER_SOUND);
+        loadSoundEffect("paddle_hit", "/com/Arkanoid/sounds/paddle_hit.wav");
+        loadSoundEffect("wall_hit", "/com/Arkanoid/sounds/wall_hit.wav");
+        loadSoundEffect("brick_break", "/com/Arkanoid/sounds/brick_break.wav");
+        loadSoundEffect("life_lost", "/com/Arkanoid/sounds/lost_life.wav");
+        loadSoundEffect("level_complete", "/com/Arkanoid/sounds/level_complete.wav");
+        loadSoundEffect("game_over", "/com/Arkanoid/sounds/game_over.wav");
 
         // === BACKGROUND MUSIC ===
-        loadBackgroundMusic("menu", Define.MENU_THEME_MUSIC);
-        loadBackgroundMusic("game", Define.GAME_THEME_MUSIC);
+        loadBackgroundMusic("menu", "/com/Arkanoid/sounds/menu_theme.mp3");
+        loadBackgroundMusic("game", "/com/Arkanoid/sounds/game_theme.mp3");
 
         System.out.println("====================================\n");
     }
@@ -118,12 +117,7 @@ public class SoundManager {
 
         AudioClip clip = soundEffects.get(name);
         if (clip != null) {
-            try {
-                clip.play();
-            } catch (Exception e) {
-                // Bỏ qua lỗi âm thanh để không làm gián đoạn game
-                System.err.println("⚠ Error playing sound effect " + name + ": " + e.getMessage());
-            }
+            clip.play();
         }
     }
 
@@ -135,12 +129,7 @@ public class SoundManager {
 
         AudioClip clip = soundEffects.get(name);
         if (clip != null) {
-            try {
-                clip.play(volumeMultiplier * sfxVolume);
-            } catch (Exception e) {
-                // Bỏ qua lỗi âm thanh để không làm gián đoạn game
-                System.err.println("⚠ Error playing sound effect " + name + ": " + e.getMessage());
-            }
+            clip.play(volumeMultiplier * sfxVolume);
         }
     }
 
@@ -214,13 +203,13 @@ public class SoundManager {
             // Phát nhạc mới trong background thread để không block UI
             final AudioClip musicToPlay = newMusic;
             final String musicName = name;
-            
+
             new Thread(() -> {
                 try {
                     System.out.println("Playing music: " + musicName + " at volume: " + musicToPlay.getVolume());
                     musicToPlay.play();
                     System.out.println("✓ Started playing: " + musicName);
-                    
+
                     // Kiểm tra xem có đang phát không
                     if (musicToPlay.isPlaying()) {
                         System.out.println("✓ Music is currently playing!");
@@ -232,10 +221,10 @@ public class SoundManager {
                     e.printStackTrace();
                 }
             }).start();
-            
+
             currentMusic = newMusic;
             currentMusicName = name;
-            
+
         } catch (Exception e) {
             System.err.println("✗ Error playing music " + name + ": " + e.getMessage());
             e.printStackTrace();
@@ -309,12 +298,12 @@ public class SoundManager {
      */
     public void setMusicVolume(double volume) {
         this.musicVolume = Math.max(0.0, Math.min(1.0, volume));
-        
+
         // Update tất cả music clips trong map
         for (AudioClip clip : backgroundMusics.values()) {
             clip.setVolume(this.musicVolume);
         }
-        
+
         // QUAN TRỌNG: Update currentMusic đang phát (nếu có)
         if (currentMusic != null) {
             currentMusic.setVolume(this.musicVolume);
@@ -335,7 +324,7 @@ public class SoundManager {
     public void setMusicEnabled(boolean enabled) {
         this.musicEnabled = enabled;
         System.out.println("Music " + (enabled ? "enabled" : "disabled"));
-        
+
         if (!enabled) {
             // Tắt nhạc - dừng nhạc hiện tại
             if (currentMusic != null && currentMusic.isPlaying()) {

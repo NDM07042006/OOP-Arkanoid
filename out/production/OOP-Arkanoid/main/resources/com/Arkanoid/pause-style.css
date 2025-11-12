@@ -1,0 +1,85 @@
+/* Menu Background */
+.root {
+    -fx-background-color: transparent;
+}
+
+/* Pause Buttons - Style chung */
+.pause-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-border-width: 0;
+    -fx-cursor: hand;
+}
+
+/* Resume button */
+.resume-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFD700;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.resume-button:hover {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFA500;
+}
+
+/* Restart button - Màu xanh lá */
+.restart-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #4CAF50;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.restart-button:hover {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFD700;
+}
+
+/* Setting button */
+.setting-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ff00ff;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.setting-button:hover {
+    -fx-background-color: transparent;
+    -fx-text-fill: #be44c2;
+}
+
+/* Menu button - Màu đỏ */
+.menu-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #F44336;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.menu-button:hover {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFD700;
+}
+
+/* Exit button */
+.exit-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #99b4c0;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.exit-button:hover {
+    -fx-background-color: transparent;
+    -fx-text-fill: #96abb1;
+}

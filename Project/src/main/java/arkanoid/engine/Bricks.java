@@ -47,7 +47,7 @@ public class Bricks extends GameObject {
         return currrentPoints;
     }
 
-    public void setCurrrentPoints(double minusPoint) {
+    public void setCurrrentPoints(int minusPoint) {
         this.currrentPoints -= minusPoint;
     }
 

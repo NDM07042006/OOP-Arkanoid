@@ -17,7 +17,7 @@ public class HighScoresScene {
     public void show() {
         // Thử lấy từ cache trước
         Scene cachedScene = SceneCache.getInstance().getCachedScene("highscores");
-        
+
         if (cachedScene != null) {
             // Sử dụng cached scene (instant!)
             System.out.println("⚡ Using cached HighScoresScene");
@@ -27,14 +27,14 @@ public class HighScoresScene {
                 // Reload data để có điểm mới nhất
                 controller.initialize();
             }
-            
+
             stage.setTitle("High Scores");
             stage.setScene(cachedScene);
             stage.setResizable(false);
             stage.show();
             return;
         }
-        
+
         // Nếu chưa cache, load bình thường
         try {
             System.out.println("🔄 Loading HighScoresScene from FXML");

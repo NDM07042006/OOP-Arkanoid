@@ -31,7 +31,7 @@ public class Lives {
         this.balls = balls;
     }
 
-    
+
 
     public void updateLives() {
         if (balls.isEmpty()) {

@@ -14,13 +14,13 @@ public class Define {
     public static final String PADDLES_AND_BALLS_IMAGE_PATH = "/com/Arkanoid/img/paddles_and_balls.png";
     public static final String BRICKS_IMAGE_PATH            = "/com/Arkanoid/img/bricks.png";
     public static final String PAUSE_BUTTON_IMAGE_PATH      = "/com/Arkanoid/images/pause.png";
-    
+
     // Backgrounds (base path, append level number + extension)
     public static final String BACKGROUND_BASE_PATH         = "/com/Arkanoid/images/background_";
-    
+
     // UI Images
     public static final String UI_09_IMAGE_PATH             = "/com/Arkanoid/images/Ui_09.png";
-    
+
     // ==================== FXML PATHS ====================
     public static final String END_SCREEN_PATH              = "/com/Arkanoid/EndScreen.fxml";
     public static final String MENU_GAME_PATH               = "/com/Arkanoid/MenuGame.fxml";
@@ -29,7 +29,7 @@ public class Define {
     public static final String GAME_SCENE_PATH              = "/com/Arkanoid/GameScene.fxml";
     public static final String LEVELS_PATH                  = "/com/Arkanoid/Levels.fxml";
     public static final String HIGH_SCORES_PATH             = "/com/Arkanoid/HighScores.fxml";
-    
+
     // ==================== SOUND PATHS ====================
     // Sound Effects
     public static final String BUTTON_HOVER_SOUND           = "/com/Arkanoid/sounds/button_hover.wav";
@@ -40,7 +40,7 @@ public class Define {
     public static final String LIFE_LOST_SOUND              = "/com/Arkanoid/sounds/lost_life.wav";
     public static final String LEVEL_COMPLETE_SOUND         = "/com/Arkanoid/sounds/level_complete.wav";
     public static final String GAME_OVER_SOUND              = "/com/Arkanoid/sounds/game_over.wav";
-    
+
     // Background Music
     public static final String MENU_THEME_MUSIC             = "/com/Arkanoid/sounds/menu_theme.wav";
     public static final String GAME_THEME_MUSIC             = "/com/Arkanoid/sounds/game_theme.wav";
