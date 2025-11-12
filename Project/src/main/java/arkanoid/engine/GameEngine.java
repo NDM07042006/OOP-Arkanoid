@@ -42,6 +42,23 @@ public class GameEngine {
     public void setLives(int lives) {
         this.lives = lives;
     }
+    
+    /**
+     * Check if game is over (lives <= 0)
+     */
+    public boolean isGameOver() {
+        return lives <= 0;
+    }
+    
+    /**
+     * Check if player wins (all bricks destroyed)
+     */
+    public boolean isWin() {
+        if (map == null || map.getBrickGroup() == null) {
+            return false;
+        }
+        return map.getBrickGroup().isEmpty();
+    }
 
     public void addLife() {
         lives++;

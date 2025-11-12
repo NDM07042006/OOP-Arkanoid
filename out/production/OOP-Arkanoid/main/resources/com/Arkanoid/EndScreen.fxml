@@ -9,11 +9,11 @@
     <children>
         <!-- Background Image (Game Over / You Win) -->
         <ImageView fx:id="backgroundImage" fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="false" />
-        <Label layoutX="280.0" layoutY="190.0" text="Score: 0" />
-        <Label layoutX="265.0" layoutY="220.0" text="High Score: 0" />
-        <Label layoutX="284.0" layoutY="250.0" text="Level: 0" />
-        <Button fx:id="restartButton" layoutX="102.0" layoutY="350.0" mnemonicParsing="false" onAction="#Restart" text="Restart" />
-        <Button fx:id="menuButton" layoutX="275.0" layoutY="350.0" mnemonicParsing="false" onAction="#Menu" text="Menu" />
-        <Button fx:id="nextLevelButton" layoutX="412.0" layoutY="350.0" mnemonicParsing="false" onAction="#NextLevel" text="Next Level" />
+        <Label fx:id="scoreLabel" layoutX="280.0" layoutY="190.0" text="Score: 0" styleClass="end-score-label" />
+        <Label fx:id="highScoreLabel" layoutX="265.0" layoutY="220.0" text="High Score: 0" styleClass="end-highscore-label" />
+        <Label fx:id="levelLabel" layoutX="284.0" layoutY="250.0" text="Level: 0" styleClass="end-level-label" />
+        <Button fx:id="restartButton" layoutX="102.0" layoutY="350.0" mnemonicParsing="false" onAction="#Restart" text="Restart" styleClass="restart-button" />
+        <Button fx:id="menuButton" layoutX="275.0" layoutY="350.0" mnemonicParsing="false" onAction="#Menu" text="Menu" styleClass="menu-button" />
+        <Button fx:id="nextLevelButton" layoutX="412.0" layoutY="350.0" mnemonicParsing="false" onAction="#NextLevel" text="Next Level" styleClass="next-level-button" />
     </children>
 </AnchorPane>

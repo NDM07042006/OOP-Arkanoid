@@ -105,7 +105,7 @@ public class GameController {
             scene = anchorPane.getScene();
             map = new Map(level);
             gameEngine.setGame(anchorPane, map, player);
-            map.loadMap(Define.BACKGROUND_WIDTH, Define.BACKGROUND_HEIGHT);
+            map.loadMap(Define.SCREEN_WIDTH, Define.SCREEN_HEIGHT);
 
             for (Bricks b : map.getBrickGroup()) {
                 b.setSence(scene);
@@ -188,11 +188,25 @@ public class GameController {
                 @Override
                 public void handle(long now) {
                     if (gameEngine != null) {
-                    gameEngine.update();
-                    gameEngine.CheckAllCollision();
-
+                        gameEngine.update();
+                        gameEngine.CheckAllCollision();
+                        
+                        // Update UI labels
+                        updateLives(gameEngine.getLives());
+                        updateScore(gameEngine.getScore().getScore());
+                        
+                        // Check game over
+                        if (gameEngine.isGameOver()) {
+                            mainLoop.stop();
+                            showEndScreen(false); // false = thua
+                        }
+                        
+                        // Check win
+                        if (gameEngine.isWin()) {
+                            mainLoop.stop();
+                            showEndScreen(true); // true = thắng
+                        }
                     }
-
                 }
             };
             mainLoop.start();
@@ -229,7 +243,7 @@ public class GameController {
 
             // Set vị trí background ở góc trên bên trái
             AnchorPane.setTopAnchor(newBackground, 0.0);
-            AnchorPane.setLeftAnchor(newBackground, (Double) 150.0);
+            AnchorPane.setLeftAnchor(newBackground, 0.0);
             AnchorPane.setRightAnchor(newBackground, 0.0);
             AnchorPane.setBottomAnchor(newBackground, 0.0);
 
@@ -319,24 +333,34 @@ public class GameController {
         loadBackgroundForLevel(levelNumber);
         gameEngine.addBall();
         gameEngine.setLives(10);
+
     }
 
     public void closeLevel() {
         gameEngine.destroyAll();
-
     }
-    /*
-    @FXML
-
-    public void endGame() {
-        if (live == 0){
-            stage.close();
-            EndScene endScene = (EndScene)
+    
+    /**
+     * Show end screen with win/lose status
+     * @param isWin true = thắng, false = thua
+     */
+    private void showEndScreen(boolean isWin) {
+        try {
+            // Stop game
+            if (mainLoop != null) {
+                mainLoop.stop();
+            }
+            
+            // Create EndScene with win/lose status
+            EndScene endScene = new EndScene(stage, isWin);
+            endScene.show();
+            
+            System.out.println("✅ Showing end screen: " + (isWin ? "YOU WIN!" : "GAME OVER"));
+        } catch (Exception e) {
+            System.err.println("❌ Error showing end screen: " + e.getMessage());
+            e.printStackTrace();
         }
     }
-
-
-     */
 
 
 
