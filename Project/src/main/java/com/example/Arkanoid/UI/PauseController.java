@@ -23,10 +23,10 @@ public class PauseController {
         stage.close();
     }
 
-    public static void setGameController(GameController gameController) {
-        gameController = gameController;
+    public static void setGameController(GameController game) {
+        gameController = game;
+        System.out.println("d");
 
-        
     }
 
     @FXML
@@ -72,6 +72,7 @@ public class PauseController {
     public void menu() {
         // Đóng pause window
 
+        gameController.closeLevel();
         stage.close();
 
 

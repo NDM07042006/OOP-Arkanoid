@@ -15,6 +15,7 @@ public class CheckPowerUpAndPaddle extends CheckCollision {
     protected void check() {
         Iterator<PowerUp> powerUpIterator = powerUps.iterator();
         while (powerUpIterator.hasNext()) {
+            if (paddle != null) {
             PowerUp powerUp = powerUpIterator.next();
             if (powerUp.getSprite().getBoundsInParent().intersects(paddle.getSprite().getBoundsInParent())) {
                 /*
@@ -24,6 +25,7 @@ public class CheckPowerUpAndPaddle extends CheckCollision {
                 powerUpIterator.remove();
             }
         }
+    }
     }
 
     private void safeRemove(PowerUp powerUp) {

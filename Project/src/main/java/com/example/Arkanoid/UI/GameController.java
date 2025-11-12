@@ -289,7 +289,8 @@ public class GameController {
     @FXML
     public void restartLevel() {
         gameEngine.destroyAll();
-        gameEngine.update();
+
+        System.out.println("Testing runing ksgdfjkhabsdfuvsdjbfhgasfdghfnadtftghaysgedfbioahsbdfuiohaksduyfgboyyesgdf");
         Paddle newplayer = new Paddle(200, 500, Define.PADDLES_AND_BALLS_IMAGE_PATH);
         gameEngine.setLives(10);
         map = new Map(levelNumber);
@@ -307,6 +308,11 @@ public class GameController {
         loadBackgroundForLevel(levelNumber);
         gameEngine.addBall();
         gameEngine.setLives(10);
+
+    }
+
+    public void closeLevel() {
+        gameEngine.destroyAll();
 
     }
 

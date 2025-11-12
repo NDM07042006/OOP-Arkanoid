@@ -60,6 +60,7 @@ public class SceneNavigator {
                 controller.setStage(stage);
                 controller.setLevel(level);
             }
+            PauseController.setGameController(controller);
 
             stage.setScene(cachedScene);
             stage.setTitle("Game - Level " + level);

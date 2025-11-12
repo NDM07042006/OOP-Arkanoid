@@ -50,7 +50,7 @@ public class GameScene2 {
                 gameController.setStage(stage);
                 gameController.setLevel(levelNumber);
             }
-            PauseController.setGameController(gameController);
+
             stage.setTitle("Game - Level " + levelNumber);
             stage.setScene(scene);
             stage.setResizable(false);
