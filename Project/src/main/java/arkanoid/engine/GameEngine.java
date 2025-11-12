@@ -155,6 +155,7 @@ public class GameEngine {
 
     public void addScore(int point){
         score.addScore(point);
+        System.out.println("💰 Added " + point + " points, total: " + score.getScore());
     }
 
     /*

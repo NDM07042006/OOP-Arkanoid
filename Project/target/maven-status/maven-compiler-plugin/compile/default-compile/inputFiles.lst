@@ -1,6 +1,8 @@
 /home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/arkanoid/engine/Define.java
+/home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/arkanoid/engine/PowerUp/Main.java
 /home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/com/example/Arkanoid/Utlis/SceneNavigator.java
 /home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/com/example/Arkanoid/Data/Score.java
+/home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/arkanoid/engine/PowerUp/ExtraLife.java
 /home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/com/example/Arkanoid/UI/EndController.java
 /home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/arkanoid/engine/GameEngine.java
 /home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/com/example/Arkanoid/UI/GameScene2.java
@@ -38,6 +40,7 @@
 /home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/com/example/Arkanoid/Main.java
 /home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/com/example/Arkanoid/Utlis/Animations/Animation.java
 /home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/com/example/Arkanoid/Utlis/Animations/ParticleSystem.java
+/home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/arkanoid/engine/PowerUp/PointBonus.java
 /home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/arkanoid/engine/PowerUp/FastBall.java
 /home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/com/example/Arkanoid/UI/HighScoresController.java
 /home/mrnam/Desktop/OOP-Arkanoid/Project/src/main/java/arkanoid/engine/PowerUp/SlowBall.java

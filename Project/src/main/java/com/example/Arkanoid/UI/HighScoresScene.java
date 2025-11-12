@@ -24,8 +24,7 @@ public class HighScoresScene {
             HighScoresController controller = (HighScoresController) SceneCache.getInstance().getCachedController("highscores");
             if (controller != null) {
                 controller.setStage(stage);
-                // Reload data để có điểm mới nhất
-                controller.initialize();
+                // setStage sẽ tự động reload dữ liệu
             }
 
             stage.setTitle("High Scores");

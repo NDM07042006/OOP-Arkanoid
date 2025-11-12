@@ -18,6 +18,10 @@ public class HighScoresController {
 
     public void setStage(Stage stage) {
         this.stage = stage;
+        // Reload high scores mỗi khi set stage (mở screen)
+        if (highScoreListView != null) {
+            loadHighScores();
+        }
     }
 
     @FXML

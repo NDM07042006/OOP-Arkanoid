@@ -76,25 +76,42 @@ public class Score {
             // Tạo thư mục Data nếu chưa tồn tại
             File file = new File(FILE_PATH);
             file.getParentFile().mkdirs();
+            
+            System.out.println("💾 Saving high scores to: " + FILE_PATH);
+            System.out.println("💾 Saving " + entries.size() + " entries:");
+            for (HighScoreEntry entry : entries) {
+                System.out.println("   - " + entry.getPlayerName() + ": " + entry.getScore());
+            }
 
             try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_PATH))) {
                 oos.writeObject(entries);
-                System.out.println("High scores saved to: " + FILE_PATH);
+                System.out.println("✅ High scores saved successfully!");
             }
         } catch (Exception e) {
-            System.err.println("Error saving high scores:");
+            System.err.println("❌ Error saving high scores:");
             e.printStackTrace();
         }
     }
 
     @SuppressWarnings("unchecked")
     private List<HighScoreEntry> loadHighScore() {
+        System.out.println("📂 Loading high scores from: " + FILE_PATH);
+        System.out.println("📂 user.dir = " + System.getProperty("user.dir"));
+        
+        File file = new File(FILE_PATH);
+        System.out.println("📂 File exists: " + file.exists());
+        System.out.println("📂 File absolute path: " + file.getAbsolutePath());
+        
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILE_PATH))) {
             List<HighScoreEntry> loaded = (List<HighScoreEntry>) ois.readObject();
-            System.out.println("High scores loaded: " + loaded.size() + " entries");
+            System.out.println("✅ High scores loaded: " + loaded.size() + " entries");
+            for (HighScoreEntry entry : loaded) {
+                System.out.println("   - " + entry.getPlayerName() + ": " + entry.getScore());
+            }
             return loaded;
         } catch (Exception e) {
-            System.out.println("No existing high scores found, starting fresh.");
+            System.out.println("⚠️ No existing high scores found, starting fresh.");
+            System.out.println("⚠️ Error: " + e.getMessage());
             return new ArrayList<>();
         }
     }

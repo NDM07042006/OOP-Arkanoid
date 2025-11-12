@@ -10,6 +10,7 @@ main/java/com/example/Arkanoid/Utlis/Animations/Animation.class
 main/java/com/example/Arkanoid/Utlis/Animations/ParticleSystem.class
 main/java/arkanoid/engine/Paddle.class
 main/java/arkanoid/engine/PowerUp/SlowBall.class
+main/java/arkanoid/engine/PowerUp/ExtraLife.class
 main/java/com/example/Arkanoid/UI/GameController$1.class
 main/java/com/example/Arkanoid/Utlis/Particle.class
 main/java/arkanoid/engine/CheckCollision/CheckBallAndPaddle.class
@@ -49,4 +50,5 @@ main/java/com/example/Arkanoid/UI/EndScene.class
 main/java/arkanoid/engine/Main.class
 main/java/com/example/Arkanoid/Utlis/Animations/Particle.class
 main/java/com/example/Arkanoid/Data/Lives.class
+main/java/arkanoid/engine/PowerUp/PointBonus.class
 main/java/com/example/Arkanoid/Utlis/Animations/PaddleGlowAnimation$Particle.class

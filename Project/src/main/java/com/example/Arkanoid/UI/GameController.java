@@ -271,6 +271,7 @@ public class GameController {
     public void updateScore(int score) {
         if (scoreLabel != null) {
             scoreLabel.setText("SCORE: " + score);
+            // System.out.println("🎯 UI Score updated: " + score);
         }
     }
 
@@ -351,11 +352,12 @@ public class GameController {
                 mainLoop.stop();
             }
             
-            // Create EndScene with win/lose status
-            EndScene endScene = new EndScene(stage, isWin);
+            // Create EndScene with win/lose status và Score object
+            EndScene endScene = new EndScene(stage, isWin, gameEngine.getScore(), levelNumber);
             endScene.show();
             
             System.out.println("✅ Showing end screen: " + (isWin ? "YOU WIN!" : "GAME OVER"));
+            System.out.println("   Final Score: " + gameEngine.getScore().getScore());
         } catch (Exception e) {
             System.err.println("❌ Error showing end screen: " + e.getMessage());
             e.printStackTrace();
