@@ -121,18 +121,7 @@ Class Diagram
 ## Future Improvements
 
 ---
-### Planned Features
-1. Thêm các chế độ chơi mới  
-   - Chế độ giới hạn thời gian.  
-   - Chế độ nhiều người chơi kết hợp.  
-2. Enhanced gameplay
-   - Đánh boss ở level cuối cùng.  
-   - Nhiều power-up đa dạng hơn(shield,etc.)  
-   - Hệ thống thành tựu.  
-3. Technical improvements
-    - Đối đầu với AI(bot).  
-    - Chế độ nhiều người chơi.  
-    - Chế độ online  
+ 
 
 ## Technologies Used
 
