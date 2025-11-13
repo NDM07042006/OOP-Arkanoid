@@ -42,8 +42,7 @@ Class Diagram
    Used in: PowerUp, CheckCollision
 3. **Facade Pattern**  
    Used in: SceneNavigator.
-4. **Observer Pattern**  
-   Used in: EventHandleController.
+
 ## Multithreading Implementation
 
 ---
